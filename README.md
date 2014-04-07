@@ -1,4 +1,2 @@
-pinata
-======
-
-Pinata finding multi-player game
+#pinata
+pinata finding multiplayer game
