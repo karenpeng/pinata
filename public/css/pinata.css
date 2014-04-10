@@ -1,0 +1,10 @@
+#myCanvas{
+  position: absolute;
+  left: 50%;
+  margin-left: -600px;
+  background-color: #ddd;
+}
+
+#wrap{
+  position: relative;
+}
