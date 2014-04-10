@@ -5,10 +5,9 @@ var point = new obelisk.Point(0, 0);
 var pixelView = new obelisk.PixelView(canvas, point);
 var dms = 20;
 var a = 23;
-var b = -17;
+var b = -7;
 
 var p3d, cubeDms, cubeColor, cube;
-var color, dimension, brick, p3dBrick;
 
 // create brick
 // function cuteCube() {
@@ -32,33 +31,57 @@ function drawBg() {
 // pixelView.renderObject(brick, p3dBrick);
 
 function draw() {
-		drawBg();
+		if (!mobile) {
+				drawBg();
 
-		color = new obelisk.SideColor().getByInnerColor(obelisk.ColorPattern.GREEN);
-		dimension = new obelisk.BrickDimension(20, 20);
-		brick = new obelisk.Brick(dimension, color);
-		p3dBrick = new obelisk.Point3D(20 * a, 20 * b, 0);
-		pixelView.renderObject(brick, p3dBrick);
+				var color = new obelisk.SideColor().getByInnerColor(obelisk.ColorPattern.GRAY);
+				var dimension = new obelisk.BrickDimension(dms, dms);
+				var brick = new obelisk.Brick(dimension, color);
+				for (var i = 10; i <= 80; i++) {
+						for (var j = -10; j <= 45; j++) {
+								var p3dBrick = new obelisk.Point3D(i * (dms - 2), j * (dms - 2), 0);
+								pixelView.renderObject(brick, p3dBrick);
+						}
+				}
 
-		p3d = new obelisk.Point3D(20 * a, 20 * b, 0);
-		cubeDms = new obelisk.CubeDimension(20, 20, 20);
-		cubeColor = new obelisk.CubeColor().getByHorizontalColor(obelisk.ColorPattern
-				.GRASS_GREEN);
-		cube = new obelisk.Cube(cubeDms, cubeColor, false);
-		pixelView.renderObject(cube, p3d);
+				p3d = new obelisk.Point3D(20 * a, 20 * b, 0);
+				cubeDms = new obelisk.CubeDimension(20, 20, 20);
+				cubeColor = new obelisk.CubeColor().getByHorizontalColor(obelisk.ColorPattern
+						.GRASS_GREEN);
+				cube = new obelisk.Cube(cubeDms, cubeColor, false);
+				pixelView.renderObject(cube, p3d);
 
-		requestAnimationFrame(draw);
-		console.log(a, b);
+				requestAnimationFrame(draw);
+				//console.log(a, b);
+		}
 }
 draw();
+
+var preLR = 0;
+var preFB = 0;
+socket.on('otherLR', function (data) {
+		setInterval(
+				function () {
+						a += data;
+				}, 100
+		);
+});
+socket.on('otherFB', function (data) {
+		if (data > 0) {
+				b++;
+		} else {
+				b--;
+		}
+		//b += data * 0.05;
+});
 
 $(window).keydown(function (event) {
 		if (event.which === 37) {
 				event.preventDefault();
-				a++;
+				a--;
 		} else if (event.which === 39) {
 				event.preventDefault();
-				a--;
+				a++;
 		} else if (event.which === 38) {
 				event.preventDefault();
 				b--;

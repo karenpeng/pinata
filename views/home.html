@@ -1,17 +1,31 @@
 <html>
   <meta charset="UTF-8">
   <link rel="stylesheet" type="text/css" href="/public/css/pinata.css"/>
-  <head></head>
+  <head>
+      <script src="http://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+  </head>
   <body>
-  <div id="wrap">
-    <canvas id="myCanvas" width="1200" height="700"></canvas>
-  </div>
+    <div id="wat">
+      <div id="doTiltLR"></div>
+      <div id="doTiltFB"></div>
+      <p id="yell"></p>
+    </div>
+    <div id="wrap">
+      <canvas id="myCanvas" width="1200" height="700"></canvas>
+    </div>
   </body>
-  <script src="http://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
-  <script type="text/javascript" src="/public/js/obelisk.min.js"></script>
   <script type="text/javascript" src="/public/js/mobileDetect.js"></script>
-  <script type="text/javascript" src="/public/js/motionDetect.js"></script>
-  <script type="text/javascript" src="/public/js/main.js"></script>
+  <script type="text/javascript">
+    if(mobile){
+      $("#wrap").hide();
+    }else{
+      $("#wat").hide();
+    }
+  </script>
   <script src="/socket.io/socket.io.js"></script>
   <script src="/public/js/socket.js"></script>
+  <script type="text/javascript" src="/public/js/orientationDetect.js"></script>
+  <script type="text/javascript" src="/public/js/motionDetect.js"></script>
+  <script type="text/javascript" src="/public/js/obelisk.min.js"></script>
+  <script type="text/javascript" src="/public/js/main.js"></script>
 </html>

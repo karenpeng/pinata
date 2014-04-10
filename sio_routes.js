@@ -27,5 +27,17 @@ module.exports = function (sio) {
       }
     });
 
+    socket.on('lrData', function (data) {
+      laptopId.forEach(function (id) {
+        sio.sockets.socket(id).emit('otherLR', data);
+      });
+    });
+
+    socket.on('fbData', function (data) {
+      laptopId.forEach(function (id) {
+        sio.sockets.socket(id).emit('otherFB', data);
+      });
+    });
+
   });
 };
