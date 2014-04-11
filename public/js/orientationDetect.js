@@ -32,7 +32,7 @@
     document.getElementById("doTiltLR").innerHTML = Math.round(tiltLR);
     document.getElementById("doTiltFB").innerHTML = Math.round(tiltFB);
 
-    if (Math.abs(preLR - tiltLR) > 5) {
+    if (Math.abs(preLR - tiltLR) > 4) {
       //socket.emit("lrData", Math.round(tiltLR));
       //$("#yell").html('okkkkkk');
       var changeLR = tiltLR - preLR;
