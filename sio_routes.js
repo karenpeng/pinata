@@ -19,6 +19,9 @@ module.exports = function (sio) {
     socket.on('disconnect', function () {
       pageOpen--;
       socket.broadcast.emit('leave', pageOpen);
+      if (pageOpen === 0) {
+        laptopId = [];
+      }
     });
 
     socket.on('deviceData', function (data) {

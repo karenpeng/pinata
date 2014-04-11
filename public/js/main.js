@@ -1,27 +1,69 @@
+var socket = io.connect('http://' + location.host);
+
+socket.on('init', function (pageNum) {
+  var deviceData = {
+    device: mobile
+  };
+  socket.emit("deviceData", deviceData);
+});
+
 var canvas = document.getElementById('myCanvas');
 var context = canvas.getContext('2d');
-// create pixel view container in point
 var point = new obelisk.Point(0, 0);
 var pixelView = new obelisk.PixelView(canvas, point);
-var dms = 20;
+var cubes = [];
+var bricks = [];
+var cube1;
 
-var p3d, cubeDms, cubeColor, cube;
-
-// create brick
 function cuteCube(a, b) {
   this.a = a;
   this.b = b;
-  this.p3d = new obelisk.Point3D(20 * this.a, 20 * this.b, 0);
+  this.right = 0;
+  this.back = 0;
+  this.c = obelisk.ColorPattern.GRASS_GREEN;
+  this.cubeColor = new obelisk.CubeColor().getByHorizontalColor(this.c);
   this.cubeDms = new obelisk.CubeDimension(20, 20, 20);
-  this.cubeColor = new obelisk.CubeColor().getByHorizontalColor(obelisk.ColorPattern
-    .GRASS_GREEN);
   this.cube = new obelisk.Cube(this.cubeDms, this.cubeColor, false);
-
 }
 
 cuteCube.prototype = {
+  move: function () {
+    if (this.right === 1) {
+      this.a++;
+    } else if (this.right === 2) {
+      this.a--;
+    }
+    if (this.back === 1) {
+      this.b++;
+    } else if (this.back === 2) {
+      this.b--;
+    }
+    if (this.a < 10) this.a = 10;
+    if (this.a > 80) this.a = 80;
+    if (this.b < -20) this.b = -20;
+    if (this.b > 30) this.b = 30;
+  },
   render: function () {
+    this.p3d = new obelisk.Point3D(20 * this.a, 20 * this.b, 0);
+    this.cubeColor = new obelisk.CubeColor().getByHorizontalColor(this.c);
     pixelView.renderObject(this.cube, this.p3d);
+  }
+};
+
+function cuteBrick(a, b) {
+  this.a = a;
+  this.b = b;
+  this.c = obelisk.ColorPattern.GRAY;
+  this.brickColor = new obelisk.SideColor().getByInnerColor(this.c);
+  this.dimension = new obelisk.BrickDimension(20, 20);
+  this.brick = new obelisk.Brick(this.dimension, this.brickColor);
+}
+
+cuteBrick.prototype = {
+  render: function () {
+    this.p3dBrick = new obelisk.Point3D(this.a * 18, this.b * 18, 0);
+    this.brickColor = new obelisk.SideColor().getByInnerColor(this.c);
+    pixelView.renderObject(this.brick, this.p3dBrick);
   }
 };
 
@@ -32,71 +74,71 @@ function drawBg() {
   context.fill();
 }
 
-// var color = new obelisk.SideColor().getByInnerColor(obelisk.ColorPattern.GRAY);
-// var dimension = new obelisk.BrickDimension(dms, dms);
-// var brick = new obelisk.Brick(dimension, color);
-// var p3dBrick = new obelisk.Point3D(i * (dms - 2), j * (dms - 2), 0);
-// pixelView.renderObject(brick, p3dBrick);
-
-var cube1 = new cuteCube(23, -17);
+function init() {
+  cubes.push(new cuteCube(27, 7));
+  for (var i = 10; i <= 80; i++) {
+    for (var j = -10; j <= 45; j++) {
+      var myBrick = new cuteBrick(i, j);
+      bricks.push(myBrick);
+    }
+  }
+}
 
 function draw() {
   if (!mobile) {
-    drawBg();
+    setTimeout(function () {
+      drawBg();
+      bricks.forEach(function (item) {
+        item.render();
+      });
+      cubes[0].move();
+      cubes[0].render();
 
-    var color = new obelisk.SideColor().getByInnerColor(obelisk.ColorPattern.GRAY);
-    var dimension = new obelisk.BrickDimension(dms, dms);
-    var brick = new obelisk.Brick(dimension, color);
-    for (var i = 10; i <= 80; i++) {
-      for (var j = -10; j <= 45; j++) {
-        var p3dBrick = new obelisk.Point3D(i * (dms - 2), j * (dms - 2), 0);
-        pixelView.renderObject(brick, p3dBrick);
-      }
-    }
-
-    // p3d = new obelisk.Point3D(20 * a, 20 * b, 0);
-    // cubeDms = new obelisk.CubeDimension(20, 20, 20);
-    // cubeColor = new obelisk.CubeColor().getByHorizontalColor(obelisk.ColorPattern
-    //   .GRASS_GREEN);
-    // cube = new obelisk.Cube(cubeDms, cubeColor, false);
-    // pixelView.renderObject(cube, p3d);
-    cube1.render();
-
-    requestAnimationFrame(draw);
-    //console.log(a, b);
+      requestAnimationFrame(draw);
+      //console.log(a, b);
+    }, 200);
   }
 }
+
+init();
 draw();
 
 var preLR = 0;
 var preFB = 0;
 socket.on('otherLR', function (data) {
-  setInterval(
-    function () {
-      cube1.a += data;
-    }, 100
-  );
+  // if (data - preLR > 0) {
+  //   cube1.a++;
+  // } else {
+  //   cube1.a--;
+  // }
+  // preLR = data;
+  if (data > -6 && data < 6) {
+    cube1.right = 0;
+  } else if (data > 6) {
+    cube1.right = 1;
+  } else if (data < -6) {
+    cube1.right = 2;
+  }
 });
 socket.on('otherFB', function (data) {
-  if (data > 0) {
-    cube1.b++;
-  } else {
-    cube1.b--;
+  // if (data - preFB > 0) {
+  //   cube1.b++;
+  // } else {
+  //   cube1.b--;
+  // }
+  // preFB = data;
+  if (data > -6 && data < 6) {
+    cube1.back = 0;
+  } else if (data > 6) {
+    cube1.back = 1;
+  } else if (data < -6) {
+    cube1.back = 2;
   }
 });
 
-$(window).keydown(function (event) {
-  if (event.which === 37) {
-    event.preventDefault();
-    a--;
-  } else if (event.which === 39) {
-    event.preventDefault();
-    a++;
-  } else if (event.which === 38) {
-    event.preventDefault();
-    b--;
-  } else if (event.which === 40) {
-    event.preventDefault();
-    b++;
-  }
+socket.on('in', function (pageNum) {
+
+});
+socket.on('leave', function (pageNum) {
+
 });
