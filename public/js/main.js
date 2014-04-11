@@ -4,19 +4,27 @@ var context = canvas.getContext('2d');
 var point = new obelisk.Point(0, 0);
 var pixelView = new obelisk.PixelView(canvas, point);
 var dms = 20;
-var a = 23;
-var b = -7;
 
 var p3d, cubeDms, cubeColor, cube;
 
 // create brick
-// function cuteCube() {
-//    this.
-// }
+function cuteCube(a, b) {
+  this.a = a;
+  this.b = b;
+  this.p3d = new obelisk.Point3D(20 * this.a, 20 * this.b, 0);
+  this.cubeDms = new obelisk.CubeDimension(20, 20, 20);
+  this.cubeColor = new obelisk.CubeColor().getByHorizontalColor(obelisk.ColorPattern
+    .GRASS_GREEN);
+  this.cube = new obelisk.Cube(this.cubeDms, this.cubeColor, false);
 
-// cuteCube.prototype = {
+}
 
-// }
+cuteCube.prototype = {
+  render: function () {
+    pixelView.renderObject(this.cube, this.p3d);
+  }
+};
+
 function drawBg() {
   context.beginPath();
   context.rect(0, 0, 1200, 700);
@@ -29,6 +37,8 @@ function drawBg() {
 // var brick = new obelisk.Brick(dimension, color);
 // var p3dBrick = new obelisk.Point3D(i * (dms - 2), j * (dms - 2), 0);
 // pixelView.renderObject(brick, p3dBrick);
+
+var cube1 = new cuteCube(23, -17);
 
 function draw() {
   if (!mobile) {
@@ -44,12 +54,13 @@ function draw() {
       }
     }
 
-    p3d = new obelisk.Point3D(20 * a, 20 * b, 0);
-    cubeDms = new obelisk.CubeDimension(20, 20, 20);
-    cubeColor = new obelisk.CubeColor().getByHorizontalColor(obelisk.ColorPattern
-      .GRASS_GREEN);
-    cube = new obelisk.Cube(cubeDms, cubeColor, false);
-    pixelView.renderObject(cube, p3d);
+    // p3d = new obelisk.Point3D(20 * a, 20 * b, 0);
+    // cubeDms = new obelisk.CubeDimension(20, 20, 20);
+    // cubeColor = new obelisk.CubeColor().getByHorizontalColor(obelisk.ColorPattern
+    //   .GRASS_GREEN);
+    // cube = new obelisk.Cube(cubeDms, cubeColor, false);
+    // pixelView.renderObject(cube, p3d);
+    cube1.render();
 
     requestAnimationFrame(draw);
     //console.log(a, b);
@@ -62,15 +73,15 @@ var preFB = 0;
 socket.on('otherLR', function (data) {
   setInterval(
     function () {
-      a += data;
+      cube1.a += data;
     }, 100
   );
 });
 socket.on('otherFB', function (data) {
   if (data > 0) {
-    b++;
+    cube1.b++;
   } else {
-    b--;
+    cube1.b--;
   }
 });
 
