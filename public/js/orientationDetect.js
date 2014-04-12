@@ -32,14 +32,6 @@
     document.getElementById("doTiltLR").innerHTML = Math.round(tiltLR);
     document.getElementById("doTiltFB").innerHTML = Math.round(tiltFB);
 
-    // if (Math.abs(preLR - tiltLR) > 6) {
-    //   socket.emit("lrData", Math.round(tiltLR));
-    //   preLR = tiltLR;
-    // }
-    // if (Math.abs(preFB - tiltFB) > 6) {
-    //   socket.emit("fbData", Math.round(tiltFB));
-    //   preFB = tiltFB;
-    // }
     count++;
     var lr = Math.round(tiltLR);
     var fb = Math.round(tiltFB);

@@ -1,30 +1,30 @@
 <html>
   <meta charset="UTF-8">
-  <link rel="stylesheet" type="text/css" href="/public/css/pinata.css"/>
   <head>
-      <script src="http://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
-      <script type="text/javascript" src="/public/js/mobileDetect.js"></script>
+    <link rel="stylesheet" type="text/css" href="/public/css/pinata.css"/>
+    <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+    <script type="text/javascript" src="/public/js/mobileDetect.js"></script>
   </head>
   <body>
-    <div id="wat">
-      <div id="doTiltLR"></div>
-      <div id="doTiltFB"></div>
-      <p id="yell"></p>
-    </div>
-    <div id="wrap">
-      <canvas id="myCanvas" width="1200" height="700"></canvas>
-    </div>
+    <div id="wat"></div>
+    <div id="wrap"></div>
   </body>
+  <script type="text/javascript" src="/socket.io/socket.io.js"></script>
   <script type="text/javascript">
-    if(mobile){
-      $("#wrap").hide();
+    var socket = io.connect('http://' + location.host);
+      socket.on('init', function () {
+        socket.emit('deviceData', mobile);
+    });
+    if(!mobile){
+      var can = '<canvas id="myCanvas" width="1200" height="700"><\/canvas>';
+      $("#wrap").append(can);
+      document.write('<script type="text/javascript" src="/public/js/obelisk.min.js"><\/script>');
+      document.write('<script type="text/javascript" src="/public/js/main.js"><\/script>');
     }else{
-      $("#wat").hide();
+      var debug = '<div id="doTiltLR"><\/div><div id="doTiltFB"><\/div>';
+      $("#wat").append(debug);
+      document.write('<script type="text/javascript" src="/public/js/orientationDetect.js"><\/script>');
+      document.write('<script type="text/javascript" src="/public/js/motionDetect.js"><\/script>');
     }
   </script>
-  <script src="/socket.io/socket.io.js"></script>
-  <script type="text/javascript" src="/public/js/orientationDetect.js"></script>
-  <script type="text/javascript" src="/public/js/motionDetect.js"></script>
-  <script type="text/javascript" src="/public/js/obelisk.min.js"></script>
-  <script type="text/javascript" src="/public/js/main.js"></script>
 </html>

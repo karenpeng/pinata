@@ -12,7 +12,7 @@ module.exports = function (sio) {
   var pageOpen = 0;
   sio.sockets.on('connection', function (socket) {
     pageOpen++;
-    socket.emit('init', pageOpen);
+    socket.emit('init', true);
 
     socket.on('disconnect', function () {
       pageOpen--;
