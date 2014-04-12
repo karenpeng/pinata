@@ -10,7 +10,8 @@ var colorChoice = [
   obelisk.ColorPattern.GRAY,
   obelisk.ColorPattern.PINK
 ];
-var size = 14;
+var cubeSize = 24;
+var trackSize = 12;
 var colorIndex = 0;
 var cubes = [];
 var bricks = [];
@@ -21,13 +22,13 @@ function cuteBrick(a, b, c) {
   //this.c = obelisk.ColorPattern.GRAY;
   this.c = c;
   this.brickColor = new obelisk.SideColor().getByInnerColor(this.c);
-  this.dimension = new obelisk.BrickDimension(size, size);
+  this.dimension = new obelisk.BrickDimension(trackSize, trackSize);
   this.brick = new obelisk.Brick(this.dimension, this.brickColor);
 }
 
 cuteBrick.prototype = {
   render: function () {
-    this.p3dBrick = new obelisk.Point3D(this.a * (size - 2), this.b * (size - 2),
+    this.p3dBrick = new obelisk.Point3D(this.a * trackSize, this.b * trackSize,
       0);
     this.brickColor = new obelisk.SideColor().getByInnerColor(this.c);
     pixelView.renderObject(this.brick, this.p3dBrick);
@@ -45,7 +46,7 @@ function cuteCube(a, b, id) {
   this.myBricks = [];
   this.c = colorChoice[colorIndex];
   this.cubeColor = new obelisk.CubeColor().getByHorizontalColor(this.c);
-  this.cubeDms = new obelisk.CubeDimension(size, size, size);
+  this.cubeDms = new obelisk.CubeDimension(cubeSize, cubeSize, cubeSize);
   this.cube = new obelisk.Cube(this.cubeDms, this.cubeColor, false);
 }
 
@@ -74,7 +75,7 @@ cuteCube.prototype = {
     if (this.b > 30) this.b = 30;
   },
   render: function () {
-    this.p3d = new obelisk.Point3D(size * this.a, size * this.b, 0);
+    this.p3d = new obelisk.Point3D(trackSize * this.a, trackSize * this.b, 0);
     this.cubeColor = new obelisk.CubeColor().getByHorizontalColor(this.c);
     pixelView.renderObject(this.cube, this.p3d);
   },
