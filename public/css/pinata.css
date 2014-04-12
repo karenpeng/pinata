@@ -1,5 +1,6 @@
 #myCanvas{
   position: absolute;
+  top: 0;
   left: 50%;
   margin-left: -600px;
   background-color: #ddd;

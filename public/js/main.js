@@ -10,7 +10,7 @@ var colorChoice = [
   obelisk.ColorPattern.GRAY,
   obelisk.ColorPattern.PINK
 ];
-var size = 16;
+var size = 14;
 var colorIndex = 0;
 var cubes = [];
 var bricks = [];
