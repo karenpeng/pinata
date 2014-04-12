@@ -68,9 +68,9 @@ cuteCube.prototype = {
     } else if (this.back === 2) {
       this.b--;
     }
-    if (this.a < 10) this.a = 10;
+    if (this.a < 20) this.a = 20;
     if (this.a > 60) this.a = 60;
-    if (this.b < -20) this.b = -20;
+    if (this.b < -10) this.b = -10;
     if (this.b > 30) this.b = 30;
   },
   render: function () {
