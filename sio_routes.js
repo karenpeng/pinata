@@ -14,31 +14,43 @@ module.exports = function (sio) {
     pageOpen++;
     socket.emit('init', pageOpen);
 
-    socket.broadcast.emit('in', pageOpen);
-
     socket.on('disconnect', function () {
       pageOpen--;
-      socket.broadcast.emit('leave', pageOpen);
       if (pageOpen === 0) {
         laptopId = [];
       }
+      laptopId.forEach(function (id) {
+        sio.sockets.socket(id).emit('killCube', socket.id);
+      });
     });
 
     socket.on('deviceData', function (data) {
-      if (!data.device) {
+      if (!data) {
         laptopId.push(socket.id);
+      } else {
+        laptopId.forEach(function (id) {
+          sio.sockets.socket(id).emit('makeCube', socket.id);
+        });
       }
     });
 
     socket.on('lrData', function (data) {
       laptopId.forEach(function (id) {
-        sio.sockets.socket(id).emit('otherLR', data);
+        var moveLR = {
+          id: socket.id,
+          info: data
+        };
+        sio.sockets.socket(id).emit('otherLR', moveLR);
       });
     });
 
     socket.on('fbData', function (data) {
       laptopId.forEach(function (id) {
-        sio.sockets.socket(id).emit('otherFB', data);
+        var moveFB = {
+          id: socket.id,
+          info: data
+        };
+        sio.sockets.socket(id).emit('otherFB', moveFB);
       });
     });
 

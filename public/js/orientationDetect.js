@@ -40,14 +40,13 @@
     //   socket.emit("fbData", Math.round(tiltFB));
     //   preFB = tiltFB;
     // }
+    count++;
     var lr = Math.round(tiltLR);
     var fb = Math.round(tiltFB);
-    //if (lr < -2 || lr > 2) {
-    socket.emit('lrData', lr);
-    //}
-    //if (fb < -2 || fb > 2) {
-    socket.emit('fbData', fb);
-    //}
+    if (count % 6 === 0) {
+      socket.emit('lrData', lr);
+      socket.emit('fbData', fb);
+    }
   }
 
 })(this);

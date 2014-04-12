@@ -3,6 +3,7 @@
   <link rel="stylesheet" type="text/css" href="/public/css/pinata.css"/>
   <head>
       <script src="http://cdn.staticfile.org/jquery/1.10.2/jquery.min.js"></script>
+      <script type="text/javascript" src="/public/js/mobileDetect.js"></script>
   </head>
   <body>
     <div id="wat">
@@ -14,7 +15,6 @@
       <canvas id="myCanvas" width="1200" height="700"></canvas>
     </div>
   </body>
-  <script type="text/javascript" src="/public/js/mobileDetect.js"></script>
   <script type="text/javascript">
     if(mobile){
       $("#wrap").hide();
@@ -23,7 +23,6 @@
     }
   </script>
   <script src="/socket.io/socket.io.js"></script>
-  <script src="/public/js/socket.js"></script>
   <script type="text/javascript" src="/public/js/orientationDetect.js"></script>
   <script type="text/javascript" src="/public/js/motionDetect.js"></script>
   <script type="text/javascript" src="/public/js/obelisk.min.js"></script>
