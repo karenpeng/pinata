@@ -21,8 +21,9 @@
       document.write('<script type="text/javascript" src="/public/js/obelisk.min.js"><\/script>');
       document.write('<script type="text/javascript" src="/public/js/main.js"><\/script>');
     }else{
-      var debug = '<div id="doTiltLR"><\/div><div id="doTiltFB"><\/div>';
+      var debug = '<div id="doTiltLR"><\/div><div id="doTiltFB"><\/div><div id="pinataX"><\/div><div id="pinataY"><\/div><div id="dis"><\/div>';
       $("#wat").append(debug);
+      document.write('<script type="text/javascript" src="/public/js/mobileSocket.js"><\/script>');
       document.write('<script type="text/javascript" src="/public/js/orientationDetect.js"><\/script>');
       document.write('<script type="text/javascript" src="/public/js/motionDetect.js"><\/script>');
     }

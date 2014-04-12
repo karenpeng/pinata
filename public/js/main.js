@@ -3,12 +3,12 @@ var context = canvas.getContext('2d');
 var point = new obelisk.Point(0, 0);
 var pixelView = new obelisk.PixelView(canvas, point);
 var colorChoice = [
-  obelisk.ColorPattern.PURPLE,
+  obelisk.ColorPattern.PINK,
   obelisk.ColorPattern.GRASS_GREEN,
   obelisk.ColorPattern.YELLOW,
   obelisk.ColorPattern.BLUE,
   obelisk.ColorPattern.GRAY,
-  obelisk.ColorPattern.PINK
+  obelisk.ColorPattern.PUPPLE
 ];
 var cubeSize = 24;
 var trackSize = 12;
@@ -99,6 +99,13 @@ function setup() {
   //     bricks.push(new cuteBrick(i, j, obelisk.ColorPattern.GRAY));
   //   }
   // }
+  cubes.push(new cuteCube(Math.random() * 20 + 20, Math.random() * 20, pinata));
+  var pinata = {
+    x: cubes[0].a,
+    y: cubes[0].b
+  };
+  socket.emit('pinata', pinata);
+  colorIndex++;
 }
 
 function draw() {
@@ -118,7 +125,7 @@ function draw() {
         item.render();
       });
       requestAnimationFrame(draw);
-    }, 200);
+    }, 120);
   }
 }
 
@@ -126,7 +133,7 @@ setup();
 draw();
 
 socket.on('makeCube', function (data) {
-  cubes.push(new cuteCube(Math.random() * 20 + 20, Math.random() * 20, data));
+  cubes.push(new cuteCube(data.x, data.y, data.id));
   colorIndex++;
   if (colorIndex > colorChoice.length - 1) {
     colorIndex = 0;

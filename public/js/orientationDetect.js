@@ -35,7 +35,7 @@
     count++;
     var lr = Math.round(tiltLR);
     var fb = Math.round(tiltFB);
-    if (count % 6 === 0) {
+    if (count % 4 === 0) {
       socket.emit('lrData', lr);
       socket.emit('fbData', fb);
     }

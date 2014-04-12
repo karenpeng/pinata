@@ -7,6 +7,8 @@
 'use strict';
 
 var laptopId = [];
+var mobileId = [];
+var pinataX, pinataY;
 //simple example
 module.exports = function (sio) {
   var pageOpen = 0;
@@ -28,31 +30,50 @@ module.exports = function (sio) {
       if (!data) {
         laptopId.push(socket.id);
       } else {
-        laptopId.forEach(function (id) {
-          sio.sockets.socket(id).emit('makeCube', socket.id);
-        });
+        mobileId.push(socket.id);
       }
     });
 
-    socket.on('lrData', function (data) {
-      laptopId.forEach(function (id) {
-        var moveLR = {
+    socket.on('pinata', function (data) {
+      pinataX = data.x;
+      pinataY = data.y;
+    });
+
+    socket.on('initXY', function (data) {
+      var pinataOh = {
+        x: pinataX,
+        y: pinataY
+      };
+      sio.sockets.socket(socket.id).emit('pinataOh', pinataOh);
+      laptopId.forEach(function (item) {
+        var makeCube = {
           id: socket.id,
-          info: data
+          x: data.x,
+          y: data.y
         };
-        sio.sockets.socket(id).emit('otherLR', moveLR);
+        sio.sockets.socket(item).emit('makeCube', makeCube);
       });
     });
 
-    socket.on('fbData', function (data) {
-      laptopId.forEach(function (id) {
-        var moveFB = {
-          id: socket.id,
-          info: data
-        };
-        sio.sockets.socket(id).emit('otherFB', moveFB);
-      });
-    });
+    // socket.on('lrData', function (data) {
+    //   laptopId.forEach(function (id) {
+    //     var moveLR = {
+    //       id: socket.id,
+    //       info: data
+    //     };
+    //     sio.sockets.socket(id).emit('otherLR', moveLR);
+    //   });
+    // });
+
+    // socket.on('fbData', function (data) {
+    //   laptopId.forEach(function (id) {
+    //     var moveFB = {
+    //       id: socket.id,
+    //       info: data
+    //     };
+    //     sio.sockets.socket(id).emit('otherFB', moveFB);
+    //   });
+    // });
 
   });
 };
