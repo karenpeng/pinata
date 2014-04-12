@@ -8,7 +8,7 @@ html, body{
 #myCanvas{
   position: absolute;
   left: 50%;
-  margin-left: -600px;
+  margin-left: -640px;
   background-color: #ddd;
 }
 
