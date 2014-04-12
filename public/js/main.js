@@ -40,8 +40,8 @@ function cuteCube(a, b, id) {
   this.id = id;
   this.right = 0;
   this.back = 0;
-  this.preA = a;
-  this.preB = b;
+  this.preA = 0;
+  this.preB = 0;
   this.myBricks = [];
   this.c = colorChoice[colorIndex];
   this.cubeColor = new obelisk.CubeColor().getByHorizontalColor(this.c);
@@ -74,12 +74,14 @@ cuteCube.prototype = {
     if (this.b > 30) this.b = 30;
   },
   render: function () {
-    this.myBricks.forEach(function (item) {
-      item.render();
-    });
     this.p3d = new obelisk.Point3D(size * this.a, size * this.b, 0);
     this.cubeColor = new obelisk.CubeColor().getByHorizontalColor(this.c);
     pixelView.renderObject(this.cube, this.p3d);
+  },
+  renderTrack: function () {
+    this.myBricks.forEach(function (item) {
+      item.render();
+    });
   }
 };
 
@@ -106,13 +108,14 @@ function draw() {
       // bricks.forEach(function (item) {
       //   item.render();
       // });
-
       cubes.forEach(function (item) {
         item.track();
         item.move();
+        item.renderTrack();
+      });
+      cubes.forEach(function (item) {
         item.render();
       });
-
       requestAnimationFrame(draw);
     }, 200);
   }
