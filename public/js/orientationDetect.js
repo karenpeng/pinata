@@ -3,6 +3,7 @@
   var count = 0;
   var preLR = 0;
   var preFB = 0;
+  exports.sending = false;
 
   init();
 
@@ -33,11 +34,14 @@
     document.getElementById("doTiltFB").innerHTML = Math.round(tiltFB);
 
     count++;
-    var lr = Math.round(tiltLR);
-    var fb = Math.round(tiltFB);
+    exports.lr = Math.round(tiltLR);
+    exports.fb = Math.round(tiltFB);
     if (count % 4 === 0) {
-      socket.emit('lrData', lr);
-      socket.emit('fbData', fb);
+      socket.emit('lrData', exports.lr);
+      socket.emit('fbData', exports.fb);
+      exports.sending = true;
+    } else {
+      exports.sending = false;
     }
   }
 

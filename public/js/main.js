@@ -5,13 +5,14 @@ var pixelView = new obelisk.PixelView(canvas, point);
 var colorChoice = [
   obelisk.ColorPattern.PINK,
   obelisk.ColorPattern.GRASS_GREEN,
-  obelisk.ColorPattern.YELLOW,
   obelisk.ColorPattern.BLUE,
+  obelisk.ColorPattern.YELLOW,
   obelisk.ColorPattern.GRAY,
   obelisk.ColorPattern.PUPPLE
 ];
-var cubeSize = 24;
-var trackSize = 12;
+var scale = 1;
+var cubeSize = 24 * scale;
+var trackSize = 12 * scale;
 var colorIndex = 0;
 var cubes = [];
 var bricks = [];
@@ -43,8 +44,10 @@ function cuteCube(a, b, id) {
   this.back = 0;
   this.preA = 0;
   this.preB = 0;
+  this.dig = false;
   this.myBricks = [];
   this.c = colorChoice[colorIndex];
+  this.originalC = this.c;
   this.cubeColor = new obelisk.CubeColor().getByHorizontalColor(this.c);
   this.cubeDms = new obelisk.CubeDimension(cubeSize, cubeSize, cubeSize);
   this.cube = new obelisk.Cube(this.cubeDms, this.cubeColor, false);
@@ -99,14 +102,27 @@ function setup() {
   //     bricks.push(new cuteBrick(i, j, obelisk.ColorPattern.GRAY));
   //   }
   // }
-  cubes.push(new cuteCube(Math.random() * 20 + 20, Math.random() * 20, pinata));
-  var pinata = {
-    x: cubes[0].a,
-    y: cubes[0].b
-  };
-  socket.emit('pinata', pinata);
-  colorIndex++;
 }
+
+function check() {
+  for (var i = 1; i < cubes.length; i++) {
+    var gapX = cubes[i].a * trackSize - cubes[0].a * trackSize;
+    var gapY = cubes[i].b * trackSize - cubes[0].b * trackSize;
+    var dis = Math.sqrt(Math.pow(gapX, 2) + Math.pow(gapY, 2));
+    if (dis < 40) {
+      cubes[i].c = obelisk.ColorPattern.BLACK;
+      cubes[i].dig = true;
+    } else {
+      cubes[i].c = cubes[i].originalC;
+      cubes[i].dig = false;
+    }
+  }
+}
+
+socket.on('pinata', function (data) {
+  cubes.push(new cuteCube(data.x, data.y, 'pinata'));
+  colorIndex++;
+});
 
 function draw() {
   if (!mobile) {
@@ -124,6 +140,9 @@ function draw() {
       cubes.forEach(function (item) {
         item.render();
       });
+
+      check();
+
       requestAnimationFrame(draw);
     }, 120);
   }
