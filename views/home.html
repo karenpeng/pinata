@@ -1,5 +1,6 @@
 <html>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width">
   <head>
     <link rel="stylesheet" type="text/css" href="/public/css/pinata.css"/>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -17,15 +18,17 @@
     });
     if(!mobile){
       var can = '<canvas id="myCanvas" width="1280" height="720"><\/canvas>';
+      $("#wrap").append('<div id="where"><\/div>');
       $("#wrap").append(can);
       document.write('<script type="text/javascript" src="/public/js/obelisk.min.js"><\/script>');
       document.write('<script type="text/javascript" src="/public/js/main.js"><\/script>');
     }else{
-      var debug = '<div id="doTiltLR"><\/div><div id="doTiltFB"><\/div><div id="pinataX"><\/div><div id="pinataY"><\/div><div id="dis"><\/div>';
+      var debug = '<div id="doTiltLR"><\/div><div id="doTiltFB"><\/div><div id="pinataX"><\/div><div id="pinataY"><\/div><div id="dis"><\/div><div id="ggg"><\/div><div id="fff"><\/div><div id="ddd"><\/div>';
       $("#wat").append(debug);
       var start = '<div id="start">STRAT<\/div>';
       $("#wat").append(start);
-      var mode = '<div id="mode"><div id="explore"><\/div><div id="summon"><\/div><\/div>';
+      $("#wat").append('<div id="alert"><\/div>')
+      var mode = '<div id="mode"><span id="explore">Explore<\/span><span id="summon">Summon<\/span><\/div>';
       document.write('<script type="text/javascript" src="/public/js/mobileSocket.js"><\/script>');
       document.write('<script type="text/javascript" src="/public/js/orientationDetect.js"><\/script>');
       document.write('<script type="text/javascript" src="/public/js/motionDetect.js"><\/script>');

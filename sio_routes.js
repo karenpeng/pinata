@@ -72,6 +72,16 @@ module.exports = function (sio) {
       });
     });
 
+    socket.on('shakeData', function (data) {
+      laptopId.forEach(function (item) {
+        var otherShake = {
+          id: socket.id,
+          dig: data
+        };
+        sio.sockets.socket(item).emit('otherShake', otherShake);
+      });
+    });
+
   });
 
 };

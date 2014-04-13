@@ -30,13 +30,10 @@
   }
 
   function deviceOrientationHandler(tiltLR, tiltFB) {
-    document.getElementById("doTiltLR").innerHTML = Math.round(tiltLR);
-    document.getElementById("doTiltFB").innerHTML = Math.round(tiltFB);
-
     count++;
     exports.lr = Math.round(tiltLR);
     exports.fb = Math.round(tiltFB);
-    if (count % 4 === 0) {
+    if (start && explore && count % 4 === 0) {
       socket.emit('lrData', exports.lr);
       socket.emit('fbData', exports.fb);
       exports.sending = true;

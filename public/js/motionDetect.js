@@ -1,7 +1,7 @@
 (function (exports) {
   exports.shake = false;
   var preX, preY, preZ = 0;
-
+  var count = 0;
   init();
 
   function init() {
@@ -28,17 +28,21 @@
   }
 
   function ifShake(x, y, z) {
-    if (Math.abs(preX - x) > 10) {
+    if (Math.abs(preX - x) > 12) {
       exports.shake = true;
       preX = x;
-    } else if (Math.abs(preY - y) > 10) {
+    } else if (Math.abs(preY - y) > 12) {
       exports.shake = true;
       preY = y;
-    } else if (Math.abs(preZ - z) > 10) {
+    } else if (Math.abs(preZ - z) > 12) {
       exports.shake = true;
       preZ = z;
     } else {
       exports.shake = false;
+    }
+    count++;
+    if (summon && count % 4 === 0) {
+      socket.emit('shakeData', exports.shake);
     }
   }
 

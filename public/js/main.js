@@ -4,11 +4,11 @@ var point = new obelisk.Point(0, 0);
 var pixelView = new obelisk.PixelView(canvas, point);
 var colorChoice = [
   obelisk.ColorPattern.PINK,
-  obelisk.ColorPattern.GRASS_GREEN,
   obelisk.ColorPattern.BLUE,
+  obelisk.ColorPattern.GRASS_GREEN,
   obelisk.ColorPattern.YELLOW,
   obelisk.ColorPattern.GRAY,
-  obelisk.ColorPattern.PUPPLE
+  obelisk.ColorPattern.PURPLE
 ];
 var scale = 1;
 var cubeSize = 24 * scale;
@@ -45,6 +45,7 @@ function cuteCube(a, b, id) {
   this.preA = 0;
   this.preB = 0;
   this.dig = false;
+  this.dis;
   this.myBricks = [];
   this.c = colorChoice[colorIndex];
   this.originalC = this.c;
@@ -79,7 +80,11 @@ cuteCube.prototype = {
   },
   render: function () {
     this.p3d = new obelisk.Point3D(trackSize * this.a, trackSize * this.b, 0);
-    this.cubeColor = new obelisk.CubeColor().getByHorizontalColor(this.c);
+    if (!this.dig) {
+      this.cubeColor = new obelisk.CubeColor().getByHorizontalColor(this.c);
+    } else {
+      this.cubeColor = obelisk.ColorPattern.getRandomComfortableColor();
+    }
     pixelView.renderObject(this.cube, this.p3d);
   },
   renderTrack: function () {
@@ -108,8 +113,11 @@ function check() {
   for (var i = 1; i < cubes.length; i++) {
     var gapX = cubes[i].a * trackSize - cubes[0].a * trackSize;
     var gapY = cubes[i].b * trackSize - cubes[0].b * trackSize;
-    var dis = Math.sqrt(Math.pow(gapX, 2) + Math.pow(gapY, 2));
-    if (dis < 40) {
+    cubes[i].dis = Math.sqrt(Math.pow(gapX, 2) + Math.pow(gapY, 2));
+
+    document.getElementById("where").innerHTML = cubes[i].dis;
+
+    if (dis < 30) {
       cubes[i].c = obelisk.ColorPattern.BLACK;
       cubes[i].dig = true;
     } else {
@@ -129,6 +137,7 @@ function draw() {
 
     setTimeout(function () {
       drawBg();
+
       // bricks.forEach(function (item) {
       //   item.render();
       // });
@@ -190,6 +199,14 @@ socket.on('otherFB', function (data) {
       } else {
         item.back = 2;
       }
+    }
+  });
+});
+
+socket.on('otherShake', function (data) {
+  cubes.forEach(function (item) {
+    if (item.id === data.id) {
+      item.dig = data.dig;
     }
   });
 });
