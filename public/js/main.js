@@ -117,7 +117,7 @@ function check() {
 
     document.getElementById("where").innerHTML = cubes[i].dis;
 
-    if (dis < 30) {
+    if (cubes[i].dis < 30) {
       cubes[i].c = obelisk.ColorPattern.BLACK;
       cubes[i].dig = true;
     } else {
