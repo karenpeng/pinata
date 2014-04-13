@@ -13,19 +13,22 @@ var pinataY = Math.random() * 20;
 var scale = 1;
 var cubeSize = 24 * scale;
 var trackSize = 12 * scale;
+var serverCubes = [];
 
 function serverCube(a, b, id) {
   this.a = a;
   this.b = b;
   this.id = id;
   this.right = 0;
+  this.preRight = 0;
   this.back = 0;
+  this.preBack = 0;
   this.myLocX;
   this.myLocY;
   this.dis;
 }
 serverCube.prototype = {
-  update: function (lr, fb) {
+  updateLR: function (lr) {
     if (lr >= -6 && lr < 6) {
       this.right = 0;
     } else if (lr > 6) {
@@ -33,6 +36,9 @@ serverCube.prototype = {
     } else {
       this.right = 2;
     }
+    return this.right;
+  },
+  updateFB: function (fb) {
     if (fb >= -6 && fb < 6) {
       this.back = 0;
     } else if (fb > 6) {
@@ -40,6 +46,7 @@ serverCube.prototype = {
     } else {
       this.back = 2;
     }
+    return this.back;
   },
   walk: function () {
     if (this.right === 1) {
@@ -66,6 +73,7 @@ serverCube.prototype = {
     this.dis = Math.sqrt(Math.pow(gapX, 2) + Math.pow(gapY, 2));
   }
 };
+
 //simple example
 module.exports = function (sio) {
   var pageOpen = 0;
@@ -81,6 +89,11 @@ module.exports = function (sio) {
       laptopId.forEach(function (id) {
         sio.sockets.socket(id).emit('killCube', socket.id);
       });
+      for (var i = 0; i < serverCubes.length; i++) {
+        if (serverCubes[i].id === socket.id) {
+          serverCubes.splice(i, 1);
+        }
+      }
     });
 
     socket.on('deviceData', function (data) {
@@ -88,43 +101,55 @@ module.exports = function (sio) {
         x: pinataX,
         y: pinataY
       };
-      sio.sockets.socket(socket.id).emit('pinata', pinata);
-
       if (!data) {
+        sio.sockets.socket(socket.id).emit('pinata', pinata);
         laptopId.push(socket.id);
       } else {
-        mobileId.push(socket.id);
-
         var mobileCube = {
           id: socket.id,
           x: Math.random() * 20 + 20,
           y: Math.random() * 20
         };
-        sio.sockets.socket(socket.id).emit('urLocation', mobileCube);
         laptopId.forEach(function (item) {
           sio.sockets.socket(item).emit('makeCube', mobileCube);
         });
+        serverCubes.push(new serverCube(mobileCube.x, mobileCube.y, socket.id));
       }
-
     });
 
     socket.on('lrData', function (data) {
-      laptopId.forEach(function (id) {
-        var moveLR = {
-          id: socket.id,
-          info: data
-        };
-        sio.sockets.socket(id).emit('otherLR', moveLR);
+      serverCubes.forEach(function (item) {
+        if (item.id === socket.id) {
+          var resultLR = item.updateLR(data.info);
+          var mobileLR = {
+            id: socket.id,
+            result: resultLR
+          };
+          if (item.preRight !== item.right) {
+            laptopId.forEach(function (item) {
+              sio.sockets.socket(item).emit('mobileLR', mobileLR);
+            });
+            item.preRight = item.right;
+          }
+        }
       });
     });
 
     socket.on('fbData', function (data) {
-      laptopId.forEach(function (id) {
-        var moveFB = {
-          id: socket.id,
-          info: data
-        };
-        sio.sockets.socket(id).emit('otherFB', moveFB);
+      serverCubes.forEach(function (item) {
+        if (item.id === socket.id) {
+          var resultFB = item.updateFB(data.info);
+          var mobileFB = {
+            id: socket.id,
+            result: resultFB
+          };
+          if (item.preBack !== item.back) {
+            laptopId.forEach(function (item) {
+              sio.sockets.socket(item).emit('mobileFB', mobileFB);
+            });
+            item.preBack = item.back;
+          }
+        }
       });
     });
 
@@ -140,4 +165,25 @@ module.exports = function (sio) {
 
   });
 
+  // function loop() {
+  //   setTimeout(function () {
+
+  //     serverCubes.forEach(function (item) {
+  //       item.walk();
+  //       item.check();
+  //       sio.sockets.socket(item.id).emit('disData', item.dis);
+  //       var mobileDis = {
+  //         id: item.id,
+  //         distance: item.dis
+  //       };
+  //       laptopId.forEach(function (id) {
+  //         sio.sockets.socket(id).emit('mobileDis', mobileDis);
+  //       });
+  //     });
+
+  //     requestAnimationFrame(loop);
+  //   }, 120);
+  // }
+
+  // loop();
 };

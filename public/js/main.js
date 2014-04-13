@@ -91,7 +91,10 @@ cuteCube.prototype = {
     this.myBricks.forEach(function (item) {
       item.render();
     });
-  }
+  },
+  // count: function (dis) {
+  //   this.dis = dis;
+  // }
 };
 
 function drawBg() {
@@ -150,8 +153,6 @@ function draw() {
         item.render();
       });
 
-      check();
-
       requestAnimationFrame(draw);
     }, 120);
   }
@@ -176,29 +177,17 @@ socket.on('killCube', function (data) {
   }
 });
 
-socket.on('otherLR', function (data) {
+socket.on('mobileLR', function (data) {
   cubes.forEach(function (item) {
     if (item.id === data.id) {
-      if (data.info >= -6 && data.info <= 6) {
-        item.right = 0;
-      } else if (data.info > 6) {
-        item.right = 1;
-      } else {
-        item.right = 2;
-      }
+      item.right = data.result;
     }
   });
 });
-socket.on('otherFB', function (data) {
+socket.on('mobileFB', function (data) {
   cubes.forEach(function (item) {
     if (item.id === data.id) {
-      if (data.info >= -6 && data.info <= 6) {
-        item.back = 0;
-      } else if (data.info > 6) {
-        item.back = 1;
-      } else {
-        item.back = 2;
-      }
+      item.back = data.result;
     }
   });
 });
