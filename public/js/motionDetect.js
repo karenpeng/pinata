@@ -28,20 +28,20 @@
   }
 
   function ifShake(x, y, z) {
-    if (Math.abs(preX - x) > 12) {
+    if (Math.abs(preX - x) > 10) {
       exports.shake = true;
       preX = x;
-    } else if (Math.abs(preY - y) > 12) {
+    } else if (Math.abs(preY - y) > 10) {
       exports.shake = true;
       preY = y;
-    } else if (Math.abs(preZ - z) > 12) {
+    } else if (Math.abs(preZ - z) > 10) {
       exports.shake = true;
       preZ = z;
     } else {
       exports.shake = false;
     }
     count++;
-    if (summon && count % 4 === 0) {
+    if (summon) {
       socket.emit('shakeData', exports.shake);
     }
   }

@@ -10,62 +10,16 @@ var laptopId = [];
 var mobileId = [];
 var pinataX = Math.random() * 20 + 20;
 var pinataY = Math.random() * 20;
-var scale = 1;
-var cubeSize = 24 * scale;
-var trackSize = 12 * scale;
+var colorChoice = [
+  0x3300ff,
+  0xff0022,
+  0x44aa33,
+  0x33ff33,
+  0xaaff00,
+  0x2200ff
+];
+var colorIndex = 0;
 
-function serverCube(a, b, id) {
-  this.a = a;
-  this.b = b;
-  this.id = id;
-  this.right = 0;
-  this.back = 0;
-  this.myLocX;
-  this.myLocY;
-  this.dis;
-}
-serverCube.prototype = {
-  update: function (lr, fb) {
-    if (lr >= -6 && lr < 6) {
-      this.right = 0;
-    } else if (lr > 6) {
-      this.right = 1;
-    } else {
-      this.right = 2;
-    }
-    if (fb >= -6 && fb < 6) {
-      this.back = 0;
-    } else if (fb > 6) {
-      this.back = 1;
-    } else {
-      this.back = 2;
-    }
-  },
-  walk: function () {
-    if (this.right === 1) {
-      this.a++;
-    } else if (this.right === 2) {
-      this.a--;
-    }
-    if (this.a < 20) this.a = 20;
-    if (this.a > 60) this.a = 60;
-
-    if (this.back === 1) {
-      this.b++;
-    } else if (this.back === 2) {
-      this.b--;
-    }
-    if (this.b < -10) this.b = -10;
-    if (this.b > 30) this.b = 30;
-    this.myLocX = this.a * trackSize;
-    this.myLocY = this.b * trackSize;
-  },
-  check: function () {
-    var gapX = this.myLocX - pinataX * trackSize;
-    var gapY = this.myLocY - pinataY * trackSize;
-    this.dis = Math.sqrt(Math.pow(gapX, 2) + Math.pow(gapY, 2));
-  }
-};
 //simple example
 module.exports = function (sio) {
   var pageOpen = 0;
@@ -97,9 +51,14 @@ module.exports = function (sio) {
 
         var mobileCube = {
           id: socket.id,
-          x: Math.random() * 20 + 20,
-          y: Math.random() * 20
+          x: Math.round(Math.random() * 10) * 2 + 20,
+          y: Math.round(Math.random() * 10) * 2,
+          c: colorChoice[colorIndex]
         };
+        colorIndex++;
+        if (colorIndex > colorChoice.length) {
+          colorIndex = 0;
+        }
         sio.sockets.socket(socket.id).emit('urLocation', mobileCube);
         laptopId.forEach(function (item) {
           sio.sockets.socket(item).emit('makeCube', mobileCube);
@@ -135,6 +94,18 @@ module.exports = function (sio) {
           dig: data
         };
         sio.sockets.socket(item).emit('otherShake', otherShake);
+      });
+    });
+
+    socket.on('explore', function () {
+      laptopId.forEach(function (item) {
+        sio.sockets.socket(item).emit('mobileExplore', socket.id);
+      });
+    });
+
+    socket.on('summon', function () {
+      laptopId.forEach(function (item) {
+        sio.sockets.socket(item).emit('mobileSummon', socket.id);
       });
     });
 

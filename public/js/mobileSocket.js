@@ -6,18 +6,24 @@
   $("#start").click(function () {
     exports.start = true;
     $("#start").hide();
-    $("#wat").append(mode);
+    $("#mode").show();
+    // $("#wat").append(mode);
+
   });
 
   $("#explore").click(function () {
+    console.log("j");
     exports.explore = true;
     exports.summon = false;
+    socket.emit('explore', true);
   });
 
   $("#summon").click(function () {
+    console.log("i");
     exports.explore = false;
     $("#summon").css('background-color', 'yellow');
     exports.summon = true;
+    socket.emit('summon', true);
   });
 
   var scale = 1;
@@ -90,16 +96,6 @@
           check();
           walk();
         }
-        if (shake) {
-          exports.summon = true;
-          exports.explore = false;
-          if (dis < 30) {
-
-          }
-        } else {
-          exports.summon = false;
-          exports.explore = true;
-        }
       }
 
       dis = Math.sqrt(Math.pow((myLocX - pinataX), 2) + Math.pow((myLocY -
@@ -114,10 +110,10 @@
       //document.getElementById("doTiltLR").innerHTML = myLocX;
       //document.getElementById("doTiltFB").innerHTML = myLocY;
       document.getElementById("dis").innerHTML = dis;
-      document.getElementById("ggg").innerHTML = exports.explore;
-      document.getElementById("fff").innerHTML = exports.summon;
+      document.getElementById("explore").innerHTML = exports.explore;
+      document.getElementById("summon").innerHTML = exports.summon;
       document.getElementById("ddd").innerHTML = shake;
-      document.getElementById("alert").innerHTML = word;
+      //document.getElementById("alert").innerHTML = word;
       requestAnimationFrame(count);
     }, 120);
   }
