@@ -4,10 +4,12 @@
   if (windowWidth > 1300 && windowWidth < 2460) {
     $('canvas').width(1920);
     $('canvas').height(1080);
+    $('canvas').css('margin-left', '-960px');
     scale = 1.5;
   } else if (windowWidth > 2460) {
     $('canvas').width(2560);
     $('canvas').height(1440);
+    $('canvas').css('margin-left', '-1280px');
     scale = 2;
   }
 
