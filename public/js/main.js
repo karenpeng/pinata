@@ -1,7 +1,8 @@
 var canvas = document.getElementById('myCanvas');
 var context = canvas.getContext('2d');
 var imgObj = new Image();
-imgObj.src = "/public/image/pinatamap.png"
+imgObj.src = "/public/image/pinatamap.png";
+
 var point = new obelisk.Point(0, 0);
 var pixelView = new obelisk.PixelView(canvas, point);
 
@@ -12,15 +13,9 @@ var trackSize = 12 * scale;
 var cubes = [];
 var bricks = [];
 
-function cuteBrick(a, b, c) {
+function cuteBrick(a, b) {
   this.a = a;
   this.b = b;
-  //this.c = obelisk.ColorPattern.GRAY;
-  this.c = c;
-  //this.c = rgba(ff, 30, 00, 50);
-  //this.brickColor = new obelisk.SideColor().getByInnerColor(this.c);
-  //this.brickColor = rgba(ff, 30, 00, 50);
-
   this.brickColor = new obelisk.SideColor(0x000000, 0x77b19c84);
   this.dimension = new obelisk.BrickDimension(trackSize, trackSize);
   this.brick = new obelisk.Brick(this.dimension, this.brickColor, false);
@@ -31,9 +26,6 @@ cuteBrick.prototype = {
     this.p3dBrick = new obelisk.Point3D(this.a * (trackSize - 2), this.b *
       (trackSize - 2),
       0);
-    //this.brickColor = new obelisk.SideColor().getByInnerColor(this.c);
-    //this.brickColor = rgba(ff, 30, 00, 50);
-    this.brickColor = new obelisk.SideColor(0x000000, 0x77b19c84);
     pixelView.renderObject(this.brick, this.p3dBrick);
   }
 };
@@ -41,6 +33,7 @@ cuteBrick.prototype = {
 function cuteCube(a, b, c, id) {
   this.a = a;
   this.b = b;
+  this.z = 0;
   this.id = id;
   this.right = 0;
   this.back = 0;
@@ -48,20 +41,21 @@ function cuteCube(a, b, c, id) {
   this.preB = 0;
   this.dig = false;
   this.dis;
+  this.preDis = 10000000000000;
   this.explore = true;
   this.summon = false;
   this.myBricks = [];
   this.c = c;
   this.originalC = this.c;
-  this.cubeColor = new obelisk.CubeColor().getByHorizontalColor(this.c);
   this.cubeDms = new obelisk.CubeDimension(cubeSize, cubeSize, cubeSize);
+  this.cubeColor = new obelisk.CubeColor().getByHorizontalColor(this.c);
   this.cube = new obelisk.Cube(this.cubeDms, this.cubeColor, false);
 }
 
 cuteCube.prototype = {
   track: function () {
     if (this.preA !== this.a || this.preB !== this.b) {
-      this.myBricks.push(new cuteBrick(this.a, this.b, this.c));
+      this.myBricks.push(new cuteBrick(this.a, this.b));
       this.preA = this.a;
       this.preB = this.b;
     }
@@ -79,26 +73,43 @@ cuteCube.prototype = {
         this.b--;
       }
     }
+    if (this.dig) {
+      this.z++;
+      if (this.z > 1) {
+        this.z = 0;
+      }
+    } else {
+      this.z = 0;
+    }
     if (this.a < 20) this.a = 20;
-    if (this.a > 60) this.a = 60;
+    if (this.a > 80) this.a = 80;
     if (this.b < -10) this.b = -10;
-    if (this.b > 30) this.b = 30;
+    if (this.b > 60) this.b = 60;
   },
   check: function (x, y) {
     var gapX = this.a * (trackSize - 2) - x * (trackSize - 2);
     var gapY = this.b * (trackSize - 2) - y * (trackSize - 2);
     this.dis = Math.sqrt(Math.pow(gapX, 2) + Math.pow(gapY, 2));
+    if (Math.abs(this.preDis - this.dis) > 20) {
+      var disData = {
+        id: this.id,
+        dis: this.dis
+      };
+      socket.emit('disData', disData);
+    }
   },
   render: function () {
+
     this.p3d = new obelisk.Point3D((trackSize - 2) * this.a, (trackSize - 2) *
-      this.b, 0);
-    if (!this.dig) {
-      this.cubeColor = new obelisk.CubeColor().getByHorizontalColor(this.c);
-    } else {
-      var c = obelisk.ColorPattern.getRandomComfortableColor();
-      this.cubeColor = new obelisk.CubeColor().getByHorizontalColor(c);
-    }
-    this.cube = new obelisk.Cube(this.cubeDms, this.cubeColor, false);
+      this.b, (trackSize - 2) * this.z);
+
+    // if (!this.dig) {
+    //   this.cubeColor = new obelisk.CubeColor().getByHorizontalColor(this.c);
+    // } else {
+    //   var c = obelisk.ColorPattern.getRandomComfortableColor();
+    //   this.cubeColor = new obelisk.CubeColor().getByHorizontalColor(c);
+    // }
+    //this.cube = new obelisk.Cube(this.cubeDms, this.cubeColor, false);
     pixelView.renderObject(this.cube, this.p3d);
   },
   renderTrack: function () {
@@ -117,11 +128,7 @@ function drawBg() {
 }
 
 function setup() {
-  // for (var i = 20; i <= 90; i++) {
-  //   for (var j = -10; j <= 50; j++) {
-  //     bricks.push(new cuteBrick(i, j, obelisk.ColorPattern.GRAY));
-  //   }
-  // }
+
 }
 
 socket.on('pinata', function (data) {
@@ -133,21 +140,18 @@ function draw() {
 
     setTimeout(function () {
       drawBg();
-
-      // bricks.forEach(function (item) {
-      //   item.render();
-      // });
       cubes.forEach(function (item) {
         item.track();
         item.move();
         item.renderTrack();
+        item.check();
       });
       cubes.forEach(function (item) {
         item.render();
       });
 
       requestAnimationFrame(draw);
-    }, 200);
+    }, 250);
   }
 }
 
@@ -170,26 +174,14 @@ socket.on('killCube', function (data) {
 socket.on('otherLR', function (data) {
   cubes.forEach(function (item) {
     if (item.id === data.id) {
-      if (data.info >= -6 && data.info <= 6) {
-        item.right = 0;
-      } else if (data.info > 6) {
-        item.right = 1;
-      } else {
-        item.right = 2;
-      }
+      item.right = data.info;
     }
   });
 });
 socket.on('otherFB', function (data) {
   cubes.forEach(function (item) {
     if (item.id === data.id) {
-      if (data.info >= -6 && data.info <= 6) {
-        item.back = 0;
-      } else if (data.info > 6) {
-        item.back = 1;
-      } else {
-        item.back = 2;
-      }
+      item.back = data.info;
     }
   });
 });
@@ -204,7 +196,7 @@ socket.on('otherShake', function (data) {
 
 socket.on('otherExplore', function (data) {
   cubes.forEach(function (item) {
-    if (item.id === data.id) {
+    if (item.id === data) {
       item.explore = true;
       item.summon = false;
     }
@@ -213,15 +205,9 @@ socket.on('otherExplore', function (data) {
 
 socket.on('otherSummon', function (data) {
   cubes.forEach(function (item) {
-    if (item.id === data.id) {
+    if (item.id === data) {
       item.explore = false;
       item.summon = true;
-      item.check();
-      var disData = {
-        id: item.id,
-        dis: item.dis
-      };
-      socket.emit('disData', dissData);
     }
   });
 });

@@ -36,6 +36,7 @@ html, body{
   padding: 20px;
   margin: 0;
   border: solid black 1px;
+  background-color: yellow;
 }
 
 #summon{

@@ -1,6 +1,7 @@
 (function (exports) {
   exports.shake = false;
   var preX, preY, preZ = 0;
+  var preShake = false;
   init();
 
   function init() {
@@ -40,7 +41,10 @@
       exports.shake = false;
     }
     if (summon) {
-      socket.emit('shakeData', exports.shake);
+      if (preShake !== exports.shake) {
+        socket.emit('shakeData', exports.shake);
+        preShake = exports.shake;
+      }
     }
   }
 

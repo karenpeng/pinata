@@ -7,9 +7,8 @@
 'use strict';
 
 var laptopId = [];
-var mobileId = [];
-var pinataX = Math.random() * 20 + 20;
-var pinataY = Math.random() * 20;
+var pinataX = Math.round(Math.random() * 18) * 2 + 10;
+var pinataY = Math.round(Math.random() * 18) * 2 - 6;
 var colorChoice = [
   0x3300ff,
   0xff0022,
@@ -19,6 +18,7 @@ var colorChoice = [
   0x2200ff
 ];
 var colorIndex = 0;
+var serverCubes = [];
 
 //simple example
 module.exports = function (sio) {
@@ -46,11 +46,10 @@ module.exports = function (sio) {
         laptopId.push(socket.id);
         sio.sockets.socket(socket.id).emit('pinata', pinata);
       } else {
-        //mobileId.push(socket.id);
         var mobileCube = {
           id: socket.id,
-          x: Math.round(Math.random() * 10) * 2 + 20,
-          y: Math.round(Math.random() * 10) * 2,
+          x: Math.round(Math.random() * 18) * 2 + 10,
+          y: Math.round(Math.random() * 18) * 2 - 6,
           c: colorChoice[colorIndex]
         };
         colorIndex++;
@@ -65,6 +64,7 @@ module.exports = function (sio) {
     });
 
     socket.on('lrData', function (data) {
+
       laptopId.forEach(function (id) {
         var moveLR = {
           id: socket.id,
@@ -72,6 +72,7 @@ module.exports = function (sio) {
         };
         sio.sockets.socket(id).emit('otherLR', moveLR);
       });
+
     });
 
     socket.on('fbData', function (data) {

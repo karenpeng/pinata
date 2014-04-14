@@ -1,9 +1,9 @@
 (function (exports) {
 
-  var count = 0;
   var preLR = 0;
   var preFB = 0;
-  exports.sending = false;
+  var lr = 0;
+  var fb = 0;
 
   init();
 
@@ -30,15 +30,30 @@
   }
 
   function deviceOrientationHandler(tiltLR, tiltFB) {
-    count++;
-    exports.lr = Math.round(tiltLR);
-    exports.fb = Math.round(tiltFB);
-    if (start && explore && count % 4 === 0) {
-      socket.emit('lrData', exports.lr);
-      socket.emit('fbData', exports.fb);
-      exports.sending = true;
-    } else {
-      exports.sending = false;
+
+    if (start && explore) {
+      if (tiltLR > -6 && tiltLR < 6) {
+        lr = 0;
+      } else if (tiltLR > 6) {
+        lr = 1;
+      } else {
+        lr = 2;
+      }
+      if (preLR !== lr) {
+        socket.emit('lrData', lr);
+        preLR = lr;
+      }
+      if (tiltFB > -6 && tiltFB < 6) {
+        fb = 0;
+      } else if (tiltFB > 6) {
+        fb = 1;
+      } else {
+        fb = 2;
+      }
+      if (preFB !== fb) {
+        socket.emit('fbData', fb);
+        preFB = fb;
+      }
     }
   }
 
