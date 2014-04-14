@@ -107,6 +107,9 @@ module.exports = function (sio) {
       sio.sockets.socket(data.id).emit('yourLevel', data.level);
     });
 
+    socket.on('summonTData', function (data) {
+      sio.sockets.socket(data.id).emit('yourSummonTData', data.times);
+    });
   });
 
 };

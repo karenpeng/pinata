@@ -1,4 +1,16 @@
 (function (exports) {
+  var scale = 1;
+  var windowWidth = window.innerWidth;
+  if (windowWidth > 1300 && windowWidth < 2460) {
+    $('canvas').width(1920);
+    $('canvas').height(1080);
+    scale = 1.5;
+  } else if (windowWidth > 2460) {
+    $('canvas').width(2560);
+    $('canvas').height(1440);
+    scale = 2;
+  }
+
   var canvas = document.getElementById('myCanvas');
   var context = canvas.getContext('2d');
   var imgObj = new Image();
@@ -7,15 +19,23 @@
   var point = new obelisk.Point(0, 0);
   var pixelView = new obelisk.PixelView(canvas, point);
 
-  var scale = 1;
   var cubeSize = 14 * scale;
   var trackSize = 14 * scale;
+  if (cubeSize % 2 !== 0) {
+    cubeSize++;
+  }
+  if (trackSize % 2 !== 0) {
+    trackSize++;
+  }
 
   var pinataX, pinataY;
 
   var cubes = [];
   var bricks = [];
-  var win = false;
+  var caught = 0;
+
+  var w = $('canvas').width();
+  var h = $('canvas').height();
 
   function cuteBrick(a, b) {
     this.a = a;
@@ -48,6 +68,7 @@
     this.preLevel;
     this.explore = true;
     this.summon = false;
+    this.summonTimes = 0;
     this.myBricks = [];
     this.c = c;
     this.originalC = this.c;
@@ -66,6 +87,7 @@
     },
     move: function () {
       if (this.explore) {
+        this.summonTimes = 0;
         if (this.right === 1) {
           this.a++;
         } else if (this.right === 2) {
@@ -76,14 +98,21 @@
         } else if (this.back === 2) {
           this.b--;
         }
-      }
-      if (this.dig) {
-        this.z++;
-        if (this.z > 1) {
+      } else if (this.summon) {
+        if (this.dig) {
+          this.z++;
+          this.summonTimes++;
+          var summonTData = {
+            id: this.id,
+            times: this.summonTimes
+          };
+          socket.emit('summonTData', summonTData);
+          if (this.z > 1) {
+            this.z = 0;
+          }
+        } else {
           this.z = 0;
         }
-      } else {
-        this.z = 0;
       }
       if (this.a < 20) this.a = 20;
       if (this.a > 100) this.a = 100;
@@ -110,6 +139,11 @@
         this.preLevel = this.level;
       }
     },
+    win: function () {
+      if (this.summonTimes > 10 && this.level === 0) {
+        over = true;
+      }
+    },
     render: function () {
 
       this.p3d = new obelisk.Point3D((trackSize - 2) * this.a, (trackSize - 2) *
@@ -133,20 +167,23 @@
 
   function draw() {
     if (!mobile) {
+      if (caught < 6) {
 
-      setTimeout(function () {
-        context.drawImage(imgObj, 0, 0, 1280, 720);
-        cubes.forEach(function (item) {
-          item.track();
-          item.move();
-          item.renderTrack();
-          item.check();
-        });
-        cubes.forEach(function (item) {
-          item.render();
-        });
-        requestAnimationFrame(draw);
-      }, 250);
+        setTimeout(function () {
+          context.drawImage(imgObj, 0, 0, w, h);
+          cubes.forEach(function (item) {
+            item.track();
+            item.move();
+            item.renderTrack();
+            item.check();
+            item.win();
+          });
+          cubes.forEach(function (item) {
+            item.render();
+          });
+          requestAnimationFrame(draw);
+        }, 250);
+      }
     }
   }
 
@@ -212,4 +249,5 @@
       }
     });
   });
+
 })(this);
