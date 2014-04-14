@@ -1,7 +1,6 @@
 (function (exports) {
   exports.shake = false;
   var preX, preY, preZ = 0;
-  var count = 0;
   init();
 
   function init() {
@@ -40,7 +39,6 @@
     } else {
       exports.shake = false;
     }
-    count++;
     if (summon) {
       socket.emit('shakeData', exports.shake);
     }

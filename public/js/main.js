@@ -6,7 +6,7 @@ var point = new obelisk.Point(0, 0);
 var pixelView = new obelisk.PixelView(canvas, point);
 
 var scale = 1;
-var cubeSize = 24 * scale;
+var cubeSize = 12 * scale;
 var trackSize = 12 * scale;
 
 var cubes = [];
@@ -21,7 +21,7 @@ function cuteBrick(a, b, c) {
   //this.brickColor = new obelisk.SideColor().getByInnerColor(this.c);
   //this.brickColor = rgba(ff, 30, 00, 50);
 
-  this.brickColor = new obelisk.SideColor(this.c, 0x333300ff);
+  this.brickColor = new obelisk.SideColor(0x000000, 0x77b19c84);
   this.dimension = new obelisk.BrickDimension(trackSize, trackSize);
   this.brick = new obelisk.Brick(this.dimension, this.brickColor, false);
 }
@@ -33,7 +33,7 @@ cuteBrick.prototype = {
       0);
     //this.brickColor = new obelisk.SideColor().getByInnerColor(this.c);
     //this.brickColor = rgba(ff, 30, 00, 50);
-    this.brickColor = new obelisk.SideColor(this.c, 0x333300ff);
+    this.brickColor = new obelisk.SideColor(0x000000, 0x77b19c84);
     pixelView.renderObject(this.brick, this.p3dBrick);
   }
 };
@@ -84,16 +84,22 @@ cuteCube.prototype = {
     if (this.b < -10) this.b = -10;
     if (this.b > 30) this.b = 30;
   },
+  check: function (x, y) {
+    var gapX = this.a * (trackSize - 2) - x * (trackSize - 2);
+    var gapY = this.b * (trackSize - 2) - y * (trackSize - 2);
+    this.dis = Math.sqrt(Math.pow(gapX, 2) + Math.pow(gapY, 2));
+  },
   render: function () {
     this.p3d = new obelisk.Point3D((trackSize - 2) * this.a, (trackSize - 2) *
       this.b, 0);
     if (!this.dig) {
       this.cubeColor = new obelisk.CubeColor().getByHorizontalColor(this.c);
     } else {
-      this.cubeColor = obelisk.ColorPattern.getRandomComfortableColor();
+      var c = obelisk.ColorPattern.getRandomComfortableColor();
+      this.cubeColor = new obelisk.CubeColor().getByHorizontalColor(c);
     }
+    this.cube = new obelisk.Cube(this.cubeDms, this.cubeColor, false);
     pixelView.renderObject(this.cube, this.p3d);
-    console.log(this.dig);
   },
   renderTrack: function () {
     this.myBricks.forEach(function (item) {
@@ -118,24 +124,6 @@ function setup() {
   // }
 }
 
-function check() {
-  for (var i = 1; i < cubes.length; i++) {
-    var gapX = cubes[i].a * trackSize - cubes[0].a * trackSize;
-    var gapY = cubes[i].b * trackSize - cubes[0].b * trackSize;
-    cubes[i].dis = Math.sqrt(Math.pow(gapX, 2) + Math.pow(gapY, 2));
-
-    document.getElementById("where").innerHTML = cubes[i].dis;
-
-    if (cubes[i].dis < 30) {
-      cubes[i].c = obelisk.ColorPattern.BLACK;
-      cubes[i].dig = true;
-    } else {
-      cubes[i].c = cubes[i].originalC;
-      cubes[i].dig = false;
-    }
-  }
-}
-
 socket.on('pinata', function (data) {
   cubes.push(new cuteCube(data.x, data.y, obelisk.ColorPattern.PINK, 'pinata'));
 });
@@ -158,10 +146,8 @@ function draw() {
         item.render();
       });
 
-      //check();
-
       requestAnimationFrame(draw);
-    }, 120);
+    }, 200);
   }
 }
 
@@ -216,7 +202,7 @@ socket.on('otherShake', function (data) {
   });
 });
 
-socket.on('mobileExplore', function (data) {
+socket.on('otherExplore', function (data) {
   cubes.forEach(function (item) {
     if (item.id === data.id) {
       item.explore = true;
@@ -225,11 +211,17 @@ socket.on('mobileExplore', function (data) {
   });
 });
 
-socket.on('mobileSummon', function (data) {
+socket.on('otherSummon', function (data) {
   cubes.forEach(function (item) {
     if (item.id === data.id) {
       item.explore = false;
       item.summon = true;
+      item.check();
+      var disData = {
+        id: item.id,
+        dis: item.dis
+      };
+      socket.emit('disData', dissData);
     }
   });
 });

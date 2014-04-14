@@ -42,13 +42,11 @@ module.exports = function (sio) {
         x: pinataX,
         y: pinataY
       };
-      sio.sockets.socket(socket.id).emit('pinata', pinata);
-
       if (!data) {
         laptopId.push(socket.id);
+        sio.sockets.socket(socket.id).emit('pinata', pinata);
       } else {
-        mobileId.push(socket.id);
-
+        //mobileId.push(socket.id);
         var mobileCube = {
           id: socket.id,
           x: Math.round(Math.random() * 10) * 2 + 20,
@@ -56,10 +54,9 @@ module.exports = function (sio) {
           c: colorChoice[colorIndex]
         };
         colorIndex++;
-        if (colorIndex > colorChoice.length) {
+        if (colorIndex > colorChoice.length - 1) {
           colorIndex = 0;
         }
-        sio.sockets.socket(socket.id).emit('urLocation', mobileCube);
         laptopId.forEach(function (item) {
           sio.sockets.socket(item).emit('makeCube', mobileCube);
         });
@@ -99,14 +96,18 @@ module.exports = function (sio) {
 
     socket.on('explore', function () {
       laptopId.forEach(function (item) {
-        sio.sockets.socket(item).emit('mobileExplore', socket.id);
+        sio.sockets.socket(item).emit('otherExplore', socket.id);
       });
     });
 
     socket.on('summon', function () {
       laptopId.forEach(function (item) {
-        sio.sockets.socket(item).emit('mobileSummon', socket.id);
+        sio.sockets.socket(item).emit('otherSummon', socket.id);
       });
+    });
+
+    socket.on('disData', function (data) {
+
     });
 
   });
