@@ -1,12 +1,14 @@
 (function (exports) {
   exports.start = false;
-  exports.explore = true;
+  exports.explore = false;
   exports.summon = false;
 
   $("#start").click(function () {
     exports.start = true;
+    exports.explore = true;
     $("#start").hide();
     $("#mode").show();
+    $("#level").show();
   });
 
   $("#explore").click(function () {
@@ -18,12 +20,15 @@
   });
 
   $("#summon").click(function () {
-    console.log("i");
     exports.explore = false;
     $("#explore").css('background-color', 'white');
     exports.summon = true;
     $("#summon").css('background-color', 'yellow');
     socket.emit('summon', true);
+  });
+
+  socket.on('yourLevel', function (data) {
+    $('#level').html('Distance:' + ' ' + data);
   });
 
 })(this);

@@ -7,8 +7,10 @@ var point = new obelisk.Point(0, 0);
 var pixelView = new obelisk.PixelView(canvas, point);
 
 var scale = 1;
-var cubeSize = 12 * scale;
-var trackSize = 12 * scale;
+var cubeSize = 14 * scale;
+var trackSize = 14 * scale;
+
+var pinataX, pinataY;
 
 var cubes = [];
 var bricks = [];
@@ -40,8 +42,8 @@ function cuteCube(a, b, c, id) {
   this.preA = 0;
   this.preB = 0;
   this.dig = false;
-  this.dis;
-  this.preDis = 10000000000000;
+  this.level;
+  this.preLevel;
   this.explore = true;
   this.summon = false;
   this.myBricks = [];
@@ -82,20 +84,28 @@ cuteCube.prototype = {
       this.z = 0;
     }
     if (this.a < 20) this.a = 20;
-    if (this.a > 80) this.a = 80;
-    if (this.b < -10) this.b = -10;
-    if (this.b > 60) this.b = 60;
+    if (this.a > 100) this.a = 100;
+    if (this.b < -30) this.b = -30;
+    if (this.b > 50) this.b = 50;
   },
-  check: function (x, y) {
-    var gapX = this.a * (trackSize - 2) - x * (trackSize - 2);
-    var gapY = this.b * (trackSize - 2) - y * (trackSize - 2);
-    this.dis = Math.sqrt(Math.pow(gapX, 2) + Math.pow(gapY, 2));
-    if (Math.abs(this.preDis - this.dis) > 20) {
-      var disData = {
+  check: function () {
+    var gapX = this.a * (trackSize - 2) - pinataX * (trackSize - 2);
+    var gapY = this.b * (trackSize - 2) - pinataY * (trackSize - 2);
+    var dis = Math.sqrt(Math.pow(gapX, 2) + Math.pow(gapY, 2));
+    if (dis < 60) this.level = 0;
+    else if (dis < 120) this.level = 1;
+    else if (dis < 200) this.level = 2;
+    else if (dis < 300) this.level = 3;
+    else if (dis < 440) this.level = 4;
+    else if (dis < 600) this.level = 5;
+    else this.level = 6;
+    if (this.preLevel !== this.level) {
+      var levelData = {
         id: this.id,
-        dis: this.dis
+        level: this.level
       };
-      socket.emit('disData', disData);
+      socket.emit('levelData', levelData);
+      this.preLevel = this.level;
     }
   },
   render: function () {
@@ -119,27 +129,11 @@ cuteCube.prototype = {
   }
 };
 
-function drawBg() {
-  context.beginPath();
-  context.rect(0, 0, 1200, 700);
-  context.fillStyle = '#ddd';
-  context.fill();
-  context.drawImage(imgObj, 0, 0, 1280, 720);
-}
-
-function setup() {
-
-}
-
-socket.on('pinata', function (data) {
-  cubes.push(new cuteCube(data.x, data.y, obelisk.ColorPattern.PINK, 'pinata'));
-});
-
 function draw() {
   if (!mobile) {
 
     setTimeout(function () {
-      drawBg();
+      context.drawImage(imgObj, 0, 0, 1280, 720);
       cubes.forEach(function (item) {
         item.track();
         item.move();
@@ -149,14 +143,18 @@ function draw() {
       cubes.forEach(function (item) {
         item.render();
       });
-
       requestAnimationFrame(draw);
     }, 250);
   }
 }
 
-setup();
 draw();
+
+socket.on('pinata', function (data) {
+  cubes.push(new cuteCube(data.x, data.y, obelisk.ColorPattern.PINK, 'pinata'));
+  pinataX = data.x;
+  pinataY = data.y;
+});
 
 socket.on('makeCube', function (data) {
   cubes.push(new cuteCube(data.x, data.y, data.c, data.id));

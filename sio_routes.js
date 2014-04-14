@@ -7,7 +7,7 @@
 'use strict';
 
 var laptopId = [];
-var pinataX = Math.round(Math.random() * 18) * 2 + 10;
+var pinataX = Math.round(Math.random() * 18) * 2 + 12;
 var pinataY = Math.round(Math.random() * 18) * 2 - 6;
 var colorChoice = [
   0x3300ff,
@@ -18,7 +18,6 @@ var colorChoice = [
   0x2200ff
 ];
 var colorIndex = 0;
-var serverCubes = [];
 
 //simple example
 module.exports = function (sio) {
@@ -48,8 +47,8 @@ module.exports = function (sio) {
       } else {
         var mobileCube = {
           id: socket.id,
-          x: Math.round(Math.random() * 18) * 2 + 10,
-          y: Math.round(Math.random() * 18) * 2 - 6,
+          x: Math.round(Math.random() * 22) * 2 + 14,
+          y: Math.round(Math.random() * 22) * 2 - 6,
           c: colorChoice[colorIndex]
         };
         colorIndex++;
@@ -64,7 +63,6 @@ module.exports = function (sio) {
     });
 
     socket.on('lrData', function (data) {
-
       laptopId.forEach(function (id) {
         var moveLR = {
           id: socket.id,
@@ -72,7 +70,6 @@ module.exports = function (sio) {
         };
         sio.sockets.socket(id).emit('otherLR', moveLR);
       });
-
     });
 
     socket.on('fbData', function (data) {
@@ -107,8 +104,8 @@ module.exports = function (sio) {
       });
     });
 
-    socket.on('disData', function (data) {
-
+    socket.on('levelData', function (data) {
+      sio.sockets.socket(data.id).emit('yourLevel', data.level);
     });
 
   });

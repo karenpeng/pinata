@@ -18,7 +18,6 @@
     });
     if(!mobile){
       var can = '<canvas id="myCanvas" width="1280" height="720"><\/canvas>';
-      $("#wrap").append('<div id="where"><\/div>');
       $("#wrap").append(can);
       document.write('<script type="text/javascript" src="/public/js/obelisk.min.js"><\/script>');
       document.write('<script type="text/javascript" src="/public/js/main.js"><\/script>');
@@ -28,6 +27,8 @@
       var mode = '<div id="mode"><span id="explore">Explore<\/span><span id="summon">Summon<\/span><\/div>';
       $("#wat").append(mode);
       $("#mode").hide();
+      $("#wat").append('<div id="level"><\/div>');
+      $("#level").hide();
       document.write('<script type="text/javascript" src="/public/js/main_mobile.js"><\/script>');
       document.write('<script type="text/javascript" src="/public/js/orientationDetect.js"><\/script>');
       document.write('<script type="text/javascript" src="/public/js/motionDetect.js"><\/script>');
