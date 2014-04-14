@@ -7,7 +7,7 @@
 'use strict';
 
 var laptopId = [];
-var pinataX = Math.round(Math.random() * 18) * 2 + 12;
+var pinataX = Math.round(Math.random() * 18) * 2 + 10;
 var pinataY = Math.round(Math.random() * 18) * 2 - 6;
 var colorChoice = [
   0x3300ff,
@@ -35,7 +35,6 @@ module.exports = function (sio) {
         sio.sockets.socket(id).emit('killCube', socket.id);
       });
     });
-
     socket.on('deviceData', function (data) {
       var pinata = {
         x: pinataX,

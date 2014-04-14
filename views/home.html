@@ -7,8 +7,6 @@
     <script type="text/javascript" src="/public/js/mobileDetect.js"></script>
   </head>
   <body>
-    <div id="wat"></div>
-    <div id="wrap"></div>
   </body>
   <script type="text/javascript" src="/socket.io/socket.io.js"></script>
   <script type="text/javascript">
@@ -17,11 +15,13 @@
         socket.emit('deviceData', mobile);
     });
     if(!mobile){
+      $('body').append('<div id="wrap"><\/div>');
       var can = '<canvas id="myCanvas" width="1280" height="720"><\/canvas>';
       $("#wrap").append(can);
       document.write('<script type="text/javascript" src="/public/js/obelisk.min.js"><\/script>');
       document.write('<script type="text/javascript" src="/public/js/main.js"><\/script>');
     }else{
+      $('body').append('<div id="wat"><\/div>');
       var start = '<div id="start">STRAT<\/div>';
       $("#wat").append(start);
       var mode = '<div id="mode"><span id="explore">Explore<\/span><span id="summon">Summon<\/span><\/div>';

@@ -20,6 +20,7 @@
   });
 
   $("#summon").click(function () {
+    $("#wat").removeClass('flash');
     exports.explore = false;
     $("#explore").css('background-color', 'white');
     exports.summon = true;
@@ -29,6 +30,11 @@
 
   socket.on('yourLevel', function (data) {
     $('#level').html('Distance:' + ' ' + data);
+    if (data === 0) {
+      $("#wat").addClass('flash');
+    } else {
+      $("#wat").removeClass('flash');
+    }
   });
 
 })(this);
