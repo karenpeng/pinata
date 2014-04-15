@@ -2,6 +2,8 @@
   exports.start = false;
   exports.explore = false;
   exports.summon = false;
+  exports.times = 0;
+  var w, h;
 
   $("#start").click(function () {
     exports.start = true;
@@ -17,6 +19,8 @@
     exports.summon = false;
     $("#summon").css('background-color', 'white');
     socket.emit('explore', true);
+    $(".hit").removeClass('hitOn');
+    $(".hit").hide();
   });
 
   $("#summon").click(function () {
@@ -26,6 +30,7 @@
     exports.summon = true;
     $("#summon").css('background-color', 'yellow');
     socket.emit('summon', true);
+    $(".hit").show();
   });
 
   socket.on('yourLevel', function (data) {
@@ -34,6 +39,27 @@
       $("#wat").addClass('flash');
     } else {
       $("#wat").removeClass('flash');
+    }
+  });
+
+  socket.on('yourSummonTData', function (data) {
+    exports.times = data;
+    if (data === 1) {
+      $("#hit7").addClass('hitOn');
+    } else if (data === 2) {
+      $("#hit6").addClass('hitOn');
+    } else if (data === 3) {
+      $("#hit5").addClass('hitOn');
+    } else if (data === 4) {
+      $("#hit4").addClass('hitOn');
+    } else if (data === 5) {
+      $("#hit3").addClass('hitOn');
+    } else if (data === 6) {
+      $("#hit2").addClass('hitOn');
+    } else if (data === 7) {
+      $("#hit1").addClass('hitOn');
+    } else if (data === 8) {
+      $("#hit0").addClass('hitOn');
     }
   });
 

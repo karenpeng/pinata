@@ -6,9 +6,39 @@
 
 'use strict';
 
+var nickNames = [
+  'Sunset',
+  'Peewee',
+  'Skeeter',
+  'Limberleg',
+  'Two - Bits',
+  'Hunky - Dory',
+  'Hoot Owl',
+  'Tumbleweed',
+  'Swayback',
+  'Wild - Cat',
+  'Bean - Belly',
+  'Never Sweat',
+  'Iron Jaw',
+  'Rockin - Chair',
+  'Razorback',
+  'Jack - Rabbit',
+  'Four - Ace',
+  'The Rambler',
+  'Snake Eye',
+  'Gray Wonder',
+  'Puddin’ - Foot',
+  'Bootjack',
+  'Mountain Sprout'
+];
+
 var laptopId = [];
-var pinataX = Math.round(Math.random() * 18) * 2 + 10;
-var pinataY = Math.round(Math.random() * 18) * 2 - 6;
+var pinataLoc = [];
+for (var i = 0; i < 3; i++) {
+  pinataLoc.push([Math.round(Math.random() * 18) * 2 + 14, Math.round(Math.random() *
+    18) * 2 - 6]);
+}
+
 var colorChoice = [
   0x3300ff,
   0xff0022,
@@ -36,13 +66,9 @@ module.exports = function (sio) {
       });
     });
     socket.on('deviceData', function (data) {
-      var pinata = {
-        x: pinataX,
-        y: pinataY
-      };
       if (!data) {
         laptopId.push(socket.id);
-        sio.sockets.socket(socket.id).emit('pinata', pinata);
+        sio.sockets.socket(socket.id).emit('pinataLoc', pinataLoc);
       } else {
         var mobileCube = {
           id: socket.id,

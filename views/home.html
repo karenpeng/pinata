@@ -1,6 +1,6 @@
 <html>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width">
+  <meta name="viewport" content="width=device-width, user-scalable=no">
   <head>
     <link rel="stylesheet" type="text/css" href="/public/css/pinata.css"/>
     <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
@@ -19,6 +19,7 @@
       var can = '<canvas id="myCanvas" width="1280" height="720"><\/canvas>';
       $("#wrap").append(can);
       document.write('<script type="text/javascript" src="/public/js/obelisk.min.js"><\/script>');
+      document.write('<script type="text/javascript" src="/public/js/class.js"><\/script>');
       document.write('<script type="text/javascript" src="/public/js/main.js"><\/script>');
     }else{
       $('body').append('<div id="wat"><\/div>');
@@ -29,6 +30,10 @@
       $("#mode").hide();
       $("#wat").append('<div id="level"><\/div>');
       $("#level").hide();
+      for (var i = 0; i < 8; i++) {
+        $("#wat").append('<div class="hit" id="hit' + i + '"><\/div>');
+      }
+      $(".hit").hide();
       document.write('<script type="text/javascript" src="/public/js/main_mobile.js"><\/script>');
       document.write('<script type="text/javascript" src="/public/js/orientationDetect.js"><\/script>');
       document.write('<script type="text/javascript" src="/public/js/motionDetect.js"><\/script>');
