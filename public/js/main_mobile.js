@@ -4,6 +4,7 @@
   exports.summon = false;
   exports.times = 0;
   var w, h;
+  var score = 0;
 
   $("#start").click(function () {
     exports.start = true;
@@ -35,7 +36,7 @@
 
   socket.on('yourLevel', function (data) {
     $('#level').html('Distance:' + ' ' + data);
-    if (data === 0) {
+    if (data === 0 && exports.start) {
       $("#wat").addClass('flash');
     } else {
       $("#wat").removeClass('flash');
@@ -60,7 +61,17 @@
       $("#hit1").addClass('hitOn');
     } else if (data === 8) {
       $("#hit0").addClass('hitOn');
+    } else if (data === 9) {
+      $(".hit").removeClass('hitOn');
+      $(".hit").hide();
     }
+  });
+
+  socket.on('yourScoreData', function () {
+    score = data;
+    $(".hit").removeClass('hitOn');
+    $(".hit").hide();
+    $("#wat").append('<div id="caught">You Catch' + score + 'Pinata!</div>');
   });
 
 })(this);

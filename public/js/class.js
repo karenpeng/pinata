@@ -1,6 +1,6 @@
 (function (exports) {
 
-  var cubeSize = 14;
+  var cubeSize = 16;
   var trackSize = cubeSize - 2;
 
   function cuteBrick(a, b) {
@@ -53,6 +53,9 @@
     this.explore = true;
     this.summon = false;
     this.summonTimes = 0;
+    this.pinataId;
+    this.score = 0;
+    this.preScore = 0;
     this.myBricks = [];
     this.c = c;
     this.originalC = this.c;
@@ -86,11 +89,13 @@
         if (this.dig) {
           this.z++;
           this.summonTimes++;
-          var summonTData = {
-            id: this.id,
-            times: this.summonTimes
-          };
-          socket.emit('summonTData', summonTData);
+          if (this.summonTimes <= 9) {
+            var summonTData = {
+              id: this.id,
+              times: this.summonTimes
+            };
+            socket.emit('summonTData', summonTData);
+          }
           if (this.z > 1) {
             this.z = 0;
           }
@@ -104,7 +109,6 @@
       if (this.b > 50) this.b = 50;
     },
     check: function (arr) {
-      var pinataId;
       var that = this;
       var minDis = 10000000000;
       arr.forEach(function (item) {
@@ -113,7 +117,7 @@
         var dis = Math.sqrt(Math.pow(gapX, 2) + Math.pow(gapY, 2));
         if (minDis > dis) {
           minDis = dis;
-          pinataId = item.id;
+          that.pinataId = item.id;
         }
       });
 
@@ -135,7 +139,17 @@
     },
     win: function () {
       if (this.summonTimes >= 8 && this.level === 0) {
-        caught++;
+        this.score++;
+        this.summonTimes = 0;
+        return true;
+      }
+      if (this.preScore !== this.score) {
+        var scoreData = {
+          id: this.id,
+          score: this.score
+        };
+        socket.emit('scoreData', scoreData);
+        this.preScore = this.score;
       }
     },
     render: function () {

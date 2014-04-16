@@ -35,7 +35,7 @@ var nickNames = [
 var laptopId = [];
 var pinataLoc = [];
 for (var i = 0; i < 3; i++) {
-  pinataLoc.push([Math.round(Math.random() * 18) * 2 + 14, Math.round(Math.random() *
+  pinataLoc.push([Math.round(Math.random() * 18) * 2 + 16, Math.round(Math.random() *
     18) * 2 - 6]);
 }
 
@@ -136,6 +136,11 @@ module.exports = function (sio) {
     socket.on('summonTData', function (data) {
       sio.sockets.socket(data.id).emit('yourSummonTData', data.times);
     });
+
+    socket.on('scoreData', function (data) {
+      sio.sockets.socket(data.id).emit('yourScoreData', data.score);
+    });
+
   });
 
 };
