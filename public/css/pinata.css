@@ -5,6 +5,10 @@ html, body{
   margin: 0;
 }
 
+body{
+  overflow: hidden;
+}
+
 #myCanvas{
   position: absolute;
   left: 50%;
