@@ -6,7 +6,7 @@
   function cuteBrick(a, b) {
     this.a = a;
     this.b = b;
-    this.brickColor = new obelisk.SideColor(0x000000, 0x77b19c84);
+    this.brickColor = new obelisk.SideColor(0x000000, 0x33a0844c);
     this.dimension = new obelisk.BrickDimension(cubeSize, cubeSize);
     this.brick = new obelisk.Brick(this.dimension, this.brickColor, false);
   }
@@ -89,6 +89,7 @@
         if (this.dig) {
           this.z++;
           this.summonTimes++;
+          console.log(this.summonTimes);
           if (this.summonTimes <= 9) {
             var summonTData = {
               id: this.id,
@@ -104,9 +105,10 @@
         }
       }
       if (this.a < 20) this.a = 20;
-      if (this.a > 100) this.a = 100;
-      if (this.b < -30) this.b = -30;
-      if (this.b > 50) this.b = 50;
+      if (this.a > 80) this.a = 80;
+      if (this.b < -26) this.b = -26;
+      if (this.b > 38) this.b = 38;
+
     },
     check: function (arr) {
       var that = this;
@@ -141,15 +143,15 @@
       if (this.summonTimes >= 8 && this.level === 0) {
         this.score++;
         this.summonTimes = 0;
+        if (this.preScore !== this.score) {
+          var scoreData = {
+            id: this.id,
+            score: this.score
+          };
+          socket.emit('scoreData', scoreData);
+          this.preScore = this.score;
+        }
         return true;
-      }
-      if (this.preScore !== this.score) {
-        var scoreData = {
-          id: this.id,
-          score: this.score
-        };
-        socket.emit('scoreData', scoreData);
-        this.preScore = this.score;
       }
     },
     render: function () {

@@ -40,7 +40,7 @@
     } else {
       exports.shake = false;
     }
-    if (summon) {
+    if (summon && times <= 9) {
       if (preShake !== exports.shake) {
         socket.emit('shakeData', exports.shake);
         preShake = exports.shake;

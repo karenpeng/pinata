@@ -55,7 +55,7 @@
             item.render();
           });
           requestAnimationFrame(draw);
-        }, 300);
+        }, 330);
       } else {
         context.font = "100px Georgia";
         context.fillText("GAME OVER", windowWidth / 2 - 300, windowWidth * 9 /
