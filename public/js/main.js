@@ -12,7 +12,7 @@
   var canvas = document.getElementById('myCanvas');
   var context = canvas.getContext('2d');
   var imgObj = new Image();
-  imgObj.src = "/public/image/pinatamapkaren.png";
+  imgObj.src = "/public/image/pinatamap-20140416.png";
 
   exports.point = new obelisk.Point(0, 0);
   exports.pixelView = new obelisk.PixelView(canvas, point);
