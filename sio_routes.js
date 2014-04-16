@@ -31,6 +31,7 @@ var nickNames = [
   'Bootjack',
   'Mountain Sprout'
 ];
+var nameIndex = 0;
 
 var laptopId = [];
 var pinataLoc = [];
