@@ -1,11 +1,11 @@
 (function (exports) {
 
-  var windowWidth = window.innerWidth;
-  $('#myCanvas').width(windowWidth);
-  $('#myCanvas').height(windowWidth * 9 / 16);
-  var mgl = -windowWidth / 2;
-  var mglS = mgl.toString();
-  $('#myCanvas').css('margin-left', mglS);
+  // var windowWidth = window.innerWidth;
+  // $('#myCanvas').width(windowWidth);
+  // $('#myCanvas').height(windowWidth * 9 / 16);
+  // var mgl = -windowWidth / 2;
+  // var mglS = mgl.toString();
+  // $('#myCanvas').css('margin-left', mglS);
   var w = $("#myCanvas").width();
   var h = $("#myCanvas").height();
 
@@ -19,10 +19,11 @@
 
   var pinatas = [];
   var cubes = [];
-  var bricks = [];
 
   function restart() {
-
+    pinatas = [];
+    cubes = [];
+    socket.emit('restartData', true);
   }
 
   function draw() {
@@ -31,7 +32,7 @@
       if (pinatas.length > 0) {
 
         setTimeout(function () {
-          context.drawImage(imgObj, 0, 0);
+          context.drawImage(imgObj, 0, 0, 1280, 720);
 
           cubes.forEach(function (item) {
             item.track();

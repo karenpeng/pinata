@@ -87,7 +87,9 @@
         }
       } else if (this.summon) {
         if (this.dig) {
-          this.z++;
+          if (this.summonTimes < 9) {
+            this.z++;
+          }
           this.summonTimes++;
           console.log(this.summonTimes);
           if (this.summonTimes <= 9) {
@@ -142,7 +144,7 @@
     win: function () {
       if (this.summonTimes >= 8 && this.level === 0) {
         this.score++;
-        this.summonTimes = 0;
+        //this.summonTimes = 0;
         if (this.preScore !== this.score) {
           var scoreData = {
             id: this.id,

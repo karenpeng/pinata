@@ -33,13 +33,6 @@ var nickNames = [
 ];
 var nameIndex = 0;
 
-var laptopId = [];
-var pinataLoc = [];
-for (var i = 0; i < 3; i++) {
-  pinataLoc.push([Math.round(Math.random() * 18) * 2 + 16, Math.round(Math.random() *
-    18) * 2 - 6]);
-}
-
 var colorChoice = [
   0x3300ff,
   0xff0022,
@@ -50,6 +43,19 @@ var colorChoice = [
 ];
 var colorIndex = 0;
 
+var laptopId = [];
+var pinataLoc = [];
+
+function restartServer() {
+  laptopId = [];
+  pinataLoc = [];
+  nameIndex = 0;
+  colorIndex = 0;
+  for (var i = 0; i < 3; i++) {
+    pinataLoc.push([Math.round(Math.random() * 18) * 2 + 16, Math.round(Math.random() *
+      18) * 2 - 6]);
+  }
+}
 //simple example
 module.exports = function (sio) {
   var pageOpen = 0;
@@ -140,6 +146,10 @@ module.exports = function (sio) {
 
     socket.on('scoreData', function (data) {
       sio.sockets.socket(data.id).emit('yourScoreData', data.score);
+    });
+
+    socket.on('restart', function () {
+      restartServer();
     });
 
   });
