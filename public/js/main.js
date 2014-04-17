@@ -1,18 +1,18 @@
 (function (exports) {
 
   var windowWidth = window.innerWidth;
-  $('canvas').width(windowWidth);
-  $('canvas').height(windowWidth * 9 / 16);
+  $('#myCanvas').width(windowWidth);
+  $('#myCanvas').height(windowWidth * 9 / 16);
   var mgl = -windowWidth / 2;
   var mglS = mgl.toString();
-  $('canvas').css('margin-left', mglS);
+  $('#myCanvas').css('margin-left', mglS);
   var w = $("#myCanvas").width();
   var h = $("#myCanvas").height();
 
   var canvas = document.getElementById('myCanvas');
   var context = canvas.getContext('2d');
   var imgObj = new Image();
-  imgObj.src = "/public/image/pinatamap-20140416.png";
+  imgObj.src = "http://lab.dxtr.com/pinata/pinatamap.png";
 
   exports.point = new obelisk.Point(0, 0);
   exports.pixelView = new obelisk.PixelView(canvas, point);
@@ -31,7 +31,7 @@
       if (pinatas.length > 0) {
 
         setTimeout(function () {
-          context.drawImage(imgObj, 0, 0, w, h);
+          context.drawImage(imgObj, 0, 0);
 
           cubes.forEach(function (item) {
             item.track();
