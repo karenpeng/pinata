@@ -56,6 +56,8 @@ function restartServer() {
       18) * 2 - 6]);
   }
 }
+
+restartServer();
 //simple example
 module.exports = function (sio) {
   var pageOpen = 0;
