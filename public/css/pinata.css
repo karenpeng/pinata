@@ -8,47 +8,13 @@ html, body{
 body{
   overflow: hidden;
 }
-/*
-#myCanvas{
-  position: absolute;
-  left: 50%;
-  width:1280px;
-  height:720px;
-  margin-left: -640px;
-  background-color: #ddd;
-}
-*/
 
 #myCanvas{
   position: absolute;
   left: 50%;
   background-color: #ddd;
 }
-/*
-@media screen (max-wdith: 1000px){
-  #myCanvas{
-    width: 1024px;
-    height: 576px;
-    margin-left:-512px;
-  }
-}
 
-@media screen and (min-width: 1000px) and (max-width: 1270px) {
-  #myCanvas{
-    width: 1280px;
-    height: 720px;
-    margin-left:-640px;
-  }
-}
-
-@media screen and (min-width: 1270px) and (max-width: 2560px) {
-  #myCanvas{
-    width: 2560px;
-    height: 1440px;
-    margin-left:-720px;
-  }
-}
-*/
 #wrap{
   position: relative;
 }
@@ -140,5 +106,5 @@ body{
 }
 
 #caught{
-  margin: auto;
+  margin: 100px auto;
 }

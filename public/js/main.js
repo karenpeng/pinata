@@ -3,14 +3,16 @@
   var windowWidth = window.innerWidth;
   $('#myCanvas').width(windowWidth);
   $('#myCanvas').height(windowWidth * 9 / 16);
+  var canvas = document.getElementById('myCanvas');
+  canvas.setAttribute('width', windowWidth);
+  canvas.setAttribute('height', windowWidth * 9 / 16);
+
   var mgl = -windowWidth / 2;
   var mglS = mgl.toString();
   $('#myCanvas').css('margin-left', mglS);
   var w = $("#myCanvas").width();
   var h = $("#myCanvas").height();
-  console.log(w, h);
 
-  var canvas = document.getElementById('myCanvas');
   var context = canvas.getContext('2d');
   var imgObj = new Image();
   imgObj.src = "http://lab.dxtr.com/pinata/pinatamap.png";
