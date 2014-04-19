@@ -77,6 +77,9 @@ function restartServer() {
     laptopId.forEach(function (item) {
       sio.sockets.socket(item).emit('makeCube', mobileCube);
     });
+    mobileId.forEach(function (item) {
+      sio.sockets.socket(item).emit('startOver', true);
+    });
   });
 }
 
@@ -186,6 +189,9 @@ module.exports = function (sio) {
       if (restartCounter === 0) {
         restartServer();
         restartCounter = 1;
+        setTimeout(function () {
+          restartCounter = 0;
+        }, 5000);
       }
     });
 

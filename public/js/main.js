@@ -22,7 +22,7 @@
 
   var pinatas = [];
   var cubes = [];
-  var over = false;
+  var init = false;
 
   function restart() {
     pinatas = [];
@@ -30,58 +30,48 @@
     socket.emit('restartData', true);
   }
 
-  function draw() {
-    if (!mobile) {
-
-      setTimeout(function () {
-        if (!over) {
-          context.drawImage(imgObj, 0, 0, w, h);
-
-          cubes.forEach(function (item) {
-            item.track();
-            item.move();
-            item.renderTrack();
-            item.check(pinatas);
-            if (item.win()) {
-              for (var i = 0; i < pinatas.length; i++) {
-                if (pinatas[i].id === item.pinataId) {
-                  pinatas.splice(i, 1);
-                }
-              }
-            }
-          });
-
-          pinatas.forEach(function (item) {
-            item.render();
-          });
-
-          cubes.forEach(function (item) {
-            item.render();
-          });
-
-          if (pinatas.length === 0) {
-            over = true;
-          }
-
-        } else {
-          //setTimeout(function () {
-          context.font = "100px Georgia";
-          context.fillText("GAME OVER", windowWidth / 2 - 300,
-            windowWidth *
-            9 /
-            32);
-          // }, 1000);
-          // setTimeout(function () {
-          restart();
-          // }, 1010);
-        }
-        requestAnimationFrame(draw);
-      }, 330);
-
-    }
+  function draw(foo, rate) {
+    setTimeout(function () {
+      requestAnimationFrame(draw);
+      foo();
+    }, 1000 / rate);
   }
 
-  draw();
+  draw(function () {
+    if (init && pinatas.length > 0) {
+      context.drawImage(imgObj, 0, 0, w, h);
+
+      cubes.forEach(function (item) {
+        item.track();
+        item.move();
+        item.renderTrack();
+        item.check(pinatas);
+        if (item.win()) {
+          for (var i = 0; i < pinatas.length; i++) {
+            if (pinatas[i].id === item.pinataId) {
+              pinatas.splice(i, 1);
+            }
+          }
+        }
+      });
+
+      pinatas.forEach(function (item) {
+        item.render();
+      });
+
+      cubes.forEach(function (item) {
+        item.render();
+      });
+
+    }
+    if (init && pinatas.length === 0) {
+      context.font = "100px Georgia";
+      context.fillText("GAME OVER", windowWidth / 2 - 300,
+        windowWidth * 9 / 32);
+      restart();
+      init = false;
+    }
+  }, 4);
 
   socket.on('pinataLoc', function (data) {
     var i = 0;
@@ -89,7 +79,7 @@
       pinatas.push(new pinata(item[0], item[1], i));
       i++;
     });
-    //draw();
+    init = true;
   });
 
   socket.on('makeCube', function (data) {

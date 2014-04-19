@@ -3,7 +3,6 @@
   exports.explore = false;
   exports.summon = false;
   exports.times = 0;
-  var w, h;
   var score = 0;
 
   $("#start").click(function () {
@@ -61,9 +60,6 @@
       $("#hit1").addClass('hitOn');
     } else if (data === 8) {
       $("#hit0").addClass('hitOn');
-    } else if (data === 9) {
-      $(".hit").removeClass('hitOn');
-      $(".hit").hide();
     }
   });
 
@@ -72,6 +68,17 @@
     $(".hit").removeClass('hitOn');
     $(".hit").hide();
     $("#wat").append('<div id="caught">You Catch' + score + 'Pinata!</div>');
+  });
+
+  socket.on('startOver', function () {
+    exports.start = false;
+    exports.explore = false;
+    exports.summon = false;
+    exports.times = 0;
+    score = 0;
+    $("#start").show();
+    $("#mode").hide();
+    $("#level").hide();
   });
 
 })(this);
