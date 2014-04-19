@@ -11,9 +11,13 @@
     $("#start").hide();
     $("#mode").show();
     $("#level").show();
+    $("#summon").css('background-color', 'white');
+    $("#explore").css('background-color', 'yellow');
   });
 
   $("#explore").click(function () {
+    $("#caught").remove();
+    $("#level").show();
     exports.explore = true;
     $("#explore").css('background-color', 'yellow');
     exports.summon = false;
@@ -63,11 +67,12 @@
     }
   });
 
-  socket.on('yourScoreData', function () {
+  socket.on('yourScoreData', function (data) {
     score = data;
     $(".hit").removeClass('hitOn');
     $(".hit").hide();
-    $("#wat").append('<div id="caught">You Catch' + score + 'Pinata!</div>');
+    $("#level").hide();
+    $("#wat").append('<div id="caught">You Catch One Pinata!</div>');
   });
 
   socket.on('startOver', function () {
@@ -76,9 +81,12 @@
     exports.summon = false;
     exports.times = 0;
     score = 0;
-    $("#start").show();
+    $(".hit").removeClass('hitOn');
+    $(".hit").hide();
     $("#mode").hide();
     $("#level").hide();
+    $("#caught").remove();
+    $("#start").show();
   });
 
 })(this);

@@ -125,13 +125,12 @@
         }
       });
 
-      if (minDis < 60) this.level = 0;
-      else if (minDis < 120) this.level = 1;
-      else if (minDis < 200) this.level = 2;
-      else if (minDis < 300) this.level = 3;
-      else if (minDis < 440) this.level = 4;
-      else if (minDis < 600) this.level = 5;
-      else this.level = 6;
+      if (minDis < 100) this.level = 0;
+      else if (minDis < 200) this.level = 1;
+      else if (minDis < 300) this.level = 2;
+      else if (minDis < 400) this.level = 3;
+      else if (minDis < 500) this.level = 4;
+      else this.level = 5;
       if (this.explore && this.preLevel !== this.level) {
         var levelData = {
           id: this.id,
@@ -142,7 +141,7 @@
       }
     },
     win: function () {
-      if (this.summonTimes >= 8 && this.level === 0) {
+      if (this.summonTimes === 8 && this.level === 0) {
         this.score++;
         //this.summonTimes = 0;
         if (this.preScore !== this.score) {

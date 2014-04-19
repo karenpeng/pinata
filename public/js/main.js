@@ -23,6 +23,7 @@
   var pinatas = [];
   var cubes = [];
   var init = false;
+  var overCount = 0;
 
   function restart() {
     pinatas = [];
@@ -32,7 +33,9 @@
 
   function draw(foo, rate) {
     setTimeout(function () {
-      requestAnimationFrame(draw);
+      requestAnimationFrame(function () {
+        draw(foo, rate);
+      });
       foo();
     }, 1000 / rate);
   }
@@ -68,8 +71,12 @@
       context.font = "100px Georgia";
       context.fillText("GAME OVER", windowWidth / 2 - 300,
         windowWidth * 9 / 32);
-      restart();
-      init = false;
+      overCount++;
+      if (overCount > 24) {
+        restart();
+        overCount = 0;
+        init = false;
+      }
     }
   }, 4);
 

@@ -47,40 +47,9 @@ var colorIndex = 0;
 var laptopId = [];
 var mobileId = [];
 var pinataLoc = [];
-for (var i = 0; i < 3; i++) {
-  pinataLoc.push([Math.round(Math.random() * 18) * 2 + 16, Math.round(Math.random() *
-    18) * 2 - 6]);
-}
-
-function restartServer() {
-  pinataLoc = [];
-  nameIndex = 0;
-  colorIndex = 0;
-  for (var i = 0; i < 3; i++) {
-    pinataLoc.push([Math.round(Math.random() * 18) * 2 + 16, Math.round(Math.random() *
-      18) * 2 - 6]);
-  }
-  laptopId.forEach(function (id) {
-    sio.sockets.socket(id).emit('pinataLoc', pinataLoc);
-  });
-  mobileId.forEach(function (item) {
-    var mobileCube = {
-      id: socket.id,
-      x: Math.round(Math.random() * 22) * 2 + 14,
-      y: Math.round(Math.random() * 22) * 2 - 6,
-      c: colorChoice[colorIndex]
-    };
-    colorIndex++;
-    if (colorIndex > colorChoice.length - 1) {
-      colorIndex = 0;
-    }
-    laptopId.forEach(function (item) {
-      sio.sockets.socket(item).emit('makeCube', mobileCube);
-    });
-    mobileId.forEach(function (item) {
-      sio.sockets.socket(item).emit('startOver', true);
-    });
-  });
+for (var i = 0; i < 2; i++) {
+  pinataLoc.push([Math.round(Math.random() * 16) * 2 + 16, Math.round(Math.random() *
+    16) * 2 - 6]);
 }
 
 //simple example
@@ -185,7 +154,39 @@ module.exports = function (sio) {
       sio.sockets.socket(data.id).emit('yourScoreData', data.score);
     });
 
-    socket.on('restart', function () {
+    function restartServer() {
+      pinataLoc = [];
+      nameIndex = 0;
+      colorIndex = 0;
+      for (var i = 0; i < 2; i++) {
+        pinataLoc.push([Math.round(Math.random() * 16) * 2 + 16, Math.round(
+          Math.random() *
+          16) * 2 - 6]);
+      }
+      laptopId.forEach(function (id) {
+        sio.sockets.socket(id).emit('pinataLoc', pinataLoc);
+      });
+      mobileId.forEach(function (item) {
+        var mobileCube = {
+          id: item,
+          x: Math.round(Math.random() * 22) * 2 + 14,
+          y: Math.round(Math.random() * 22) * 2 - 6,
+          c: colorChoice[colorIndex]
+        };
+        colorIndex++;
+        if (colorIndex > colorChoice.length - 1) {
+          colorIndex = 0;
+        }
+        laptopId.forEach(function (item) {
+          sio.sockets.socket(item).emit('makeCube', mobileCube);
+        });
+        mobileId.forEach(function (item) {
+          sio.sockets.socket(item).emit('startOver', true);
+        });
+      });
+    }
+
+    socket.on('restartData', function () {
       if (restartCounter === 0) {
         restartServer();
         restartCounter = 1;

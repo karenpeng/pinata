@@ -106,5 +106,10 @@ body{
 }
 
 #caught{
-  margin: 100px auto;
+  margin: 40% auto 0;
+  text-align: center;
+}
+
+.got{
+  background-color: red;
 }
