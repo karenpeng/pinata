@@ -22,6 +22,7 @@
 
   var pinatas = [];
   var cubes = [];
+  var over = false;
 
   function restart() {
     pinatas = [];
@@ -32,9 +33,8 @@
   function draw() {
     if (!mobile) {
 
-      if (pinatas.length > 0) {
-
-        setTimeout(function () {
+      setTimeout(function () {
+        if (!over) {
           context.drawImage(imgObj, 0, 0, w, h);
 
           cubes.forEach(function (item) {
@@ -58,15 +58,30 @@
           cubes.forEach(function (item) {
             item.render();
           });
-          requestAnimationFrame(draw);
-        }, 330);
-      } else {
-        context.font = "100px Georgia";
-        context.fillText("GAME OVER", windowWidth / 2 - 300, windowWidth * 9 /
-          32);
-      }
+
+          if (pinatas.length === 0) {
+            over = true;
+          }
+
+        } else {
+          //setTimeout(function () {
+          context.font = "100px Georgia";
+          context.fillText("GAME OVER", windowWidth / 2 - 300,
+            windowWidth *
+            9 /
+            32);
+          // }, 1000);
+          // setTimeout(function () {
+          restart();
+          // }, 1010);
+        }
+        requestAnimationFrame(draw);
+      }, 330);
+
     }
   }
+
+  draw();
 
   socket.on('pinataLoc', function (data) {
     var i = 0;
@@ -74,7 +89,7 @@
       pinatas.push(new pinata(item[0], item[1], i));
       i++;
     });
-    draw();
+    //draw();
   });
 
   socket.on('makeCube', function (data) {

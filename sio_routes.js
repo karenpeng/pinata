@@ -5,6 +5,7 @@
  */
 
 'use strict';
+var restartCounter = 0;
 
 var nickNames = [
   'Sunset',
@@ -44,10 +45,14 @@ var colorChoice = [
 var colorIndex = 0;
 
 var laptopId = [];
+var mobileId = [];
 var pinataLoc = [];
+for (var i = 0; i < 3; i++) {
+  pinataLoc.push([Math.round(Math.random() * 18) * 2 + 16, Math.round(Math.random() *
+    18) * 2 - 6]);
+}
 
 function restartServer() {
-  laptopId = [];
   pinataLoc = [];
   nameIndex = 0;
   colorIndex = 0;
@@ -55,9 +60,26 @@ function restartServer() {
     pinataLoc.push([Math.round(Math.random() * 18) * 2 + 16, Math.round(Math.random() *
       18) * 2 - 6]);
   }
+  laptopId.forEach(function (id) {
+    sio.sockets.socket(id).emit('pinataLoc', pinataLoc);
+  });
+  mobileId.forEach(function (item) {
+    var mobileCube = {
+      id: socket.id,
+      x: Math.round(Math.random() * 22) * 2 + 14,
+      y: Math.round(Math.random() * 22) * 2 - 6,
+      c: colorChoice[colorIndex]
+    };
+    colorIndex++;
+    if (colorIndex > colorChoice.length - 1) {
+      colorIndex = 0;
+    }
+    laptopId.forEach(function (item) {
+      sio.sockets.socket(item).emit('makeCube', mobileCube);
+    });
+  });
 }
 
-restartServer();
 //simple example
 module.exports = function (sio) {
   var pageOpen = 0;
@@ -67,18 +89,27 @@ module.exports = function (sio) {
 
     socket.on('disconnect', function () {
       pageOpen--;
-      if (pageOpen === 0) {
-        laptopId = [];
+      for (var i = 0; i < laptopId.length; i++) {
+        if (laptopId[i] === socket.id) {
+          laptopId.splice(i, 1);
+        }
+      }
+      for (var j = 0; j < mobileId.length; j++) {
+        if (mobileId[j] === socket.id) {
+          mobileId.splice(j, 1);
+        }
       }
       laptopId.forEach(function (id) {
         sio.sockets.socket(id).emit('killCube', socket.id);
       });
     });
+
     socket.on('deviceData', function (data) {
       if (!data) {
         laptopId.push(socket.id);
         sio.sockets.socket(socket.id).emit('pinataLoc', pinataLoc);
       } else {
+        mobileId.push(socket.id);
         var mobileCube = {
           id: socket.id,
           x: Math.round(Math.random() * 22) * 2 + 14,
@@ -147,11 +178,15 @@ module.exports = function (sio) {
     });
 
     socket.on('scoreData', function (data) {
+      restartCounter = 0;
       sio.sockets.socket(data.id).emit('yourScoreData', data.score);
     });
 
     socket.on('restart', function () {
-      restartServer();
+      if (restartCounter === 0) {
+        restartServer();
+        restartCounter = 1;
+      }
     });
 
   });

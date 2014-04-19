@@ -92,7 +92,7 @@
           }
           this.summonTimes++;
           console.log(this.summonTimes);
-          if (this.summonTimes <= 9) {
+          if (this.summonTimes < 9) {
             var summonTData = {
               id: this.id,
               times: this.summonTimes
@@ -132,7 +132,7 @@
       else if (minDis < 440) this.level = 4;
       else if (minDis < 600) this.level = 5;
       else this.level = 6;
-      if (this.preLevel !== this.level) {
+      if (this.explore && this.preLevel !== this.level) {
         var levelData = {
           id: this.id,
           level: this.level
