@@ -13,6 +13,8 @@
     $("#level").show();
     $("#summon").css('background-color', 'white');
     $("#explore").css('background-color', 'yellow');
+    $("#level").attr('src',
+      '/public/image/face1/PinataAvatar20140418-03-0.png');
   });
 
   $("#explore").click(function () {
@@ -28,6 +30,7 @@
   });
 
   $("#summon").click(function () {
+    $("#level").hide();
     $("#wat").removeClass('flash');
     exports.explore = false;
     $("#explore").css('background-color', 'white');
@@ -38,7 +41,9 @@
   });
 
   socket.on('yourLevel', function (data) {
-    $('#level').html('Distance:' + ' ' + data);
+    //$('#level').html('Distance:' + ' ' + data);
+    $("#level").attr('src', '/public/image/face1/PinataAvatar20140418-03-' +
+      data + '.png');
     if (data === 0 && exports.start) {
       $("#wat").addClass('flash');
     } else {
