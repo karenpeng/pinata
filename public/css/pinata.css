@@ -25,9 +25,12 @@ body{
 }
 
 #start{
-  margin: 40% auto 0;
-  width: 100px;
+  position: absolute;
+  z-index: 2;
+  margin-top: 40%;
+  margin-left: 40%;
   font-size: 14px;
+  padding: 10px;
   border: solid black 1px;
   text-align: center;
 }
@@ -104,10 +107,9 @@ body{
 }
 
 #caught{
-  margin: 40% auto 0;
+  position: absolute;
+  z-index: 2;
+  margin-top: 40%;
+  margin-left: 20%;
   text-align: center;
-}
-
-.got{
-  background-color: red;
 }

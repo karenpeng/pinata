@@ -88,6 +88,7 @@ module.exports = function (sio) {
           y: Math.round(Math.random() * 22) * 2 - 6,
           c: colorChoice[colorIndex]
         };
+        sio.sockets.socket(socket.id).emit('yourColor', colorIndex);
         colorIndex++;
         if (colorIndex > colorChoice.length - 1) {
           colorIndex = 0;
@@ -173,6 +174,7 @@ module.exports = function (sio) {
           y: Math.round(Math.random() * 22) * 2 - 6,
           c: colorChoice[colorIndex]
         };
+        sio.sockets.socket(item).emit('yourColor', colorIndex);
         colorIndex++;
         if (colorIndex > colorChoice.length - 1) {
           colorIndex = 0;

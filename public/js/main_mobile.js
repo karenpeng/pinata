@@ -4,17 +4,31 @@
   exports.summon = false;
   exports.times = 0;
   var score = 0;
+  var colors = [
+    '#3300ff',
+    '#ff0022',
+    '#44aa33',
+    '#33ff33',
+    '#aaff00',
+    '#2200ff'
+  ];
+  var myIndex;
 
   $("#start").click(function () {
     exports.start = true;
     exports.explore = true;
     $("#start").hide();
+    $("#wat").css('background-color', colors[myIndex]);
     $("#mode").show();
     $("#level").show();
     $("#summon").css('background-color', 'white');
     $("#explore").css('background-color', 'yellow');
     $("#level").attr('src',
       '/public/image/face1/PinataAvatar20140418-03-0.png');
+  });
+
+  socket.on('yourColor', function (data) {
+    myIndex = data;
   });
 
   $("#explore").click(function () {
@@ -92,6 +106,7 @@
     $("#level").hide();
     $("#caught").remove();
     $("#start").show();
+    $("#wat").css('background-color', 'white');
   });
 
 })(this);
