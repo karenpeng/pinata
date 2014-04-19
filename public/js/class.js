@@ -107,9 +107,9 @@
         }
       }
       if (this.a < 20) this.a = 20;
-      if (this.a > 80) this.a = 80;
-      if (this.b < -26) this.b = -26;
-      if (this.b > 38) this.b = 38;
+      if (this.a > 70) this.a = 70;
+      if (this.b < -20) this.b = -20;
+      if (this.b > 30) this.b = 30;
 
     },
     check: function (arr) {
