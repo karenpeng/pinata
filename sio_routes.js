@@ -48,7 +48,7 @@ var laptopId = [];
 var mobileId = [];
 var pinataLoc = [];
 for (var i = 0; i < 5; i++) {
-  pinataLoc.push([Math.round(Math.random() * 16) * 2 + 16, Math.round(Math.random() *
+  pinataLoc.push([Math.round(Math.random() * 20) * 2 + 16, Math.round(Math.random() *
     16) * 2 - 6]);
 }
 
@@ -160,7 +160,7 @@ module.exports = function (sio) {
       nameIndex = 0;
       colorIndex = 0;
       for (var i = 0; i < 5; i++) {
-        pinataLoc.push([Math.round(Math.random() * 16) * 2 + 16, Math.round(
+        pinataLoc.push([Math.round(Math.random() * 20) * 2 + 16, Math.round(
           Math.random() *
           16) * 2 - 6]);
       }
