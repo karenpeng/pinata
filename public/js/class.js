@@ -106,7 +106,7 @@
           this.z = 0;
         }
       }
-      if (this.a < 20) this.a = 20;
+      if (this.a < 24) this.a = 24;
       if (this.a > 70) this.a = 70;
       if (this.b < -20) this.b = -20;
       if (this.b > 30) this.b = 30;

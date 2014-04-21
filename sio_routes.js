@@ -48,8 +48,8 @@ var laptopId = [];
 var mobileId = [];
 var pinataLoc = [];
 for (var i = 0; i < 5; i++) {
-  pinataLoc.push([Math.round(Math.random() * 20) * 2 + 16, Math.round(Math.random() *
-    16) * 2 - 6]);
+  pinataLoc.push([Math.round(Math.random() * 20) * 2 + 26, Math.round(Math.random() *
+    20) * 2 - 14]);
 }
 
 //simple example
@@ -84,8 +84,8 @@ module.exports = function (sio) {
         mobileId.push(socket.id);
         var mobileCube = {
           id: socket.id,
-          x: Math.round(Math.random() * 22) * 2 + 14,
-          y: Math.round(Math.random() * 22) * 2 - 6,
+          x: Math.round(Math.random() * 20) * 2 + 26,
+          y: Math.round(Math.random() * 20) * 2 - 14,
           c: colorChoice[colorIndex]
         };
         sio.sockets.socket(socket.id).emit('yourColor', colorIndex);
@@ -160,9 +160,9 @@ module.exports = function (sio) {
       nameIndex = 0;
       colorIndex = 0;
       for (var i = 0; i < 5; i++) {
-        pinataLoc.push([Math.round(Math.random() * 20) * 2 + 16, Math.round(
+        pinataLoc.push([Math.round(Math.random() * 20) * 2 + 26, Math.round(
           Math.random() *
-          16) * 2 - 6]);
+          20) * 2 - 14]);
       }
       laptopId.forEach(function (id) {
         sio.sockets.socket(id).emit('pinataLoc', pinataLoc);
@@ -170,8 +170,8 @@ module.exports = function (sio) {
       mobileId.forEach(function (item) {
         var mobileCube = {
           id: item,
-          x: Math.round(Math.random() * 22) * 2 + 14,
-          y: Math.round(Math.random() * 22) * 2 - 6,
+          x: Math.round(Math.random() * 20) * 2 + 26,
+          y: Math.round(Math.random() * 20) * 2 - 14,
           c: colorChoice[colorIndex]
         };
         sio.sockets.socket(item).emit('yourColor', colorIndex);
