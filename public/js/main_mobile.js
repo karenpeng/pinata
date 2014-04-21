@@ -10,7 +10,19 @@
     '#44aa33',
     '#33ff33',
     '#aaff00',
-    '#2200ff'
+    '#2200ff',
+    '#44aa33',
+    '#33bb33',
+    '#cc5522',
+    '#aaaa33',
+    '#4422ee',
+    '#ddcc44',
+    '#22bb00',
+    '#cc33bb',
+    '#33ccbb',
+    '#ccaa66',
+    '#aaeebb',
+    '#aaaaaa'
   ];
   var myIndex;
 
