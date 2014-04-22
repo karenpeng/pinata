@@ -60,9 +60,7 @@
     this.myBricks = [];
     this.c = c;
     this.originalC = this.c;
-    //this.cubeDms = new obelisk.CubeDimension(cubeSize, cubeSize, cubeSize);
     this.cubeColor = new obelisk.CubeColor().getByHorizontalColor(this.c);
-    //this.cube = new obelisk.Cube(this.cubeDms, this.cubeColor, false);
   }
 
   cuteCube.prototype = {
@@ -146,7 +144,6 @@
         0) {
         this.score++;
         this.scoreCounter = 1;
-        //this.summonTimes = 0;
         if (this.preScore !== this.score) {
           var scoreData = {
             id: this.id,
@@ -155,7 +152,6 @@
           socket.emit('scoreData', scoreData);
           this.preScore = this.score;
         }
-        console.log(this.score);
         return true;
       }
     },
@@ -175,6 +171,5 @@
   };
   exports.pinata = pinata;
   exports.cuteCube = cuteCube;
-  exports.cuteBrick =
-    cuteBrick;
+  exports.cuteBrick = cuteBrick;
 })(this);
