@@ -55,13 +55,14 @@
     this.summonTimes = 0;
     this.pinataId;
     this.score = 0;
+    this.scoreCounter = 0;
     this.preScore = 0;
     this.myBricks = [];
     this.c = c;
     this.originalC = this.c;
-    this.cubeDms = new obelisk.CubeDimension(cubeSize, cubeSize, cubeSize);
+    //this.cubeDms = new obelisk.CubeDimension(cubeSize, cubeSize, cubeSize);
     this.cubeColor = new obelisk.CubeColor().getByHorizontalColor(this.c);
-    this.cube = new obelisk.Cube(this.cubeDms, this.cubeColor, false);
+    //this.cube = new obelisk.Cube(this.cubeDms, this.cubeColor, false);
   }
 
   cuteCube.prototype = {
@@ -75,6 +76,7 @@
     move: function () {
       if (this.explore) {
         this.summonTimes = 0;
+        this.scoreCounter = 0;
         if (this.right === 1) {
           this.a++;
         } else if (this.right === 2) {
@@ -91,7 +93,6 @@
             this.z++;
           }
           this.summonTimes++;
-          console.log(this.summonTimes);
           if (this.summonTimes < 9) {
             var summonTData = {
               id: this.id,
@@ -141,8 +142,10 @@
       }
     },
     win: function () {
-      if (this.summonTimes === 8 && this.level === 0) {
+      if (this.scoreCounter === 0 && this.summonTimes === 8 && this.level ===
+        0) {
         this.score++;
+        this.scoreCounter = 1;
         //this.summonTimes = 0;
         if (this.preScore !== this.score) {
           var scoreData = {
@@ -152,12 +155,16 @@
           socket.emit('scoreData', scoreData);
           this.preScore = this.score;
         }
+        console.log(this.score);
         return true;
       }
     },
     render: function () {
       this.p3d = new obelisk.Point3D(trackSize * this.a, trackSize * this.b,
         trackSize * this.z);
+      this.cubeDms = new obelisk.CubeDimension(cubeSize, cubeSize, cubeSize *
+        (this.score + 1));
+      this.cube = new obelisk.Cube(this.cubeDms, this.cubeColor, false);
       pixelView.renderObject(this.cube, this.p3d);
     },
     renderTrack: function () {
@@ -168,5 +175,6 @@
   };
   exports.pinata = pinata;
   exports.cuteCube = cuteCube;
-  exports.cuteBrick = cuteBrick;
+  exports.cuteBrick =
+    cuteBrick;
 })(this);
