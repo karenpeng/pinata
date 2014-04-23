@@ -5,24 +5,22 @@
   exports.times = 0;
   var score = 0;
   var colors = [
-    '#3300ff',
-    '#ff0022',
-    '#44aa33',
-    '#33ff33',
-    '#aaff00',
-    '#2200ff',
-    '#44aa33',
-    '#33bb33',
-    '#cc5522',
-    '#aaaa33',
-    '#4422ee',
-    '#ddcc44',
-    '#22bb00',
-    '#cc33bb',
-    '#33ccbb',
-    '#ccaa66',
-    '#aaeebb',
-    '#aaaaaa'
+    '#1abc9c',
+    '#27ae60',
+    '#3498db',
+    '#8e44ad',
+    '#f1c40f',
+    '#d35400',
+    '#e74c3c',
+    '#006CB7',
+    '#076BB6',
+    '#F47E43',
+    '#752763',
+    '#4D947A',
+    '#DA4952',
+    '#F47D45',
+    '#2E4DA7',
+    '#8DAED7'
   ];
   var myIndex;
 
