@@ -184,17 +184,17 @@ module.exports = function (sio) {
           y: Math.round(Math.random() * 20) * 2 - 14,
           c: colorChoice[colorIndex]
         };
-        sio.sockets.socket(item).emit('yourColor', colorIndex);
-        colorIndex++;
-        if (colorIndex > colorChoice.length - 1) {
-          colorIndex = 0;
-        }
         laptopId.forEach(function (item) {
           sio.sockets.socket(item).emit('makeCube', mobileCube);
         });
         mobileId.forEach(function (item) {
           sio.sockets.socket(item).emit('startOver', true);
         });
+        sio.sockets.socket(item).emit('yourColor', colorIndex);
+        colorIndex++;
+        if (colorIndex > colorChoice.length - 1) {
+          colorIndex = 0;
+        }
       });
     }
 

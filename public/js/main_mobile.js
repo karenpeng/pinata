@@ -28,7 +28,7 @@
     exports.start = true;
     exports.explore = true;
     $("#start").hide();
-    $("#wat").css('background-color', colors[myIndex]);
+    //$("#wat").css('background-color', colors[myIndex]);
     $("#mode").show();
     $("#level").show();
     $("#summon").css('background-color', 'white');
@@ -39,6 +39,7 @@
 
   socket.on('yourColor', function (data) {
     myIndex = data;
+    $("#wat").css('background-color', colors[myIndex]);
   });
 
   $("#explore").click(function () {
@@ -116,7 +117,7 @@
     $("#level").hide();
     $("#caught").remove();
     $("#start").show();
-    $("#wat").css('background-color', 'white');
+    $("#wat").css('background-color', colors[myIndex]);
   });
 
 })(this);
