@@ -24,8 +24,10 @@
   var cubes = [];
   var init = false;
   var overCount = 0;
+  $("#explode").show();
 
   function restart() {
+    $("#explode").hide();
     pinatas = [];
     cubes = [];
     socket.emit('restartData', true);
@@ -59,7 +61,7 @@
       });
 
       pinatas.forEach(function (item) {
-        //item.render();
+        item.render();
       });
 
       cubes.forEach(function (item) {
@@ -68,11 +70,21 @@
 
     }
     if (init && pinatas.length === 0) {
-      context.font = "100px Georgia";
-      context.fillText("GAME OVER", windowWidth / 2 - 300,
-        windowWidth * 9 / 32);
+      // context.drawImage(imgObj, 0, 0, w, h);
+      // for (var i = 0; i < 5; i++) {
+      //   context.beginPath();
+      //   context.rect(0, 0, w, h);
+      //   context.fillStyle = 'rgba(225,225,225,0.4)';
+      //   context.fill();
+      // }
+      // $('.blurCanvas').blurjs({
+      //   overlay: 'rgba(255,255,255,0.8)'
+      // });
       overCount++;
-      if (overCount > 24) {
+      if (overCount > 8) {
+        $("#explode").show();
+      }
+      if (overCount > 16) {
         restart();
         overCount = 0;
         init = false;

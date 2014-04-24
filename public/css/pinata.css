@@ -119,3 +119,11 @@ body{
   color: white;
   text-align: center;
 }
+
+#explode{
+  position: absolute;
+  z-index: 2;
+  top: 50%;
+  left: 50%;
+  margin-left: -350px;
+}
