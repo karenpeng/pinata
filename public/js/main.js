@@ -81,10 +81,10 @@
       //   overlay: 'rgba(255,255,255,0.8)'
       // });
       overCount++;
+      //if (overCount > 8) {
+      $("#explode").show();
+      //}
       if (overCount > 8) {
-        $("#explode").show();
-      }
-      if (overCount > 16) {
         restart();
         overCount = 0;
         init = false;
