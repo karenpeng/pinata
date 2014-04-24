@@ -5,22 +5,50 @@
   exports.times = 0;
   var score = 0;
   var colors = [
+    /* green */
     '#1abc9c',
-    '#27ae60',
-    '#3498db',
-    '#8e44ad',
+
+    /* denim */
+    '#2C3E50',
+
+    /* yellow */
     '#f1c40f',
+
+    /* rust */
     '#d35400',
-    '#e74c3c',
+
+    /* dark green */
+    '#27ae60',
+
+    /* dark blue */
     '#006CB7',
-    '#076BB6',
+
+    /* light blue */
+    '#3498db',
+
+    /* violet */
+    '#8e44ad',
+
+    /* brick */
+    '#e74c3c',
+
+    /* peach */
     '#F47E43',
+
+    /* dark violet */
     '#752763',
+
+    /* dull green */
     '#4D947A',
+
+    /* raspberry */
     '#DA4952',
-    '#F47D45',
-    '#2E4DA7',
-    '#8DAED7'
+
+    /* white */
+    '#ECF0F1',
+
+    /* navy blue */
+    '#2E4DA7'
   ];
   var myIndex;
 

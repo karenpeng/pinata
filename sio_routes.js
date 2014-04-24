@@ -35,29 +35,58 @@ var nickNames = [
 var nameIndex = 0;
 
 var colorChoice = [
+  /* green */
   0x1abc9c,
-  0x27ae60,
-  0x3498db,
-  0x8e44ad,
+
+  /* denim */
+  0x2C3E50,
+
+  /* yellow */
   0xf1c40f,
+
+  /* rust */
   0xd35400,
-  0xe74c3c,
+
+  /* dark green */
+  0x27ae60,
+
+  /* dark blue */
   0x006CB7,
-  0x076BB6,
+
+  /* light blue */
+  0x3498db,
+
+  /* violet */
+  0x8e44ad,
+
+  /* brick */
+  0xe74c3c,
+
+  /* peach */
   0xF47E43,
+
+  /* dark violet */
   0x752763,
+
+  /* dull green */
   0x4D947A,
+
+  /* raspberry */
   0xDA4952,
-  0xF47D45,
-  0x2E4DA7,
-  0x8DAED7
+
+  /* white */
+  0xECF0F1,
+
+  /* navy blue */
+  0x2E4DA7
+
 ];
 var colorIndex = 0;
 
 var laptopId = [];
 var mobileId = [];
 var pinataLoc = [];
-for (var i = 0; i < 2; i++) {
+for (var i = 0; i < 5; i++) {
   pinataLoc.push([Math.round(Math.random() * 20) * 2 + 26, Math.round(Math.random() *
     20) * 2 - 14]);
 }
@@ -169,7 +198,7 @@ module.exports = function (sio) {
       pinataLoc = [];
       nameIndex = 0;
       colorIndex = 0;
-      for (var i = 0; i < 2; i++) {
+      for (var i = 0; i < 5; i++) {
         pinataLoc.push([Math.round(Math.random() * 20) * 2 + 26, Math.round(
           Math.random() *
           20) * 2 - 14]);

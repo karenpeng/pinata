@@ -24,13 +24,13 @@
   var cubes = [];
   var init = false;
   var overCount = 0;
-  $("#explode").show();
 
   function restart() {
-    $("#explode").hide();
     pinatas = [];
     cubes = [];
     socket.emit('restartData', true);
+    overCount = 0;
+    init = false;
   }
 
   function draw(foo, rate) {
@@ -61,7 +61,7 @@
       });
 
       pinatas.forEach(function (item) {
-        item.render();
+        //item.render();
       });
 
       cubes.forEach(function (item) {
@@ -70,24 +70,22 @@
 
     }
     if (init && pinatas.length === 0) {
-      // context.drawImage(imgObj, 0, 0, w, h);
-      // for (var i = 0; i < 5; i++) {
-      //   context.beginPath();
-      //   context.rect(0, 0, w, h);
-      //   context.fillStyle = 'rgba(225,225,225,0.4)';
-      //   context.fill();
-      // }
+      //$("#explode").attr("src", "http://lab.dxtr.com/pinata/pinata.gif");
       // $('.blurCanvas').blurjs({
       //   overlay: 'rgba(255,255,255,0.8)'
       // });
       overCount++;
-      //if (overCount > 8) {
-      $("#explode").show();
-      //}
-      if (overCount > 8) {
+      if (overCount === 5) {
+        $("#explode").attr("src", "http://lab.dxtr.com/pinata/pinata.gif");
+        $("#explode").show();
+      }
+      if (overCount === 21) {
+        context.drawImage(imgObj, 0, 0, w, h);
+        $("#explode").removeAttr("src");
+        $("#explode").hide();
+      }
+      if (overCount === 36) {
         restart();
-        overCount = 0;
-        init = false;
       }
     }
   }, 4);
