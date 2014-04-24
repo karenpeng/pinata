@@ -38,9 +38,6 @@ var colorChoice = [
   /* green */
   0x1abc9c,
 
-  /* denim */
-  0x2C3E50,
-
   /* yellow */
   0xf1c40f,
 

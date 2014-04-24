@@ -8,9 +8,6 @@
     /* green */
     '#1abc9c',
 
-    /* denim */
-    '#2C3E50',
-
     /* yellow */
     '#f1c40f',
 
@@ -71,7 +68,8 @@
   });
 
   $("#explore").click(function () {
-    $("#caught").remove();
+    $("#caught").html();
+    $("#caught").hide();
     $("#level").show();
     exports.explore = true;
     $("#explore").css('background-color', 'yellow');
@@ -130,7 +128,8 @@
     $(".hit").removeClass('hitOn');
     $(".hit").hide();
     $("#level").hide();
-    $("#wat").append('<div id="caught">You Catch One Pinata!</div>');
+    $("#caught").show();
+    $("#caught").html('You Catch One Pinata!');
   });
 
   socket.on('startOver', function () {
