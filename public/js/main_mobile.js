@@ -1,9 +1,14 @@
 (function (exports) {
+  var sound = new Howl({
+    urls: ['/public/music/ow.mp3']
+  }).play();
+
   exports.start = false;
   exports.explore = false;
   exports.summon = false;
   exports.times = 0;
   var score = 0;
+  var level;
   var colors = [
     /* green */
     '#1abc9c',
@@ -48,6 +53,7 @@
     '#2E4DA7'
   ];
   var myIndex;
+  var oow = document.getElementById("ow");
 
   $("#start").click(function () {
     exports.start = true;
@@ -92,6 +98,8 @@
   });
 
   socket.on('yourLevel', function (data) {
+    level = data;
+    //oow.play();
     //$('#level').html('Distance:' + ' ' + data);
     $("#level").attr('src', '/public/image/face1/PinataAvatar20140418-03-' +
       data + '.png');

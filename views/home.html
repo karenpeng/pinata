@@ -24,6 +24,8 @@
       document.write('<script type="text/javascript" src="/public/js/class.js"><\/script>');
       //document.write('<script type="text/javascript" src="/public/js/blur.min.js"><\/script>');
       document.write('<script type="text/javascript" src="/public/js/main.js"><\/script>');
+      //document.write('<audio id="ow"><source type="audio/mp3" src="/public/music/ow.mp3"><\/audio>');
+      document.write('<script type="text/javascript" src="/public/js/howler.js"><\/script>');
     }else{
       $('body').append('<div id="wat"><\/div>');
       var start = '<div id="start">STRAT<\/div>';
@@ -39,9 +41,19 @@
         $("#wat").append('<div class="hit" id="hit' + i + '"><\/div>');
       }
       $(".hit").hide();
+      //document.write('<audio id="ow"><source type="audio/mp3" src="/public/music/ow.mp3"\/><\/audio>');
+      document.write('<script type="text/javascript" src="/public/js/howler.js"><\/script>');
       document.write('<script type="text/javascript" src="/public/js/main_mobile.js"><\/script>');
       document.write('<script type="text/javascript" src="/public/js/orientationDetect.js"><\/script>');
       document.write('<script type="text/javascript" src="/public/js/motionDetect.js"><\/script>');
     }
   </script>
+  <script type="text/javascript">
+  $(document).ready(function(){
+  var sound = new Howl({
+    urls: ['/public/music/ow.mp3']
+  }).play();
+  })
+  </script>
+
 </html>

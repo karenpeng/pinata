@@ -105,10 +105,10 @@
           this.z = 0;
         }
       }
-      if (this.a < 24) this.a = 24;
-      if (this.a > 70) this.a = 70;
-      if (this.b < -20) this.b = -20;
-      if (this.b > 30) this.b = 30;
+      if (this.a < 24 * w / 1280) this.a = 24 * w / 1280;
+      if (this.a > 70 * w / 1280) this.a = 70 * w / 1280;
+      if (this.b < -20 * h / 720) this.b = -20 * h / 720;
+      if (this.b > 30 * h / 720) this.b = 30 * h / 720;
 
     },
     check: function (arr) {

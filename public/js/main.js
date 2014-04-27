@@ -10,8 +10,8 @@
   var mgl = -windowWidth / 2;
   var mglS = mgl.toString();
   $('#myCanvas').css('margin-left', mglS);
-  var w = $("#myCanvas").width();
-  var h = $("#myCanvas").height();
+  exports.w = $("#myCanvas").width();
+  exports.h = $("#myCanvas").height();
 
   var context = canvas.getContext('2d');
   var imgObj = new Image();
@@ -44,7 +44,7 @@
 
   draw(function () {
     if (init && pinatas.length > 0) {
-      context.drawImage(imgObj, 0, 0, w, h);
+      context.drawImage(imgObj, 0, 0, exports.w, exports.h);
 
       cubes.forEach(function (item) {
         item.track();
@@ -80,7 +80,7 @@
         $("#explode").show();
       }
       if (overCount === 21) {
-        context.drawImage(imgObj, 0, 0, w, h);
+        context.drawImage(imgObj, 0, 0, exports.w, exports.h);
         $("#explode").removeAttr("src");
         $("#explode").hide();
       }
