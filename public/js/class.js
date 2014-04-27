@@ -1,19 +1,34 @@
 (function (exports) {
-  var windowWidth = window.innerWidth;
-  $('#myCanvas').width(windowWidth);
-  $('#myCanvas').height(windowWidth * 9 / 16);
+  // var windowWidth = window.innerWidth;
+  // $('#myCanvas').width(windowWidth);
+  // $('#myCanvas').height(windowWidth * 9 / 16);
+  // $('#myCanvas').attr('width', windowWidth);
+  // $('#myCanvas').attr('height', windowWidth * 9 / 16);
 
-  $('#myCanvas').attr('width', windowWidth);
-  $('#myCanvas').attr('height', windowWidth * 9 / 16);
+  $('#myCanvas').attr('width', 1280);
+  $('#myCanvas').attr('height', 720);
 
-  var mgl = -windowWidth / 2;
-  var mglS = mgl.toString();
-  $('#myCanvas').css('margin-left', mglS);
+  // var mgl = -windowWidth / 2;
+  // var mglS = mgl.toString();
+  // $('#myCanvas').css('margin-left', mglS);
+  $('#myCanvas').css('margin-left', '-640px');
+
   exports.w = $("#myCanvas").width();
   exports.h = $("#myCanvas").height();
 
-  var cubeSize = Math.round(16 * exports.w / 1280);
-  console.log(cubeSize);
+  var originCubeSize = 16 * exports.w * exports.h / 1280 / 720;
+  // var cubeSize;
+  // if (Math.round(originCubeSize) % 2 !== 0) {
+  //   if (Math.round(originCubeSize) > originCubeSize) {
+  //     cubeSize = Math.round(originCubeSize) + 1;
+  //   } else {
+  //     cubeSize = Math.round(originCubeSize) - 1;
+  //   }
+  // } else {
+  //   cubeSize = Math.round(originCubeSize);
+  // }
+
+  var cubeSize = 16;
   var trackSize = cubeSize - 2;
 
   function cuteBrick(a, b) {
@@ -118,10 +133,17 @@
           this.z = 0;
         }
       }
-      if (this.a < 26 * exports.w / 1280) this.a = 26 * exports.w / 1280;
-      if (this.a > 72 * exports.w / 1280) this.a = 72 * exports.w / 1280;
-      if (this.b < -20 * exports.h / 720) this.b = -20 * exports.h / 720;
-      if (this.b > 30 * exports.h / 720) this.b = 30 * exports.h / 720;
+
+      if (exports.w >= 1100) {
+        if (this.a < 26 * exports.w / 1280) this.a = 26 * exports.w / 1280;
+        if (this.a > 70 * exports.w / 1280) this.a = 70 * exports.w / 1280;
+        if (this.b < -20 * exports.w / 1280) this.b = -20 * exports.w / 1280;
+        if (this.b > 26 * exports.w / 1280) this.b = 26 * exports.w / 1280;
+      }
+      // if (this.a < 26) this.a = 26;
+      // if (this.a > 72) this.a = 72;
+      // if (this.b < -20) this.b = -20;
+      // if (this.b > 30) this.b = 30;
 
     },
     check: function (arr) {

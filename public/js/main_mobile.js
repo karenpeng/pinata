@@ -1,7 +1,4 @@
 (function (exports) {
-  var sound = new Howl({
-    urls: ['/public/music/ow.mp3']
-  }).play();
 
   exports.start = false;
   exports.explore = false;
@@ -54,8 +51,10 @@
   ];
   var myIndex;
   var oow = document.getElementById("ow");
+  var playCount = 0;
 
   $("#start").click(function () {
+    oow.play();
     exports.start = true;
     exports.explore = true;
     $("#start").hide();
@@ -66,6 +65,7 @@
     $("#explore").css('background-color', 'yellow');
     $("#level").attr('src',
       '/public/image/face1/PinataAvatar20140418-03-0.png');
+    oow.pause();
   });
 
   socket.on('yourColor', function (data) {
@@ -87,6 +87,7 @@
   });
 
   $("#summon").click(function () {
+    oow.pause();
     $("#level").hide();
     $("#wat").removeClass('flash');
     exports.explore = false;
@@ -99,14 +100,21 @@
 
   socket.on('yourLevel', function (data) {
     level = data;
-    //oow.play();
     //$('#level').html('Distance:' + ' ' + data);
     $("#level").attr('src', '/public/image/face1/PinataAvatar20140418-03-' +
       data + '.png');
     if (data === 0 && exports.start) {
       $("#wat").addClass('flash');
+      if (playCount === 0) {
+        oow.play();
+        playCount = 1;
+      }
     } else {
       $("#wat").removeClass('flash');
+      if (playCount == 1) {
+        oow.pause();
+        playCount = 0;
+      }
     }
   });
 
