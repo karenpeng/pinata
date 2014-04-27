@@ -5,7 +5,6 @@
   exports.summon = false;
   exports.times = 0;
   var score = 0;
-  var level;
   var colors = [
     /* green */
     '#1abc9c',
@@ -51,6 +50,7 @@
   ];
   var myIndex;
   var oow = document.getElementById("ow");
+  var ssha = document.getElementById("sha");
   var playCount = 0;
 
   $("#start").click(function () {
@@ -74,6 +74,7 @@
   });
 
   $("#explore").click(function () {
+    ssha.pause();
     $("#caught").html();
     $("#caught").hide();
     $("#level").show();
@@ -88,6 +89,7 @@
 
   $("#summon").click(function () {
     oow.pause();
+    ssha.play();
     $("#level").hide();
     $("#wat").removeClass('flash');
     exports.explore = false;
@@ -140,6 +142,7 @@
   });
 
   socket.on('yourScoreData', function (data) {
+    ssha.pause();
     score = data;
     $(".hit").removeClass('hitOn');
     $(".hit").hide();
@@ -161,6 +164,8 @@
     $("#caught").remove();
     $("#start").show();
     $("#wat").css('background-color', colors[myIndex]);
+    oow.pause();
+    ssha.pause();
   });
 
 })(this);

@@ -8,7 +8,6 @@
   </head>
   <body>
   </body>
-  <audio id="ow" loop preload="auto"><source type="audio/mp3" src="/public/music/ow.mp3"></audio>
   <script type="text/javascript" src="/socket.io/socket.io.js"></script>
   <script type="text/javascript">
     var socket = io.connect('http://' + location.host);
@@ -26,6 +25,8 @@
       document.write('<script type="text/javascript" src="/public/js/class.js"><\/script>');
       document.write('<script type="text/javascript" src="/public/js/main.js"><\/script>');
     }else{
+      document.write('<audio id="ow" loop preload="auto"><source type="audio/mp3" src="/public/music/ow.mp3"></audio>');
+      document.write('<audio id="sha" loop preload="auto"><source type="audio/mp3" src="/public/music/maracas.mp3"></audio>');
       $('body').append('<div id="wat"><\/div>');
       var start = '<div id="start">STRAT<\/div>';
       $("#wat").append(start);

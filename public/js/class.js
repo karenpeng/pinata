@@ -134,16 +134,16 @@
         }
       }
 
-      if (exports.w >= 1100) {
-        if (this.a < 26 * exports.w / 1280) this.a = 26 * exports.w / 1280;
-        if (this.a > 70 * exports.w / 1280) this.a = 70 * exports.w / 1280;
-        if (this.b < -20 * exports.w / 1280) this.b = -20 * exports.w / 1280;
-        if (this.b > 26 * exports.w / 1280) this.b = 26 * exports.w / 1280;
-      }
-      // if (this.a < 26) this.a = 26;
-      // if (this.a > 72) this.a = 72;
-      // if (this.b < -20) this.b = -20;
-      // if (this.b > 30) this.b = 30;
+      // if (exports.w >= 1100) {
+      //   if (this.a < 26 * exports.w / 1280) this.a = 26 * exports.w / 1280;
+      //   if (this.a > 70 * exports.w / 1280) this.a = 70 * exports.w / 1280;
+      //   if (this.b < -20 * exports.w / 1280) this.b = -20 * exports.w / 1280;
+      //   if (this.b > 26 * exports.w / 1280) this.b = 26 * exports.w / 1280;
+      // }
+      if (this.a < 26) this.a = 26;
+      if (this.a > 72) this.a = 72;
+      if (this.b < -20) this.b = -20;
+      if (this.b > 30) this.b = 30;
 
     },
     check: function (arr) {
