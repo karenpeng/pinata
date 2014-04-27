@@ -42,9 +42,6 @@
     /* raspberry */
     '#DA4952',
 
-    /* white */
-    '#ECF0F1',
-
     /* navy blue */
     '#2E4DA7'
   ];

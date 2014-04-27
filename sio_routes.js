@@ -71,9 +71,6 @@ var colorChoice = [
   /* raspberry */
   0xDA4952,
 
-  /* white */
-  0xECF0F1,
-
   /* navy blue */
   0x2E4DA7
 
