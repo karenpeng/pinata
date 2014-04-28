@@ -145,7 +145,8 @@
     $(".hit").hide();
     $("#level").hide();
     $("#caught").show();
-    $("#caught").html('You Catch One Pinata!');
+    $("#caught").html(
+      '<span class="catch-text">You Catch One Pinata!</span>');
   });
 
   socket.on('startOver', function () {
