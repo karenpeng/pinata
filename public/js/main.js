@@ -65,6 +65,7 @@
       if (overCount === 5) {
         $("#explode").attr("src", "http://pinatarush.com/images/pinata.gif");
         $("#explode").show();
+        socket.emit('submitScore', true);
       }
       if (overCount === 21) {
         context.drawImage(imgObj, 0, 0, w, h);
@@ -138,6 +139,10 @@
         item.summon = true;
       }
     });
+  });
+
+  $("#test").click(function () {
+    socket.emit('submitScore', true);
   });
 
 })(this);

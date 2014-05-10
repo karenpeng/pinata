@@ -149,12 +149,46 @@
       '<span class="catch-text">You Catch One Pinata!</span>');
   });
 
+  socket.on('submitYourScore', function () {
+    $("#submitScore").show();
+    $("#nameInput").show();
+    $("#topThree").hide();
+  });
+
+  $("#submitButton").click(function () {
+    //save the name and the score
+    var record = new Record();
+    record.name = $("#userName").val();
+    record.score = score;
+    record.save();
+    $("#nameInput").hide();
+    //get the top3
+    var query = {};
+    // 要取的字段
+    var select = 'name score';
+    // 查询的一些选项
+    var options = {
+      limit: 3, // 只取前三个
+      sort: {
+        score: -1
+      }, // 按照分数排序, -1 表示倒序（从大到小）
+    };
+    Record.find(query, select, options, function (err, data) {
+      if (err) {
+        return next(err);
+      }
+      $("#topThree").show();
+      $("#topThree").append(data);
+    });
+  });
+
   socket.on('startOver', function () {
     exports.start = false;
     exports.explore = false;
     exports.summon = false;
     exports.times = 0;
     score = 0;
+    $("#submitScore").hide();
     $(".hit").removeClass('hitOn');
     $(".hit").hide();
     $("#mode").hide();

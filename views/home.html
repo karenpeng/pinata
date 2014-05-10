@@ -33,6 +33,7 @@
     <script type="text/javascript" src="/public/js/mobileDetect.js"></script>
   </head>
   <body>
+    <button id="test">test</button>
   </body>
   <script type="text/javascript" src="/socket.io/socket.io.js"></script>
   <script type="text/javascript">
@@ -41,8 +42,8 @@
         socket.emit('deviceData', mobile);
     });
     if(!mobile){
-      $('body').append('<div id="wrap"><\/div>');
-      var can = '<canvas class="blurCanvas" id="myCanvas"><\/canvas>';
+      $('body').append('<div id="wrap"></div>');
+      var can = '<canvas class="blurCanvas" id="myCanvas"></canvas>';
       $("#wrap").append(can);
       $("#wrap").append('<img id="explode">');
       $("#explode").hide();
@@ -53,20 +54,24 @@
     }else{
       document.write('<audio id="ow" loop preload="auto"><source type="audio/mp3" src="http://pinatarush.com/audio/ow.mp3"></audio>');
       document.write('<audio id="sha" loop preload="auto"><source type="audio/mp3" src="http://pinatarush.com/audio/maracas.mp3"></audio>');
-      $('body').append('<div id="wat"><\/div>');
-      var start = '<div id="start">start<\/div>';
+      $('body').append('<div id="wat"></div>');
+      var start = '<div id="start">start</div>';
       $("#wat").append(start);
-      var mode = '<div id="mode"><span id="explore">Explore<\/span><span id="summon">Summon<\/span><\/div>';
+      var mode = '<div id="mode"><span id="explore">Explore</span><span id="summon">Summon</span></div>';
       $("#wat").append(mode);
       $("#mode").hide();
       $("#wat").append('<img id="level">');
       $("#level").hide();
-      $("#wat").append('<div id="caught"><\/div>');
+      $("#wat").append('<div id="caught"></div>');
       $("#caught").hide();
       for (var i = 0; i < 8; i++) {
-        $("#wat").append('<div class="hit" id="hit' + i + '"><\/div>');
+        $("#wat").append('<div class="hit" id="hit' + i + '"></div>');
       }
       $(".hit").hide();
+      $("#wat").append('<div id="submitScore"></div>');
+      $("#submitScore").append('<div id="nameInput">Yourname: <input id="userName" type="text"><input id="submitButton" type="button" value="Submit"></div>');
+      $("#submitScore").append('<div id="topThree"></div>');
+      $("#submitScore").hide();
       document.write('<script type="text/javascript" src="/public/js/main_mobile.js"><\/script>');
       document.write('<script type="text/javascript" src="/public/js/orientationDetect.js"><\/script>');
       document.write('<script type="text/javascript" src="/public/js/motionDetect.js"><\/script>');
