@@ -46,35 +46,9 @@
       $("#wrap").append(can);
       $("#wrap").append('<img id="explode">');
       $("#explode").hide();
-      $("#wrap").append('<div id="topThree" class="highscore-bg">
-    <div class="scrim">
-      <p class="highscore-text big">All Time High Score</p>
-      <table>
-        <tr class="highscore-label">
-          <td class="rank" id="rank0">Rank</td>
-          <td class="score" id="score0">Score</td>
-          <td class="name" id="name0">Name</td>
-        </tr>
-        <tr>
-          <td class="rank" id="rank1">1st</td>
-          <td class="score" id="score1"></td>
-          <td class="name" id="name1"></td>
-        </tr>
-        <tr>
-          <td class="rank" id="rank2">2nd</td>
-          <td class="score" id="score2"></td>
-          <td class="name" id="name2"></td>
-        </tr>
-        <tr>
-          <td class="rank" id="rank3">3rd</td>
-          <td class="score" id="score3"></td>
-          <td class="name" id="name3"></td>
-        </tr>
-      </table>
-     </div>
-  </div>');
+      $("#wrap").append('<div id="topThree" class="highscore-bg"><div class="scrim"><p class="highscore-text big">All Time High Score</p><table><tr class="highscore-label"><td class="rank" id="rank0">Rank</td><td class="score" id="score0">Score</td><td class="name" id="name0">Name</td></tr><tr><td class="rank" id="rank1">1st</td><td class="score" id="score1"></td><td class="name" id="name1"></td></tr><tr><td class="rank" id="rank2">2nd</td><td class="score" id="score2"></td><td class="name" id="name2"></td></tr><tr><td class="rank" id="rank3">3rd</td><td class="score" id="score3"></td><td class="name" id="name3"></td></tr></table><div id="playAgain">Play Again</div></div></div>');
       $("#topThree").hide();
-      document.write('<audio id="bg" loop autoplay preload="auto"><source type="audio/mp3" src="http://pinatarush.com/audio/pr_background.mp3"></audio>');
+      document.write('<audio id="bg" loop preload="auto"><source type="audio/mp3" src="http://pinatarush.com/audio/pr_background.mp3"></audio>');
       document.write('<script type="text/javascript" src="/public/js/obelisk.min.js"><\/script>');
       document.write('<script type="text/javascript" src="/public/js/class.js"><\/script>');
       document.write('<script type="text/javascript" src="/public/js/main.js"><\/script>');
@@ -97,14 +71,7 @@
       }
       $("#wrapHit").hide();
       $("#wat").append('<div id="submitName"></div>');
-      $("#submitName").append('<div class="highscore-bg">
-    <div class="scrim">
-      <p><img src="http://pinatarush.com/images/youwon.gif" alt="You Won" width="300" height="200"></p>
-      <p class="highscore-text">Enter Your Name Below</p>
-      <input id="userName" class="form-control" type="text" placeholder="• • • •" value="" maxlength="4"></input><br/>
-      <button id="submitButton" class="btn btn-hg btn-primary">SUBMIT</button>
-     </div>
-  </div>');
+      $("#submitName").append('<div class="highscore-bg"><div id="yourInput" class="scrim"><p><img src="http://pinatarush.com/images/youwon.gif" width="300" height="200"></p><p class="highscore-text">Enter Your Name Below</p><input id="userName" class="form-control" type="text" placeholder="• • • •" maxlength="4"></input><br/><button id="submitButton" class="btn btn-hg btn-primary">SUBMIT</button></div></div>');
       $("#submitName").hide();
       document.write('<script type="text/javascript" src="/public/js/main_mobile.js"><\/script>');
       document.write('<script type="text/javascript" src="/public/js/orientationDetect.js"><\/script>');

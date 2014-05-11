@@ -23,12 +23,10 @@ var sioRoutes = require('./sio_routes');
 var config = require('./config');
 var routes = require('./routes');
 
-//mongoose
 var mongoose = require('mongoose');
 mongoose.connect(
-  'mongodb://karenpunkpunk:happiness_first@ds031627.mongolab.com:31627/pinata_score'
+  'mongodb://karen:test@ds031627.mongolab.com:31627/pinata_score'
 );
-var Record = require('./models/record');
 
 var PUBLIC_DIR = path.join(__dirname, 'public');
 

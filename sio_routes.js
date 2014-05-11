@@ -5,6 +5,7 @@
  */
 
 'use strict';
+var Record = require('./models/record');
 var restartCounter = 0;
 var winner = 0;
 var winnerCount = 0;
@@ -82,7 +83,7 @@ var colorIndex = 0;
 var laptopId = [];
 var mobileId = [];
 var pinataLoc = [];
-for (var i = 0; i < 5; i++) {
+for (var i = 0; i < 1; i++) {
   pinataLoc.push([Math.round(Math.random() * 20) * 2 + 26, Math.round(Math.random() *
     20) * 2 - 14]);
 }
@@ -196,7 +197,7 @@ module.exports = function (sio) {
       winnerCount = 0;
       nameIndex = 0;
       colorIndex = 0;
-      for (var i = 0; i < 5; i++) {
+      for (var i = 0; i < 1; i++) {
         pinataLoc.push([Math.round(Math.random() * 20) * 2 + 26, Math.round(
           Math.random() *
           20) * 2 - 14]);
@@ -242,7 +243,6 @@ module.exports = function (sio) {
       }
     });
 
-    //from dead horse
     /**
      * 获取所有的records记录
     app.get('/records', function (req, res, next) {
@@ -258,27 +258,31 @@ module.exports = function (sio) {
     });
     */
 
-    /**
-     * 增加一个records
-     * http://localhost:7001/records/add?name=dead_horse&score=123
-     */
-    socket.on('addRecord', function (req, res, next) {
-      // 获得参数
-      var query = req.query;
-      if (!query.name) {
-        return res.send('need name');
-      }
-      if (!query.score) {
-        return res.send('need score');
-      }
-      // 新建一条record
+    // app.get('/records/add', function (req, res, next) {
+    //   // 获得参数
+    //   var query = req.query;
+    //   if (!query.name) {
+    //     return res.send('need name');
+    //   }
+    //   if (!query.score) {
+    //     return res.send('need score');
+    //   }
+    //   // 新建一条record
+    //   var record = new Record();
+    //   record.name = query.name;
+    //   record.score = parseInt(query.score, 10);
+    //   record.save();
+    //   res.send('saved');
+    // });
+
+    socket.on('addRecord', function (data) {
+      console.log("X" + data);
       var record = new Record();
-      record.name = query.name;
-      record.score = parseInt(query.score, 10);
+      record.name = data.name;
+      record.score = parseInt(data.score, 10);
       record.save();
-      res.send('saved');
       winnerCount++;
-      if (winnerCount === winner) {
+      if (winnerCount >= winner) {
         /**
          * 查询top 3
          */
@@ -287,7 +291,7 @@ module.exports = function (sio) {
         // query = {}
         // 获取指定用户
         // query = {name: 'dead_horse'}
-        var query1 = {};
+        var query = {};
 
         // 要取的字段
         var select = 'name score';
@@ -299,14 +303,13 @@ module.exports = function (sio) {
             score: -1
           }, // 按照分数排序, -1 表示倒序（从大到小）
         };
-        Record.find(query1, select, options, function (err, data) {
+        Record.find(query, select, options, function (err, data) {
           if (err) {
             return next(err);
           }
-          res.send(data);
-        });
-        laptopId.forEach(function (id) {
-          sio.sockets.socket(id).emit('recordDone', data);
+          laptopId.forEach(function (id) {
+            sio.sockets.socket(id).emit('recordDone', data);
+          });
         });
       }
     });

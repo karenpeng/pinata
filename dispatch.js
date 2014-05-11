@@ -1,6 +1,6 @@
 /*!
- * pinata - dispatch.js 
- * Copyright(c) 2013 
+ * pinata - dispatch.js
+ * Copyright(c) 2013
  * Author: karen <karenpenglabs@gmail.com>
  */
 
@@ -25,18 +25,20 @@ if (config.enableCluster) {
   });
 
   cluster.on('fork', function (worker) {
-    console.log('[%s] [worker:%d] new worker start', new Date(), worker.process.pid);
+    console.log('[%s] [worker:%d] new worker start', new Date(), worker.process
+      .pid);
   });
 
   cluster.on('disconnect', function (worker) {
     var w = cluster.fork();
-    console.error('[%s] [master:%s] wroker:%s disconnect! new worker:%s fork', 
+    console.error('[%s] [master:%s] wroker:%s disconnect! new worker:%s fork',
       new Date(), process.pid, worker.process.pid, w.process.pid);
   });
 
   cluster.on('exit', function (worker, code, signal) {
     var exitCode = worker.process.exitCode;
-    var err = new Error(util.format('worker %s died (code: %s, signal: %s)', worker.process.pid, exitCode, signal));
+    var err = new Error(util.format('worker %s died (code: %s, signal: %s)',
+      worker.process.pid, exitCode, signal));
     err.name = 'WorkerDiedError';
     console.error(err);
   });

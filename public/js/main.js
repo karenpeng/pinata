@@ -11,6 +11,7 @@
   var cubes = [];
   var init = false;
   var overCount = 0;
+  var rankingDone = false;
 
   function restart() {
     pinatas = [];
@@ -18,6 +19,8 @@
     socket.emit('restartData', true);
     overCount = 0;
     init = false;
+    rankingDone = false;
+    $("#topThree").hide();
   }
 
   function draw(foo, rate) {
@@ -48,7 +51,7 @@
       });
 
       pinatas.forEach(function (item) {
-        //item.render();
+        item.render();
       });
 
       cubes.forEach(function (item) {
@@ -70,7 +73,7 @@
         cubes.forEach(function (item) {
           if (item.score > highScore) {
             highScorePlayer = [];
-            highScorePlay.push(item.id);
+            highScorePlayer.push(item.id);
             highScore = item.score;
           } else if (item.score === highScore) {
             highScorePlayer.push(item.id);
@@ -81,10 +84,8 @@
         context.drawImage(imgObj, 0, 0, w, h);
         $("#explode").removeAttr("src");
         $("#explode").hide();
-        //get the top three ranking
-        ("#topThree").show();
-      } else if (overCount === 45) {
-        restart();
+      } else if (overCount > 21 && rankingDone) {
+        $("#topThree").show();
       }
     }
   }, 4);
@@ -154,6 +155,24 @@
 
   socket.on('recordDone', function (data) {
     //append the data into topThree
+    console.log(data);
+    rankingDone = true;
+    if (data[0] !== undefined) {
+      $("#name1").html(data[0].name);
+      $("#score1").html(data[0].score);
+    }
+    if (data[1] !== undefined) {
+      $("#name2").html(data[1].name);
+      $("#score2").html(data[1].score);
+    }
+    if (data[2] !== undefined) {
+      $("#name3").html(data[2].name);
+      $("#score3").html(data[2].score);
+    }
+  });
+
+  $("#playAgain").click(function () {
+    restart();
   });
 
 })(this);
