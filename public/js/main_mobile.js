@@ -154,11 +154,6 @@
     $("#submitName").show();
     exports.explore = false;
     exports.summon = false;
-    $(".hit").removeClass('hitOn');
-    $("#wrapHit").hide();
-    $("#mode").hide();
-    $("#level").hide();
-    $("#caught").remove();
   });
 
   $("#submitButton").click(function () {
@@ -170,7 +165,8 @@
         score: myScore
       };
       socket.emit('addRecord', myRecord);
-      //$("#yourInput").html("Thank You!");
+      $("#yourInput").hide();
+      $("#thx").show();
     } else {
       alert("Oops who are you?");
     }
@@ -182,11 +178,8 @@
     exports.summon = false;
     exports.times = 0;
     myScore = 0;
-    // $("#yourInput").html(
-    //   '<p><img src="http://pinatarush.com/images/youwon.gif" width="300" height="200"></p><p class="highscore-text">Enter Your Name Below</p><input id="userName" class="form-control" type="text" placeholder="• • • •" maxlength="4"></input><br/><button id="submitButton" class="btn btn-hg btn-primary">SUBMIT</button>'
-    // );
-    $("#userName").attr('value', '');
-    $("#userName").attr('placeholder', '• • • •');
+    $("#thx").hide();
+    $("#yourInput").show();
     $("#submitName").hide();
     $(".hit").removeClass('hitOn');
     $("#wrapHit").hide();

@@ -71,7 +71,9 @@
       }
       $("#wrapHit").hide();
       $("#wat").append('<div id="submitName"></div>');
-      $("#submitName").append('<div class="highscore-bg"><div id="yourInput" class="scrim"><p><img src="http://pinatarush.com/images/youwon.gif" width="300" height="200"></p><p class="highscore-text">Enter Your Name Below</p><input id="userName" class="form-control" type="text" placeholder="• • • •" maxlength="4"></input><br/><button id="submitButton" class="btn btn-hg btn-primary">SUBMIT</button></div></div>');
+      $("#submitName").append('<div id="inputHolder" class="highscore-bg"><div id="yourInput" class="scrim"><p><img src="http://pinatarush.com/images/youwon.gif" width="300" height="200"></p><p class="highscore-text">Enter Your Name Below</p><input id="userName" class="form-control" type="text" placeholder="• • • •" maxlength="4"></input><br/><button id="submitButton" class="btn btn-hg btn-primary">SUBMIT</button></div></div>');
+      $("#inputHolder").append('<div id="thx">Thank You!</div>');
+      $("#thx").hide();
       $("#submitName").hide();
       document.write('<script type="text/javascript" src="/public/js/main_mobile.js"><\/script>');
       document.write('<script type="text/javascript" src="/public/js/orientationDetect.js"><\/script>');

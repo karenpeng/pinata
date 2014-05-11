@@ -83,7 +83,7 @@ var colorIndex = 0;
 var laptopId = [];
 var mobileId = [];
 var pinataLoc = [];
-for (var i = 0; i < 1; i++) {
+for (var i = 0; i < 2; i++) {
   pinataLoc.push([Math.round(Math.random() * 20) * 2 + 26, Math.round(Math.random() *
     20) * 2 - 14]);
 }
@@ -197,7 +197,7 @@ module.exports = function (sio) {
       winnerCount = 0;
       nameIndex = 0;
       colorIndex = 0;
-      for (var i = 0; i < 1; i++) {
+      for (var i = 0; i < 2; i++) {
         pinataLoc.push([Math.round(Math.random() * 20) * 2 + 26, Math.round(
           Math.random() *
           20) * 2 - 14]);
