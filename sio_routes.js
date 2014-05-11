@@ -221,9 +221,9 @@ module.exports = function (sio) {
       });
     }
 
-    socket.on('submitScore', function () {
-      mobileId.forEach(function (id) {
-        sio.sockets.socket(id).emit('submitYourScore', true);
+    socket.on('submitName', function (data) {
+      data.forEach(function (id) {
+        sio.sockets.socket(id).emit('submitYourName', true);
       });
     });
 

@@ -65,14 +65,26 @@
       if (overCount === 5) {
         $("#explode").attr("src", "http://pinatarush.com/images/pinata.gif");
         $("#explode").show();
-        socket.emit('submitScore', true);
-      }
-      if (overCount === 21) {
+        var highScore = 0;
+        var highScorePlayer = [];
+        cubes.forEach(function (item) {
+          if (item.score > highScore) {
+            highScorePlayer = [];
+            highScorePlay.push(item.id);
+            highScore = item.score;
+          } else if (item.score === highScore) {
+            highScorePlayer.push(item.id);
+          }
+        });
+        socket.emit('submitName', highScorePlayer);
+      } else if (overCount === 21) {
         context.drawImage(imgObj, 0, 0, w, h);
         $("#explode").removeAttr("src");
         $("#explode").hide();
-      }
-      if (overCount === 36) {
+        ("#topThree").show();
+        //get the top three ranking
+
+      } else if (overCount === 45) {
         restart();
       }
     }
@@ -139,10 +151,6 @@
         item.summon = true;
       }
     });
-  });
-
-  $("#test").click(function () {
-    socket.emit('submitScore', true);
   });
 
 })(this);
