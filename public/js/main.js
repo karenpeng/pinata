@@ -81,9 +81,8 @@
         context.drawImage(imgObj, 0, 0, w, h);
         $("#explode").removeAttr("src");
         $("#explode").hide();
-        ("#topThree").show();
         //get the top three ranking
-
+        ("#topThree").show();
       } else if (overCount === 45) {
         restart();
       }
@@ -151,6 +150,10 @@
         item.summon = true;
       }
     });
+  });
+
+  socket.on('recordDone', function (data) {
+    //append the data into topThree
   });
 
 })(this);

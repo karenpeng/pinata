@@ -4,7 +4,7 @@
   exports.explore = false;
   exports.summon = false;
   exports.times = 0;
-  var score = 0;
+  var myScore = 0;
   var colors = [
     /* green */
     '#1abc9c',
@@ -140,7 +140,7 @@
 
   socket.on('yourScoreData', function (data) {
     ssha.pause();
-    score = data;
+    myScore = data;
     $(".hit").removeClass('hitOn');
     $("#wrapHit").hide();
     $("#level").hide();
@@ -155,7 +155,16 @@
 
   $("#submitButton").click(function () {
     //save the name and the score in the database
-
+    var myName = $("#userName").val();
+    if (myName) {
+      var myRecord = {
+        name: myName,
+        score: myScore
+      };
+      socket.emit('addRecord', myRecord);
+    } else {
+      alert("Oops who are you?")
+    }
   });
 
   socket.on('startOver', function () {
@@ -163,7 +172,7 @@
     exports.explore = false;
     exports.summon = false;
     exports.times = 0;
-    score = 0;
+    myScore = 0;
     $("#submitName").hide();
     $(".hit").removeClass('hitOn');
     $("#wrapHit").hide();
