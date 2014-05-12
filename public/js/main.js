@@ -162,7 +162,7 @@
         var nnd1 = arr1.join("");
         $(nnd1).html(data[i].name);
         var arr2 = ["#score", i + 1];
-        var nnd2 = arr2.joing("");
+        var nnd2 = arr2.join("");
         $(nnd2).html(data[i].score);
       }
     }
