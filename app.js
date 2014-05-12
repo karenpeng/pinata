@@ -25,7 +25,7 @@ var routes = require('./routes');
 
 var mongoose = require('mongoose');
 var uristring =
-  'mongodb://heroku_app23913158:l6djlr6sk6q3uqd51trirsgq62@ds031117.mongolab.com:31117/heroku_app23913158';
+  'mongodb://karen:test@ds031627.mongolab.com:31627/pinata_score';
 
 mongoose.connect(uristring, function (err, res) {
   if (err) {
