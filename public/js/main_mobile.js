@@ -100,7 +100,8 @@
   socket.on('yourLevel', function (data) {
     level = data;
     //$('#level').html('Distance:' + ' ' + data);
-    $("#level").attr('src', '/public/image/face1/PinataAvatar20140418-03-' +
+    $("#level").attr('src',
+      'http://pinatarush.com/images/avatar/pr-avatar-' +
       data + '.png');
     if (data === 0 && exports.start) {
       $("#wat").addClass('flash');
