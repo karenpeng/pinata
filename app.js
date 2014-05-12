@@ -28,11 +28,10 @@ var uristring =
   'mongodb://heroku_app23913158:l6djlr6sk6q3uqd51trirsgq62@ds031117.mongolab.com:31117/heroku_app23913158';
 
 mongoose.connect(uristring, function (err, res) {
-    if (err) {
-      console.log('ERROR connecting to: ' + uristring + '. ' + err);
-    } else {
-      console.log('Succeeded connected to: ' + uristring);
-    }
+  if (err) {
+    console.log('ERROR connecting to: ' + uristring + '. ' + err);
+  } else {
+    console.log('Succeeded connected to: ' + uristring);
   }
 });
 
