@@ -156,17 +156,15 @@
   socket.on('recordDone', function (data) {
     //append the data into topThree
     rankingDone = true;
-    if (data[0] !== undefined) {
-      $("#name1").html(data[0].name);
-      $("#score1").html(data[0].score);
-    }
-    if (data[1] !== undefined) {
-      $("#name2").html(data[1].name);
-      $("#score2").html(data[1].score);
-    }
-    if (data[2] !== undefined) {
-      $("#name3").html(data[2].name);
-      $("#score3").html(data[2].score);
+    for (var i = 0; i < 10; i++) {
+      if (data[i] !== undefined) {
+        var arr1 = ["#name", i + 1];
+        var nnd1 = arr1.join("");
+        $(nnd1).html(data[i].name);
+        var arr2 = ["#score", i + 1];
+        var nnd2 = arr2.joing("");
+        $(nnd2).html(data[i].score);
+      }
     }
   });
 

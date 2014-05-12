@@ -271,7 +271,7 @@ module.exports = function (sio) {
           var query = {};
           var select = 'name score';
           var options = {
-            limit: 3, // 只取前三个
+            limit: 10, // 只取前十个
             sort: {
               score: -1
             }, // 按照分数排序, -1 表示倒序（从大到小）
