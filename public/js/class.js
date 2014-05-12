@@ -175,19 +175,22 @@
       }
     },
     win: function () {
-      if (this.scoreCounter === 0 && this.summonTimes === 8 && this.level ===
-        0) {
-        this.score++;
-        this.scoreCounter = 1;
-        if (this.preScore !== this.score) {
-          var scoreData = {
-            id: this.id,
-            score: this.score
-          };
-          socket.emit('scoreData', scoreData);
-          this.preScore = this.score;
+      if (this.summonTimes === 8) {
+        if (this.scoreCounter === 0 && this.level === 0) {
+          this.score++;
+          this.scoreCounter = 1;
+          if (this.preScore !== this.score) {
+            var scoreData = {
+              id: this.id,
+              score: this.score
+            };
+            socket.emit('scoreData', scoreData);
+            this.preScore = this.score;
+          }
+          return true;
+        } else {
+          socket.emit('empty', this.id);
         }
-        return true;
       }
     },
     render: function () {

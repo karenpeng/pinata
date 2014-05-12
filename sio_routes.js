@@ -191,6 +191,10 @@ module.exports = function (sio) {
       sio.sockets.socket(data.id).emit('yourScoreData', data.score);
     });
 
+    socket.on('empty', function (data) {
+      sio.sockets.socket(data).emit('yourEmpty', true);
+    });
+
     function restartServer() {
       pinataLoc = [];
       winner = 0;
@@ -257,61 +261,32 @@ module.exports = function (sio) {
       });
     });
     */
-
-    // app.get('/records/add', function (req, res, next) {
-    //   // 获得参数
-    //   var query = req.query;
-    //   if (!query.name) {
-    //     return res.send('need name');
-    //   }
-    //   if (!query.score) {
-    //     return res.send('need score');
-    //   }
-    //   // 新建一条record
-    //   var record = new Record();
-    //   record.name = query.name;
-    //   record.score = parseInt(query.score, 10);
-    //   record.save();
-    //   res.send('saved');
-    // });
-
     socket.on('addRecord', function (data) {
-      console.log("X" + data);
       var record = new Record();
       record.name = data.name;
       record.score = parseInt(data.score, 10);
-      record.save();
-      winnerCount++;
-      if (winnerCount >= winner) {
-        /**
-         * 查询top 3
-         */
-        // 查询条件
-        // 获取全部
-        // query = {}
-        // 获取指定用户
-        // query = {name: 'dead_horse'}
-        var query = {};
-
-        // 要取的字段
-        var select = 'name score';
-
-        // 查询的一些选项
-        var options = {
-          limit: 3, // 只取前三个
-          sort: {
-            score: -1
-          }, // 按照分数排序, -1 表示倒序（从大到小）
-        };
-        Record.find(query, select, options, function (err, data) {
-          if (err) {
-            return next(err);
-          }
-          laptopId.forEach(function (id) {
-            sio.sockets.socket(id).emit('recordDone', data);
+      record.save(function () {
+        winnerCount++;
+        if (winnerCount >= winner) {
+          var query = {};
+          var select = 'name score';
+          var options = {
+            limit: 3, // 只取前三个
+            sort: {
+              score: -1
+            }, // 按照分数排序, -1 表示倒序（从大到小）
+          };
+          Record.find(query, select, options, function (err, data) {
+            if (err) {
+              return err;
+            }
+            laptopId.forEach(function (id) {
+              sio.sockets.socket(id).emit('recordDone', data);
+            });
           });
-        });
-      }
+        }
+      });
+
     });
 
     /**

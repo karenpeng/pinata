@@ -155,7 +155,6 @@
 
   socket.on('recordDone', function (data) {
     //append the data into topThree
-    console.log(data);
     rankingDone = true;
     if (data[0] !== undefined) {
       $("#name1").html(data[0].name);

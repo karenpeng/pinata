@@ -149,6 +149,15 @@
       '<span class="catch-text">You Catch One Pinata!</span>');
   });
 
+  socket.on('yourEmpty', function () {
+    ssha.pause();
+    $(".hit").removeClass('hitOn');
+    $("#wrapHit").hide();
+    $("#level").hide();
+    $("#caught").show();
+    $("#caught").html('<div id="empty">Oops nothing is here...</div>');
+  });
+
   socket.on('submitYourName', function () {
     $("#mode").hide();
     $("#submitName").show();
