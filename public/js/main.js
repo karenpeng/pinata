@@ -51,7 +51,7 @@
       });
 
       pinatas.forEach(function (item) {
-        item.render();
+        //item.render();
       });
 
       cubes.forEach(function (item) {
