@@ -146,11 +146,11 @@
       //   if (this.b < -20 * exports.w / 1280) this.b = -20 * exports.w / 1280;
       //   if (this.b > 26 * exports.w / 1280) this.b = 26 * exports.w / 1280;
       // }
-      if (this.a < 26) this.a = 26;
-      if (this.a > 102) this.a = 102;
-      if (this.b < -20) this.b = -20;
-      if (this.b > 40) this.b = 40;
 
+      if (this.a < 26) this.a = 26;
+      if (this.a > 72) this.a = 72;
+      if (this.b < -20) this.b = -20;
+      if (this.b > 30) this.b = 30;
     },
     check: function (arr) {
       var that = this;
