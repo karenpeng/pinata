@@ -32,7 +32,9 @@
   //   cubeSize = Math.round(originCubeSize);
   // }
 
-  var cubeSize = 16;
+  // var cubeSize = 16;
+  // var trackSize = cubeSize - 2;
+  var cubeSize = 32;
   var trackSize = cubeSize - 2;
 
   function cuteBrick(a, b) {
@@ -145,9 +147,9 @@
       //   if (this.b > 26 * exports.w / 1280) this.b = 26 * exports.w / 1280;
       // }
       if (this.a < 26) this.a = 26;
-      if (this.a > 72) this.a = 72;
+      if (this.a > 162) this.a = 162;
       if (this.b < -20) this.b = -20;
-      if (this.b > 30) this.b = 30;
+      if (this.b > 60) this.b = 60;
 
     },
     check: function (arr) {

@@ -84,7 +84,9 @@
         context.drawImage(imgObj, 0, 0, w, h);
         $("#explode").removeAttr("src");
         $("#explode").hide();
+        $("#gameOver").show();
       } else if (overCount > 21 && rankingDone) {
+        $("#gameOver").hide();
         $("#topThree").show();
       }
     }
