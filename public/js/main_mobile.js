@@ -156,12 +156,16 @@
     $("#wrapHit").hide();
     $("#level").hide();
     $("#caught").show();
-    $("#caught").html('<div id="empty">Oops nothing is here...</div>');
+    $("#caught").html(
+      '<span class="catch-text">Oops nothing is here...</span>');
   });
 
   socket.on('submitYourName', function () {
     $("#mode").hide();
     $("#submitName").show();
+    $("#level").hide();
+    $("#caught").hide();
+    $("#wrapHit").hide();
     exports.explore = false;
     exports.summon = false;
   });
@@ -195,7 +199,8 @@
     $("#wrapHit").hide();
     $("#mode").hide();
     $("#level").hide();
-    $("#caught").remove();
+    $("#caught").html();
+    $("#caught").hide();
     $("#start").show();
     $("#wat").css('background-color', colors[myIndex]);
     oow.pause();
