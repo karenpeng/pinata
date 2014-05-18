@@ -34,7 +34,7 @@
 
   // var cubeSize = 16;
   // var trackSize = cubeSize - 2;
-  var cubeSize = 32;
+  var cubeSize = 24;
   var trackSize = cubeSize - 2;
 
   function cuteBrick(a, b) {
