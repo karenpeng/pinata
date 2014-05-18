@@ -85,8 +85,10 @@
         $("#explode").removeAttr("src");
         $("#explode").hide();
         $("#gameOver").show();
-      } else if (overCount > 21 && rankingDone) {
+      } else if (overCount > 25) {
         $("#gameOver").hide();
+      }
+      if (overCount > 25 && rankingDone) {
         $("#topThree").show();
       }
     }

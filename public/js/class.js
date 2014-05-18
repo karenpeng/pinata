@@ -147,9 +147,9 @@
       //   if (this.b > 26 * exports.w / 1280) this.b = 26 * exports.w / 1280;
       // }
       if (this.a < 26) this.a = 26;
-      if (this.a > 162) this.a = 162;
+      if (this.a > 102) this.a = 102;
       if (this.b < -20) this.b = -20;
-      if (this.b > 60) this.b = 60;
+      if (this.b > 40) this.b = 40;
 
     },
     check: function (arr) {
