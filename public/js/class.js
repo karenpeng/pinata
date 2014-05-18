@@ -5,18 +5,22 @@
   // $('#myCanvas').attr('width', windowWidth);
   // $('#myCanvas').attr('height', windowWidth * 9 / 16);
 
-  $('#myCanvas').attr('width', 1280);
-  $('#myCanvas').attr('height', 720);
+  //$('#myCanvas').attr('width', 1280);
+  //$('#myCanvas').attr('height', 720);
+
+  $('#myCanvas').attr('width', 1920);
+  $('#myCanvas').attr('height', 1080);
 
   // var mgl = -windowWidth / 2;
   // var mglS = mgl.toString();
   // $('#myCanvas').css('margin-left', mglS);
-  $('#myCanvas').css('margin-left', '-640px');
+  //$('#myCanvas').css('margin-left', '-640px');
+  $('#myCanvas').css('margin-left', '-960px');
 
   exports.w = $("#myCanvas").width();
   exports.h = $("#myCanvas").height();
 
-  var originCubeSize = 16 * exports.w * exports.h / 1280 / 720;
+  // var originCubeSize = 16 * exports.w * exports.h / 1280 / 720;
   // var cubeSize;
   // if (Math.round(originCubeSize) % 2 !== 0) {
   //   if (Math.round(originCubeSize) > originCubeSize) {
