@@ -61,7 +61,7 @@
     $("#summon").css('background-color', 'white');
     $("#explore").css('background-color', 'yellow');
     $("#level").attr('src',
-      '/public/image/face1/PinataAvatar20140418-03-0.png');
+      'http://pinatarush.com/images/avatar/pr-avatar-6.png');
     oow.pause();
   });
 

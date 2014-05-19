@@ -22,6 +22,7 @@
     init = false;
     rankingDone = false;
     $("#topThree").hide();
+    $("#tutorial").show();
   }
 
   function draw(foo, rate) {
@@ -100,6 +101,7 @@
       } else if (overCount > 21 && rankingDone) {
         $("#gameOver").hide();
         $("#topThree").show();
+        $("#tutorial").hide();
       }
     }
   }, 4);
