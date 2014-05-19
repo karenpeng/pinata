@@ -9,7 +9,7 @@ var Record = require('./models/record');
 var restartCounter = 0;
 var winner = 0;
 var winnerCount = 0;
-var pinataNumber = 21;
+var pinataNumber = 3;
 
 var nickNames = [
   'Sunset',
