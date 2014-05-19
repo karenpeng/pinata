@@ -72,8 +72,6 @@
 
   $("#explore").click(function () {
     ssha.pause();
-    $("#caught").html();
-    $("#caught").hide();
     $("#level").show();
     exports.explore = true;
     $("#explore").css('background-color', 'yellow');
@@ -82,6 +80,8 @@
     socket.emit('explore', true);
     $(".hit").removeClass('hitOn');
     $("#wrapHit").hide();
+    $("#caughtYes").hide();
+    $("#caughtNo").hide();
   });
 
   $("#summon").click(function () {
@@ -145,9 +145,7 @@
     $(".hit").removeClass('hitOn');
     $("#wrapHit").hide();
     $("#level").hide();
-    $("#caught").show();
-    $("#caught").html(
-      '<span class="catch-text">You Catch One Pinata!</span>');
+    $("#caughtYes").show();
   });
 
   socket.on('yourEmpty', function () {
@@ -155,16 +153,15 @@
     $(".hit").removeClass('hitOn');
     $("#wrapHit").hide();
     $("#level").hide();
-    $("#caught").show();
-    $("#caught").html(
-      '<span class="catch-text">Oops nothing is here...</span>');
+    $("#caughtNo").show();
   });
 
   socket.on('submitYourName', function () {
     $("#mode").hide();
     $("#submitName").show();
     $("#level").hide();
-    $("#caught").hide();
+    $("#caughtYes").hide();
+    $("#caughtNo").hide();
     $("#wrapHit").hide();
     exports.explore = false;
     exports.summon = false;
@@ -199,8 +196,8 @@
     $("#wrapHit").hide();
     $("#mode").hide();
     $("#level").hide();
-    $("#caught").html();
-    $("#caught").hide();
+    $("#caughtYes").hide();
+    $("#caughtNo").hide();
     $("#start").show();
     $("#wat").css('background-color', colors[myIndex]);
     oow.pause();

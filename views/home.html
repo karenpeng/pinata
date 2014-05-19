@@ -66,8 +66,10 @@
       $("#mode").hide();
       $("#wat").append('<img id="level">');
       $("#level").hide();
-      $("#wat").append('<div id="caught"></div>');
-      $("#caught").hide();
+      $("#wat").append('<div class="caught" id="caughtYes"><span class="catch-text">You Catch One Pinata!</span></div>');
+      $("#wat").append('<div class="caught" id="caughtNo"><span class="catch-text">Oops nothing is here...</span></div>');
+      $("#caughtYes").hide();
+      $("#caughtNo").hide();
       $("#wat").append('<div id="wrapHit"></div>');
       for (var i = 0; i < 8; i++) {
         $("#wrapHit").append('<div class="hit" id="hit' + i + '"></div>');
