@@ -36,9 +36,9 @@
   $("#tutorial").click(function () {
     tutorialOn = !tutorialOn;
     if (tutorialOn) {
-      $("#tutorial").html('tutorialOn');
+      $("#tutorial").html('Tutorial On');
     } else {
-      $("#tutorial").html('tutorialOff');
+      $("#tutorial").html('Tutorial Off');
     }
   });
 
