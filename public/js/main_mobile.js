@@ -145,6 +145,7 @@
     $(".hit").removeClass('hitOn');
     $("#wrapHit").hide();
     $("#level").hide();
+    $("#caughtNo").hide();
     $("#caughtYes").show();
   });
 
@@ -153,6 +154,7 @@
     $(".hit").removeClass('hitOn');
     $("#wrapHit").hide();
     $("#level").hide();
+    $("#caughtYes").hide();
     $("#caughtNo").show();
   });
 
