@@ -12,6 +12,7 @@
   var init = false;
   var overCount = 0;
   var rankingDone = false;
+  var tutorialOn = false;
 
   function restart() {
     pinatas = [];
@@ -32,6 +33,15 @@
     }, 1000 / rate);
   }
 
+  $("#tutorial").click(function () {
+    tutorialOn = !tutorialOn;
+    if (tutorialOn) {
+      $("#tutorial").html('tutorialOn');
+    } else {
+      $("#tutorial").html('tutorialOff');
+    }
+  });
+
   draw(function () {
     if (init && pinatas.length > 0) {
       context.drawImage(imgObj, 0, 0, w, h);
@@ -51,7 +61,9 @@
       });
 
       pinatas.forEach(function (item) {
-        item.render();
+        if (tutorialOn) {
+          item.render();
+        }
       });
 
       cubes.forEach(function (item) {
