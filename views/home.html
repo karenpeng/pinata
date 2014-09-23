@@ -17,18 +17,18 @@
     
     <!-- iOS HomeScreen Definitions -->
     <link rel="apple-touch-startup-image" media="(device-width: 320px) and (device-height: 568px)
-           and (-webkit-device-pixel-ratio: 2)" href="http://pinatarush.com/images/pinata-cover.png">
-    <link rel="apple-touch-icon" href="http://pinatarush.com/images/pinata-icons/home-screen-icon-152.png">
-    <link rel="apple-touch-icon" sizes="76x76" href="http://pinatarush.com/images/pinata-icons/home-screen-icon-76.png">
-    <link rel="apple-touch-icon" sizes="120x120" href="http://pinatarush.com/images/pinata-icons/home-screen-icon-120.png">
-    <link rel="apple-touch-icon" sizes="152x152" href="http://pinatarush.com/images/pinata-icons/home-screen-icon-152.png">
+           and (-webkit-device-pixel-ratio: 2)" href="/..public/image/icon/pinata-cover.png">
+    <link rel="apple-touch-icon" href="http:/..public/image/icon/pinata-icons/home-screen-icon-152.png">
+    <link rel="apple-touch-icon" sizes="76x76" href="/..public/image/icon/pinata-icons/home-screen-icon-76.png">
+    <link rel="apple-touch-icon" sizes="120x120" href="/..public/image/icon/pinata-icons/home-screen-icon-120.png">
+    <link rel="apple-touch-icon" sizes="152x152" href="/..public/image/icon/pinata-icons/home-screen-icon-152.png">
     
     
     <!-- Android HomeScreen Definitions -->
-    <link rel="icon" sizes="196x196" href="http://pinatarush.com/images/pinata-icons/home-screen-icon-196.png">
-    <link rel="icon" sizes="128x128" href="http://pinatarush.com/images/pinata-icons/home-screen-icon-128.png">
+    <link rel="icon" sizes="196x196" href="/..public/image/icon/pinata-icons/home-screen-icon-196.png">
+    <link rel="icon" sizes="128x128" href="/..public/image/icon/pinata-icons/home-screen-icon-128.png">
 
-    <link rel="stylesheet" type="text/css" href="http://pinatarush.com/css/pinata.css"/>
+    <link rel="stylesheet" type="text/css" href="/../public/css/pinata.css"/>
     <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
     <script type="text/javascript" src="/public/js/mobileDetect.js"></script>
   </head>
@@ -52,13 +52,13 @@
       $("#gameOver").hide();
       $("#wrap").append('<a class="back" href="http://www.pinatarush.com">Made in Brooklyn New York by Karen & Dexter</a>');
       $("#wrap").append('<button id="tutorial">Tutorial Off</button>');
-      document.write('<audio id="bg" loop autoplay preload="auto"><source type="audio/mp3" src="http://pinatarush.com/audio/pr_background.mp3"></audio>');
+      document.write('<audio id="bg" loop autoplay preload="auto"><source type="audio/mp3" src="/../public/music/pr_background.mp3"></audio>');
       document.write('<script type="text/javascript" src="/public/js/obelisk.min.js"><\/script>');
       document.write('<script type="text/javascript" src="/public/js/class.js"><\/script>');
       document.write('<script type="text/javascript" src="/public/js/main.js"><\/script>');
     }else{
-      document.write('<audio id="ow" loop preload="auto"><source type="audio/mp3" src="http://pinatarush.com/audio/ow.mp3"></audio>');
-      document.write('<audio id="sha" loop preload="auto"><source type="audio/mp3" src="http://pinatarush.com/audio/maracas.mp3"></audio>');
+      document.write('<audio id="ow" loop preload="auto"><source type="audio/mp3" src="/../public/music/ow.mp3"></audio>');
+      document.write('<audio id="sha" loop preload="auto"><source type="audio/mp3" src="/../public/music/maracas.mp3"></audio>');
       $('body').append('<div id="wat"></div>');
       var start = '<div id="start">start</div>';
       $("#wat").append(start);
