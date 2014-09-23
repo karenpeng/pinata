@@ -1,76 +1,278 @@
-html, body{
-  top: 0;
-  left: 0;
+html{
   padding: 0;
   margin: 0;
+  top: 0;
+  left: 0;
 }
 
 body{
+  padding: 0;
+  margin: -10px 0 0 0;
+  background-color: rgb(191, 162, 110);
+  opacity: 0.1;
   overflow: hidden;
+  font-family: "mecha_condensedregular", Helvetica;
+  font-weight:normal;
 }
 
 #myCanvas{
   position: absolute;
   left: 50%;
-  background-color: #ddd;
+
+  /* background-color: rgba(191, 162, 110,1.0); */
+  -webkit-animation: fadein 5s; /* Safari and Chrome */
+         -moz-animation: fadein 5s; /* Firefox */
+          -ms-animation: fadein 5s; /* Internet Explorer */
+           -o-animation: fadein 5s; /* Opera */
+              animation: fadein 5s;
+
 }
 
+#tutorial {
+  float: left;
+  width: 200px;
+  height: 100px;
+  color: #ffffff;
+  font-family: "mecha_condensedregular", Helvetica;
+  font-weight:normal;
+  /* padding: 25px 64px; */
+  position: fixed;
+  font-size: 18px;
+  text-align: right;
+  bottom: -20px;
+  background-color: rgb(255, 255, 255);
+  z-index: 10;
+}
+
+
 #wrap{
-  position: relative;
+  position: inherit;
+  margin: 0;
+  background-image: url("../public/image/pinatarush-phone-bg.png");
+  background-repeat: repeat-x;
+  width: 100%;
+  height: 100%;
+  background-position: center 150px, left top ;
 }
 
 #wat{
   width: 100%;
   height: 100%;
+  margin: 0;
+  background-image: url("../public/image/pinatarush-phone-bg.png");
+  background-repeat: repeat-x;
+  padding-top: 5px;
+  -webkit-animation: fadein 5s; /* Safari and Chrome */
+         -moz-animation: fadein 5s; /* Firefox */
+          -ms-animation: fadein 5s; /* Internet Explorer */
+           -o-animation: fadein 5s; /* Opera */
+              animation: fadein 5s;
+
 }
+
 
 #start{
   position: absolute;
   z-index: 2;
-  top: 40%;
+  top: 50%;
   left: 50%;
-  width: 100px;
+  width: 140px;
   margin-left: -70px;
-  font-size: 14px;
-  padding: 20px;
-  color: white;
-  border: solid white 1px;
+  height: 140px;
+  margin-top: -90px;
+  border: solid #fff 1px;
   text-align: center;
+  font-size: 48px;
+  line-height: 130px;
+  vertical-align:middle;
+  font-family: "mecha_condensedregular", Helvetica;
+  color: #fff;
+
+
+  -ms-transform: rotate(45deg);
+  -webkit-transform: rotate(45deg);
+  transform: rotate(45deg);
+
+  -webkit-animation: fadein 2s; /* Safari and Chrome */
+   -moz-animation: fadein 10s; /* Firefox */
+    -ms-animation: fadein 10s; /* Internet Explorer */
+     -o-animation: fadein 10s; /* Opera */
+        animation: fadein 10s;
+
+  -webkit-animation:pulse-start 3000ms; /* Chrome, Safari, Opera */
+  -webkit-animation-iteration-count:infinite;
+  animation:pulse-start 3000ms;
+  animation-iteration-count:infinite;
+  -webkit-animation-timing-function: linear;
+
+
 }
+
+
+  /* Chrome, Safari, Opera */
+  @-webkit-keyframes pulse-start
+  {
+     0%   {border-color:rgba(255, 255, 255, 0.0);}
+    10%  {border-color:rgba(255, 255, 255, 0.2);}
+    20%  {border-color:rgba(255, 255, 255, 0.4);}
+    30%  {border-color:rgba(255, 255, 255, 0.6);}
+    40%  {border-color:rgba(255, 255, 255, 0.8);}
+    50% {border-color:rgba(255, 255, 255, 1);}
+    60%  {border-color:rgba(255, 255, 255, 0.8);}
+    70%  {border-color:rgba(255, 255, 255, 0.6);}
+    80%  {border-color:rgba(255, 255, 255, 0.4);}
+    90%  {border-color:rgba(255, 255, 255, 0.2);}
+    100%   {border-color:rgba(255, 255, 255, 0.0);}
+  }
+
+  /* Standard syntax */
+  @keyframes pulse-start
+  {
+     0%   {border-color:rgba(255, 255, 255, 0.0);}
+    10%  {border-color:rgba(255, 255, 255, 0.2);}
+    20%  {border-color:rgba(255, 255, 255, 0.4);}
+    30%  {border-color:rgba(255, 255, 255, 0.6);}
+    40%  {border-color:rgba(255, 255, 255, 0.8);}
+    50% {border-color:rgba(255, 255, 255, 1);}
+    60%  {border-color:rgba(255, 255, 255, 0.8);}
+    70%  {border-color:rgba(255, 255, 255, 0.6);}
+    80%  {border-color:rgba(255, 255, 255, 0.4);}
+    90%  {border-color:rgba(255, 255, 255, 0.2);}
+    100%   {border-color:rgba(255, 255, 255, 0.0);}
+  }
+
+
+@keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Firefox */
+@-moz-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+/* Safari and Chrome */
+@-webkit-keyframes fadein {
+    from { opacity: 0; }
+    to   { opacity: 1; }
+}
+
+
 
 #mode{
   position: fixed;
-  bottom: 0;
-  z-index: 2;
+  padding: 0px !important;
+  margin: 0px !important;
+  text-align: center  !important;
   width: 100%;
-  text-align: center;
+  height: 100px;
+  bottom: -20;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 5;
+
+  font-size: 24px;
+  line-height: 100px;
+  font-family: "mecha_condensedregular", Helvetica;
 }
 
 #explore{
+  float: left;
   width: 50%;
-  padding: 40px 54px;
-  margin: 0;
-  border: solid black 1px;
+  height: 100px;
+  /* padding: 25px 64px; */
+  border: 0px;
   background-color: yellow;
-}
+   z-index: 10;
+
+  -webkit-animation: fadein 3s; /* Safari and Chrome */
+       -moz-animation: fadein 3s; /* Firefox */
+        -ms-animation: fadein 3s; /* Internet Explorer */
+         -o-animation: fadein 3s; /* Opera */
+            animation: fadein 3s;
+
+  }
 
 #summon{
-  width: 50%;
-  padding: 40px 54px;
-  margin: 0;
-  border: solid black 1px;
-}
+  float: left;
+    width: 50%;
+    height: 100px;
+    /* padding: 25px 64px; */
+    border: 0;
+    z-index: 10;
+
+    -webkit-animation: fadein 4s; /* Safari and Chrome */
+         -moz-animation: fadein 4s; /* Firefox */
+          -ms-animation: fadein 4s; /* Internet Explorer */
+           -o-animation: fadein 4s; /* Opera */
+              animation: fadein 4s;
+  }
 
 #alert{
   font-size: 14px;
   color:red;
 }
+
+
+#playAgain{
+  color: #FFF;
+bottom: 10px;
+left: 50%;
+width: 200px;
+margin-left: 45%;
+height: 100px;
+border: 5px solid #FFF;
+text-align: center;
+font-size: 36px;
+line-height: 110px;
+vertical-align: middle;
+}
+
+
+#userName{
+    font-size: 18px;
+    font-family: "mecha_condensedregular", Helvetica;
+}
+
+
+#thx{
+    font-size: 144px;
+    text-align: center;
+    width: 320px;
+    height: 536px;
+    color: rgba(255, 255, 255,1.0);
+    font-family: "mecha_condensedregular", Helvetica;
+}
+
+
+#gameOver{
+  color: rgba(255, 255, 255,1.0);
+  position: fixed;
+  text-align: center;
+  z-index: 2;
+  top: 20%;
+  left: 50%;
+  margin-left: -25%;
+}
+
+#gameOver h1{
+  font-size: 144px;
+  line-height: 100px;
+}
+
+#gameOver h2{
+  font-size: 72px !important;
+}
+
+
 .flash{
   -webkit-animation:myfirst 0.5s; /* Chrome, Safari, Opera */
   -webkit-animation-iteration-count:infinite;
   animation:myfirst 0.5s;
   animation-iteration-count:infinite;
 }
+
 
 /* Chrome, Safari, Opera */
 @-webkit-keyframes myfirst
@@ -94,36 +296,81 @@ body{
 
 #level{
   position: absolute;
-  width:100%;
-  height: 100%;
+  width: 300px;
+  height: 300px;
   top:0;
+  left: 50%;
+  margin-left: -150px;
 }
 
-.hit{
+
+#wrapHit{
+  position:absolute;
+  margin: 0px;
+  padding: 0px;
   width: 100%;
-  height: 12.5%;
-  border: white solid 1px;
+  height: 100%;
+  background-color: rgba(255, 255, 255,1.0);
+  z-index: 4;
+  background-image: url("../public/image/maracas.gif");
+  background-attachment: inherit;
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+
+.hit{
+  width: 5px;
+  height: 5px;
+  border: rgba(0, 0, 0,1.0) solid 3px;
+  /* padding-left:20px; */
+  margin-top: 10px;
+  margin-left: 90%;
+  padding: 5px;
+  /* float: right; */
+  border-radius:10px;
 }
 
 .hitOn{
-  background-color: pink;
+  background-color: rgba(0, 0, 0,1.0);
 }
 
-#caught{
-  position: absolute;
-  z-index: 2;
-  width: 200px;
-  top: 40%;
-  left: 50%;
-  margin-left: -100px;
-  color: white;
-  text-align: center;
+.caught{
+    position: absolute;
+    z-index: 1;
+    width: 320px;
+    height: 100%;
+    margin: 0px;
+    padding: 0px;
+    color: white;
+    text-align: center;
+    font-size: 48px;
+    background-color: #bea16d !important;
+  }
+
+#caughtYes{
+   background-image:url('../public/image/pr-caught-yes.gif');
 }
+
+#caughtNo{
+  background-image:url('../public/image/pr-caught-no.png');
+  background-repeat:no-repeat;
+}
+
+#caught p {
+    position: inherit;
+    z-index: 5;
+    padding-left: 10px;
+    padding-top: 60%;
+    color: white;
+    text-align: left;
+    font-size: 48px;
+  }
 
 #explode{
-  position: absolute;
+  position: relative;
   z-index: 2;
-  top: 50%;
+  top: 15%;
   left: 50%;
   margin-left: -350px;
 }
@@ -132,3 +379,247 @@ body{
   position: absolute;
   z-index: 2;
 }
+
+.back{
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  display: block;
+  padding: 20px;
+  width: 100%;
+  height: 50px;
+  background-image: url("../public/image/pinatarush-footer-game.png");
+  background-attachment: inherit;
+  background-repeat: repeat-x;
+  box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  /* background: rgba(255, 255, 255, 0.25); */
+  -webkit-transition: all 500ms ease-in-out;
+  -moz-transition: all 500ms ease-in-out;
+  -o-transition: all 500ms ease-in-out;
+  transition: all 500ms ease-in-out; }
+
+a.back{
+  color: rgba(255,255,255,1.0);
+  text-decoration: none;
+  letter-spacing: 1px;
+  font-size: 14px;
+  font-family: "mecha_condensedregular", Helvetica;
+      text-transform:uppercase;
+      text-align: center;
+}
+
+/* Highscore */
+
+
+.highscore-bg{
+  margin:0;
+  padding:0;
+  text-align: center;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-image: url("../public/image/pinatarush-tile-background.png");
+  background-attachment: inherit;
+  background-repeat: repeat;
+}
+
+
+#inputHolder{
+  margin:0;
+  padding:0;
+  text-align: center;
+  display: block;
+  width: 100%;
+  height: 100%;
+  background-image: url("../public/image/pinatarush-tile-background.png");
+  background-attachment: inherit;
+  background-repeat: repeat;
+}
+
+#topThree{
+  position: absolute;
+  margin: auto;
+  text-align: center;
+  z-index: 3;
+}
+
+#submitName{
+  position: absolute;
+  margin: auto;
+  text-align: center;
+  z-index: 3;
+}
+
+
+
+.form-control {
+    color: #2c3e50;
+    font-family: "mecha_condensedregular", Helvetica;
+    text-align: center;
+    font-size: 48px;
+    letter-spacing: 2px;
+    text-transform:uppercase;
+    padding: 8px 12px;
+    margin: 0 auto;
+    height: 40px;
+    width: 140px;
+    border-radius: 0px;
+    box-shadow: none;
+    clear:both;
+}
+
+.highscore-text {
+    font-size: 16px;
+    color: #fff;
+    letter-spacing: 1px;
+    font-family: "mecha_condensedregular", Helvetica;
+    text-transform:uppercase;
+    text-align: center;
+
+}
+
+.big {
+    font-size: 72px !important;
+    font-family: "mecha_condensedbold", Helvetica;
+}
+
+
+.btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
+    color: #FFF;
+    background-color: #48C9B0;
+    border-color: #48C9B0;
+}
+
+
+.btn {
+    display: inline-block;
+    padding: 6px 12px;
+    margin: 10px;
+    font-size: 14px;
+    font-weight: normal;
+    line-height: 1.42857;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: middle;
+    cursor: pointer;
+    background-image: none;
+}
+
+
+.btn-hg {
+    padding: 13px 20px;
+    margin-top: 20px;
+    font-size: 28px;
+    line-height: 1.227;
+    letter-spacing: 2px;
+    font-family: "mecha_condensedregular", Helvetica;
+    width: 120px;
+    height: 120px;
+    border-radius: 100%;
+    behavior: url(PIE.htc);
+}
+
+.btn-primary {
+    color: #FFF;
+    background-color: #1ABC9C;
+}
+
+
+
+.scrim {
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  margin: 0;
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  background-image: url("../public/image/pinatarush-tile-background.png");
+  background-attachment: inherit;
+  background-repeat: repeat;
+}
+
+
+table {
+  width: 80%;
+  padding: 0;
+  margin: auto;
+  text-align: center;
+  font-size: 48px;
+  color: #fff;
+  line-height: 1.227;
+  letter-spacing: 2px;
+  font-family: "mecha_condensedregular", Helvetica;
+}
+
+td {
+  padding: 10px 20px;
+  font-size: 24px;
+}
+
+
+
+/* Typography */
+
+
+@font-face {
+    font-family: 'mechabold';
+    src: url('http://pinatarush.com/fonts/mecha_bold-webfont.eot');
+    src: url('http://pinatarush.com/fonts/mecha_bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('http://pinatarush.com/fonts/mecha_bold-webfont.woff') format('woff'),
+         url('http://pinatarush.com/fonts/mecha_bold-webfont.ttf') format('truetype'),
+         url('http://pinatarush.com/fonts/mecha_bold-webfont.svg#mechabold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+
+@font-face {
+    font-family: 'mecha_condensedbold';
+    src: url('http://pinatarush.com/fonts/mecha_condensed_bold-webfont.eot');
+    src: url('http://pinatarush.com/fonts/mecha_condensed_bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('http://pinatarush.com/fonts/mecha_condensed_bold-webfont.woff') format('woff'),
+         url('http://pinatarush.com/fonts/mecha_condensed_bold-webfont.ttf') format('truetype'),
+         url('http://pinatarush.com/fonts/mecha_condensed_bold-webfont.svg#mecha_condensedbold') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'mecha_condensedregular';
+    src: url('http://pinatarush.com/fonts/mecha_condensed-webfont.eot');
+    src: url('http://pinatarush.com/fonts/mecha_condensed-webfont.eot?#iefix') format('embedded-opentype'),
+         url('http://pinatarush.com/fonts/mecha_condensed-webfont.woff') format('woff'),
+         url('http://pinatarush.com/fonts/mecha_condensed-webfont.ttf') format('truetype'),
+         url('http://pinatarush.com/fonts/mecha_condensed-webfont.svg#mecha_condensedregular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
+
+@font-face {
+    font-family: 'mecharegular';
+    src: url('http://pinatarush.com/fonts/mecha-webfont.eot');
+    src: url('http://pinatarush.com/fonts/mecha-webfont.eot?#iefix') format('embedded-opentype'),
+         url('http://pinatarush.com/fonts/mecha-webfont.woff') format('woff'),
+         url('http://pinatarush.com/fonts/mecha-webfont.ttf') format('truetype'),
+         url('http://pinatarush.com/fonts/mecha-webfont.svg#mecharegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+
+}
+
+
+
