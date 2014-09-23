@@ -1,23 +1,23 @@
-html{
-  padding: 0;
-  margin: 0;
-  top: 0;
-  left: 0;
-}
 
-body{
-  padding: 0;
-  margin: -10px 0 0 0;
-  background-color: rgb(191, 162, 110);
-  opacity: 0.1;
-  overflow: hidden;
+html, body{
+  padding: 0 !important;
+  margin-top: -10px;
+  margin-bottom: 0px !important;
+  margin-left: 0px;
+  margin-right: 0px;
+  background: rgba(191, 162, 110,1.0);  overflow: hidden;
   font-family: "mecha_condensedregular", Helvetica;
   font-weight:normal;
+  -webkit-user-select: none;  /* Chrome all / Safari all */
+  -moz-user-select: none;     /* Firefox all */
+  -ms-user-select: none;
 }
+
 
 #myCanvas{
   position: absolute;
   left: 50%;
+  top: 50%;
 
   /* background-color: rgba(191, 162, 110,1.0); */
   -webkit-animation: fadein 5s; /* Safari and Chrome */
@@ -30,38 +30,45 @@ body{
 
 #tutorial {
   float: left;
-  width: 200px;
-  height: 100px;
-  color: #ffffff;
-  font-family: "mecha_condensedregular", Helvetica;
+    width: 200px;
+    height: 100px;
+    color: rgba(255, 255, 255, 1.0);
+    font-family: "mecha_condensedregular", Helvetica;
   font-weight:normal;
-  /* padding: 25px 64px; */
-  position: fixed;
-  font-size: 18px;
-  text-align: right;
-  bottom: -20px;
-  background-color: rgb(255, 255, 255);
-  z-index: 10;
+    /* padding: 25px 64px; */
+    position: fixed;
+    font-size: 18px;
+    text-align: right;
+    bottom: -20px;
+    border: 0px;
+    background-color: rgba(255, 255, 255, 0.0);
+    z-index: 10;
 }
+
 
 
 #wrap{
   position: inherit;
-  margin: 0;
-  background-image: url("/../public/image/pinatarush-phone-bg.png");
-  background-repeat: repeat-x;
+  margin:0;
+  background-image: url("/public/image/pinatarush-logo.png"), url("/public/image/pinatarush-phone-bg.png");
+  background-attachment: inherit;
+  background-repeat: no-repeat, repeat-x;
+  background-position: center 150px, left top;
   width: 100%;
   height: 100%;
-  background-position: center 150px, left top ;
 }
 
 #wat{
   width: 100%;
   height: 100%;
-  margin: 0;
-  background-image: url("/../public/image/pinatarush-phone-bg.png");
+  margin-top: 0px !important;
+  margin-bottom: 0px !important;
+  margin-left: 0px;
+  margin-right: 0px;
+  background-image: url("/public/image/pinatarush-phone-bg.png");
+  background-attachment: inherit;
   background-repeat: repeat-x;
-  padding-top: 5px;
+  padding-top: 5px !important;
   -webkit-animation: fadein 5s; /* Safari and Chrome */
          -moz-animation: fadein 5s; /* Firefox */
           -ms-animation: fadein 5s; /* Internet Explorer */
@@ -104,8 +111,6 @@ body{
   animation:pulse-start 3000ms;
   animation-iteration-count:infinite;
   -webkit-animation-timing-function: linear;
-
-
 }
 
 
@@ -125,21 +130,21 @@ body{
     100%   {border-color:rgba(255, 255, 255, 0.0);}
   }
 
-  /* Standard syntax */
-  @keyframes pulse-start
-  {
-     0%   {border-color:rgba(255, 255, 255, 0.0);}
-    10%  {border-color:rgba(255, 255, 255, 0.2);}
-    20%  {border-color:rgba(255, 255, 255, 0.4);}
-    30%  {border-color:rgba(255, 255, 255, 0.6);}
-    40%  {border-color:rgba(255, 255, 255, 0.8);}
-    50% {border-color:rgba(255, 255, 255, 1);}
-    60%  {border-color:rgba(255, 255, 255, 0.8);}
-    70%  {border-color:rgba(255, 255, 255, 0.6);}
-    80%  {border-color:rgba(255, 255, 255, 0.4);}
-    90%  {border-color:rgba(255, 255, 255, 0.2);}
-    100%   {border-color:rgba(255, 255, 255, 0.0);}
-  }
+/* Standard syntax */
+@keyframes pulse-start
+{
+   0%   {border-color:rgba(255, 255, 255, 0.0);}
+  10%  {border-color:rgba(255, 255, 255, 0.2);}
+  20%  {border-color:rgba(255, 255, 255, 0.4);}
+  30%  {border-color:rgba(255, 255, 255, 0.6);}
+  40%  {border-color:rgba(255, 255, 255, 0.8);}
+  50% {border-color:rgba(255, 255, 255, 1);}
+  60%  {border-color:rgba(255, 255, 255, 0.8);}
+  70%  {border-color:rgba(255, 255, 255, 0.6);}
+  80%  {border-color:rgba(255, 255, 255, 0.4);}
+  90%  {border-color:rgba(255, 255, 255, 0.2);}
+  100%   {border-color:rgba(255, 255, 255, 0.0);}
+}
 
 
 @keyframes fadein {
@@ -160,7 +165,6 @@ body{
 }
 
 
-
 #mode{
   position: fixed;
   padding: 0px !important;
@@ -175,22 +179,24 @@ body{
   font-size: 24px;
   line-height: 100px;
   font-family: "mecha_condensedregular", Helvetica;
+  text-align: center;
 }
+
 
 #explore{
   float: left;
-  width: 50%;
-  height: 100px;
-  /* padding: 25px 64px; */
-  border: 0px;
-  background-color: yellow;
-   z-index: 10;
+    width: 50%;
+    height: 100px;
+    /* padding: 25px 64px; */
+    border: 0px;
+    background-color: yellow;
+     z-index: 10;
 
-  -webkit-animation: fadein 3s; /* Safari and Chrome */
-       -moz-animation: fadein 3s; /* Firefox */
-        -ms-animation: fadein 3s; /* Internet Explorer */
-         -o-animation: fadein 3s; /* Opera */
-            animation: fadein 3s;
+    -webkit-animation: fadein 3s; /* Safari and Chrome */
+         -moz-animation: fadein 3s; /* Firefox */
+          -ms-animation: fadein 3s; /* Internet Explorer */
+           -o-animation: fadein 3s; /* Opera */
+              animation: fadein 3s;
 
   }
 
@@ -199,7 +205,7 @@ body{
     width: 50%;
     height: 100px;
     /* padding: 25px 64px; */
-    border: 0;
+    border: 0px;
     z-index: 10;
 
     -webkit-animation: fadein 4s; /* Safari and Chrome */
@@ -217,32 +223,32 @@ body{
 
 #playAgain{
   color: #FFF;
-bottom: 10px;
-left: 50%;
-width: 200px;
-margin-left: 45%;
-height: 100px;
-border: 5px solid #FFF;
-text-align: center;
-font-size: 36px;
-line-height: 110px;
-vertical-align: middle;
+  bottom: 10px;
+  left: 50%;
+  width: 200px;
+  margin-left: 45%;
+  height: 100px;
+  border: 5px solid #FFF;
+  text-align: center;
+  font-size: 36px;
+  line-height: 110px;
+  vertical-align: middle;
 }
 
 
 #userName{
-    font-size: 18px;
-    font-family: "mecha_condensedregular", Helvetica;
+  font-size: 18px;
+  font-family: "mecha_condensedregular", Helvetica;
 }
 
 
 #thx{
-    font-size: 144px;
-    text-align: center;
-    width: 320px;
-    height: 536px;
-    color: rgba(255, 255, 255,1.0);
-    font-family: "mecha_condensedregular", Helvetica;
+  font-size: 144px;
+  text-align: center;
+  width: 320px;
+  height: 536px;
+  color: rgba(255, 255, 255,1.0);
+  font-family: "mecha_condensedregular", Helvetica;
 }
 
 
@@ -267,6 +273,7 @@ vertical-align: middle;
 
 
 .flash{
+  background-image: none;
   -webkit-animation:myfirst 0.5s; /* Chrome, Safari, Opera */
   -webkit-animation-iteration-count:infinite;
   animation:myfirst 0.5s;
@@ -312,7 +319,7 @@ vertical-align: middle;
   height: 100%;
   background-color: rgba(255, 255, 255,1.0);
   z-index: 4;
-  background-image: url("/../public/image/maracas.gif");
+  background-image: url("/public/image/maracas.gif");
   background-attachment: inherit;
   background-repeat: no-repeat;
   background-position: center center;
@@ -336,36 +343,36 @@ vertical-align: middle;
 }
 
 .caught{
-    position: absolute;
-    z-index: 1;
-    width: 320px;
-    height: 100%;
-    margin: 0px;
-    padding: 0px;
-    color: white;
-    text-align: center;
-    font-size: 48px;
-    background-color: #bea16d !important;
+  position: absolute;
+  z-index: 1;
+  width: 320px;
+  height: 100%;
+  margin: 0px;
+  padding: 0px;
+  color: white;
+  text-align: center;
+  font-size: 48px;
+  background-color: #bea16d !important;
   }
 
 #caughtYes{
-   background-image:url('/../public/image/pr-caught-yes.gif');
+  background-image:url('/public/image/pr-caught-yes.gif');
 }
 
 #caughtNo{
-  background-image:url('/../public/image/pr-caught-no.png');
+  background-image:url('/public/image/pr-caught-no.png');
   background-repeat:no-repeat;
 }
 
 #caught p {
-    position: inherit;
-    z-index: 5;
-    padding-left: 10px;
-    padding-top: 60%;
-    color: white;
-    text-align: left;
-    font-size: 48px;
-  }
+  position: inherit;
+  z-index: 5;
+  padding-left: 10px;
+  padding-top: 60%;
+  color: white;
+  text-align: left;
+  font-size: 48px;
+}
 
 #explode{
   position: relative;
@@ -380,6 +387,7 @@ vertical-align: middle;
   z-index: 2;
 }
 
+
 .back{
   position: fixed;
   bottom: 0;
@@ -389,7 +397,7 @@ vertical-align: middle;
   padding: 20px;
   width: 100%;
   height: 50px;
-  background-image: url("/../public/image/pinatarush-footer-game.png");
+  background-image: url("/public/image/pinatarush-footer-game.png");
   background-attachment: inherit;
   background-repeat: repeat-x;
   box-sizing: border-box;
@@ -407,8 +415,8 @@ a.back{
   letter-spacing: 1px;
   font-size: 14px;
   font-family: "mecha_condensedregular", Helvetica;
-      text-transform:uppercase;
-      text-align: center;
+    text-transform:uppercase;
+    text-align: center;
 }
 
 /* Highscore */
@@ -421,11 +429,10 @@ a.back{
   display: block;
   width: 100%;
   height: 100%;
-  background-image: url("/../public/image/pinatarush-tile-background.png");
+  background-image: url("/public/image/pinatarush-tile-background.png");
   background-attachment: inherit;
   background-repeat: repeat;
 }
-
 
 #inputHolder{
   margin:0;
@@ -434,10 +441,11 @@ a.back{
   display: block;
   width: 100%;
   height: 100%;
-  background-image: url("/../public/image/pinatarush-tile-background.png");
+  background-image: url("/public/image/pinatarush-tile-background.png");
   background-attachment: inherit;
   background-repeat: repeat;
 }
+
 
 #topThree{
   position: absolute;
@@ -453,91 +461,91 @@ a.back{
   z-index: 3;
 }
 
-
-
 .form-control {
-    color: #2c3e50;
-    font-family: "mecha_condensedregular", Helvetica;
-    text-align: center;
-    font-size: 48px;
-    letter-spacing: 2px;
-    text-transform:uppercase;
-    padding: 8px 12px;
-    margin: 0 auto;
-    height: 40px;
-    width: 140px;
-    border-radius: 0px;
-    box-shadow: none;
-    clear:both;
+  border: 0px solid #BDC3C7;
+  color: #2c3e50;
+  font-family: "mecha_condensedregular", Helvetica;
+  text-align: center;
+  font-size: 48px;
+  letter-spacing: 2px;
+  text-transform:uppercase;
+  padding: 8px 12px;
+  margin: 0 auto;
+  height: 40px;
+  width: 140px;
+  clear:both;
 }
 
 .highscore-text {
-    font-size: 16px;
-    color: #fff;
-    letter-spacing: 1px;
-    font-family: "mecha_condensedregular", Helvetica;
-    text-transform:uppercase;
-    text-align: center;
-
+  font-size: 16px;
+  color: #fff;
+  letter-spacing: 1px;
+  font-family: "mecha_condensedregular", Helvetica;
+  text-transform:uppercase;
+  text-align: center;
 }
 
 .big {
-    font-size: 72px !important;
-    font-family: "mecha_condensedbold", Helvetica;
+  font-size: 72px !important;
+  font-family: "mecha_condensedbold", Helvetica;
 }
 
 
+
 .btn-primary:hover, .btn-primary:focus, .btn-primary:active, .btn-primary.active, .open .dropdown-toggle.btn-primary {
-    color: #FFF;
-    background-color: #48C9B0;
-    border-color: #48C9B0;
+  color: #FFF;
+  background-color: #48C9B0;
+  border-color: #48C9B0;
 }
 
 
 .btn {
-    display: inline-block;
-    padding: 6px 12px;
-    margin: 10px;
-    font-size: 14px;
-    font-weight: normal;
-    line-height: 1.42857;
-    text-align: center;
-    white-space: nowrap;
-    vertical-align: middle;
-    cursor: pointer;
-    background-image: none;
+  display: inline-block;
+  padding: 6px 12px;
+  margin: 10px;
+  font-size: 14px;
+  font-weight: normal;
+  line-height: 1.42857;
+  text-align: center;
+  white-space: nowrap;
+  vertical-align: middle;
+  cursor: pointer;
+  background-image: none;
+  border: 0px solid transparent;
+  border-radius: 100px;
+  -moz-user-select: none;
 }
 
 
 .btn-hg {
-    padding: 13px 20px;
-    margin-top: 20px;
-    font-size: 28px;
-    line-height: 1.227;
-    letter-spacing: 2px;
-    font-family: "mecha_condensedregular", Helvetica;
-    width: 120px;
-    height: 120px;
-    border-radius: 100%;
-    behavior: url(PIE.htc);
+  padding: 13px 20px;
+  margin-top: 20px;
+  font-size: 28px;
+  line-height: 1.227;
+  border-radius: 6px;
+  letter-spacing: 2px;
+  font-family: "mecha_condensedregular", Helvetica;
+  width: 120px;
+  height: 120px;
+  border-radius: 100%;
+  behavior: url(PIE.htc);
 }
 
 .btn-primary {
-    color: #FFF;
-    background-color: #1ABC9C;
+  color: #FFF;
+  background-color: #1ABC9C;
 }
-
 
 
 .scrim {
   width: 100%;
   height: 100%;
-  padding: 0;
-  margin: 0;
-  text-align: center;
+  padding: 0 !important;
+  margin: 0 !important;
+  text-align: center  !important;
   position: fixed;
   bottom: 0;
-  background-image: url("/../public/image/pinatarush-tile-background.png");
+  background-image: url("/public/image/pinatarush-tile-background.png");
   background-attachment: inherit;
   background-repeat: repeat;
 }
@@ -545,9 +553,9 @@ a.back{
 
 table {
   width: 80%;
-  padding: 0;
-  margin: auto;
-  text-align: center;
+  padding: 0 !important;
+  margin: auto !important;
+  text-align: center  !important;
   font-size: 48px;
   color: #fff;
   line-height: 1.227;
@@ -555,11 +563,15 @@ table {
   font-family: "mecha_condensedregular", Helvetica;
 }
 
+
 td {
   padding: 10px 20px;
   font-size: 24px;
 }
 
+#rank0, #score0, #name{
+  font-size: 28px;
+}
 
 
 /* Typography */
@@ -567,13 +579,14 @@ td {
 
 @font-face {
     font-family: 'mechabold';
-    src: url('http://pinatarush.com/fonts/mecha_bold-webfont.eot');
-    src: url('http://pinatarush.com/fonts/mecha_bold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('http://pinatarush.com/fonts/mecha_bold-webfont.woff') format('woff'),
-         url('http://pinatarush.com/fonts/mecha_bold-webfont.ttf') format('truetype'),
-         url('http://pinatarush.com/fonts/mecha_bold-webfont.svg#mechabold') format('svg');
+    src: url('/public/fonts/mecha_bold-webfont.eot');
+    src: url('/public/fonts/mecha_bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/public/fonts/mecha_bold-webfont.woff') format('woff'),
+         url('/public/fonts/mecha_bold-webfont.ttf') format('truetype'),
+         url('/public/fonts/mecha_bold-webfont.svg#mechabold') format('svg');
     font-weight: normal;
     font-style: normal;
+
 }
 
 
@@ -581,11 +594,11 @@ td {
 
 @font-face {
     font-family: 'mecha_condensedbold';
-    src: url('http://pinatarush.com/fonts/mecha_condensed_bold-webfont.eot');
-    src: url('http://pinatarush.com/fonts/mecha_condensed_bold-webfont.eot?#iefix') format('embedded-opentype'),
-         url('http://pinatarush.com/fonts/mecha_condensed_bold-webfont.woff') format('woff'),
-         url('http://pinatarush.com/fonts/mecha_condensed_bold-webfont.ttf') format('truetype'),
-         url('http://pinatarush.com/fonts/mecha_condensed_bold-webfont.svg#mecha_condensedbold') format('svg');
+    src: url('/public/fonts/mecha_condensed_bold-webfont.eot');
+    src: url('/public/fonts/mecha_condensed_bold-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/public/fonts/mecha_condensed_bold-webfont.woff') format('woff'),
+         url('/public/fonts/mecha_condensed_bold-webfont.ttf') format('truetype'),
+         url('/public/fonts/mecha_condensed_bold-webfont.svg#mecha_condensedbold') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -596,11 +609,11 @@ td {
 
 @font-face {
     font-family: 'mecha_condensedregular';
-    src: url('http://pinatarush.com/fonts/mecha_condensed-webfont.eot');
-    src: url('http://pinatarush.com/fonts/mecha_condensed-webfont.eot?#iefix') format('embedded-opentype'),
-         url('http://pinatarush.com/fonts/mecha_condensed-webfont.woff') format('woff'),
-         url('http://pinatarush.com/fonts/mecha_condensed-webfont.ttf') format('truetype'),
-         url('http://pinatarush.com/fonts/mecha_condensed-webfont.svg#mecha_condensedregular') format('svg');
+    src: url('/public/fonts/mecha_condensed-webfont.eot');
+    src: url('/public/fonts/mecha_condensed-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/public/fonts/mecha_condensed-webfont.woff') format('woff'),
+         url('/public/fonts/mecha_condensed-webfont.ttf') format('truetype'),
+         url('/public/fonts/mecha_condensed-webfont.svg#mecha_condensedregular') format('svg');
     font-weight: normal;
     font-style: normal;
 
@@ -611,11 +624,11 @@ td {
 
 @font-face {
     font-family: 'mecharegular';
-    src: url('http://pinatarush.com/fonts/mecha-webfont.eot');
-    src: url('http://pinatarush.com/fonts/mecha-webfont.eot?#iefix') format('embedded-opentype'),
-         url('http://pinatarush.com/fonts/mecha-webfont.woff') format('woff'),
-         url('http://pinatarush.com/fonts/mecha-webfont.ttf') format('truetype'),
-         url('http://pinatarush.com/fonts/mecha-webfont.svg#mecharegular') format('svg');
+    src: url('/public/fonts/mecha-webfont.eot');
+    src: url('/public/fonts/mecha-webfont.eot?#iefix') format('embedded-opentype'),
+         url('/public/fonts/mecha-webfont.woff') format('woff'),
+         url('/public/fonts/mecha-webfont.ttf') format('truetype'),
+         url('/public/fonts/mecha-webfont.svg#mecharegular') format('svg');
     font-weight: normal;
     font-style: normal;
 

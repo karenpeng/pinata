@@ -1,21 +1,18 @@
 (function (exports) {
-  // var windowWidth = window.innerWidth;
+  var windowWidth = window.innerWidth;
   // $('#myCanvas').width(windowWidth);
   // $('#myCanvas').height(windowWidth * 9 / 16);
   // $('#myCanvas').attr('width', windowWidth);
   // $('#myCanvas').attr('height', windowWidth * 9 / 16);
 
-  //$('#myCanvas').attr('width', 1280);
-  //$('#myCanvas').attr('height', 720);
-
-  $('#myCanvas').attr('width', 1920);
-  $('#myCanvas').attr('height', 1080);
+  $('#myCanvas').attr('width', 1280);
+  $('#myCanvas').attr('height', 720);
 
   // var mgl = -windowWidth / 2;
   // var mglS = mgl.toString();
   // $('#myCanvas').css('margin-left', mglS);
-  //$('#myCanvas').css('margin-left', '-640px');
-  $('#myCanvas').css('margin-left', '-960px');
+  $('#myCanvas').css('margin-left', '-640px');
+  $('#myCanvas').css('margin-top', '-360px');
 
   exports.w = $("#myCanvas").width();
   exports.h = $("#myCanvas").height();
@@ -34,7 +31,7 @@
 
   // var cubeSize = 16;
   // var trackSize = cubeSize - 2;
-  var cubeSize = 24;
+  var cubeSize = 20;
   var trackSize = cubeSize - 2;
 
   function cuteBrick(a, b) {
@@ -147,9 +144,9 @@
       //   if (this.b > 26 * exports.w / 1280) this.b = 26 * exports.w / 1280;
       // }
 
-      if (this.a < 26) this.a = 26;
-      if (this.a > 70) this.a = 70;
-      if (this.b < -22) this.b = -22;
+      if (this.a < 24) this.a = 24;
+      if (this.a > 56) this.a = 56;
+      if (this.b < -24) this.b = -24;
       if (this.b > 26) this.b = 26;
     },
     check: function (arr) {

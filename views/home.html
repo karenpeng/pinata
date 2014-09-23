@@ -28,8 +28,8 @@
     <link rel="icon" sizes="196x196" href="/..public/image/icon/pinata-icons/home-screen-icon-196.png">
     <link rel="icon" sizes="128x128" href="/..public/image/icon/pinata-icons/home-screen-icon-128.png">
 
-    <link rel="stylesheet" type="text/css" href="/../public/css/pinata.css"/>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link rel="stylesheet" type="text/css" href="/public/css/pinata.css"/>
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
     <script type="text/javascript" src="/public/js/mobileDetect.js"></script>
   </head>
   <body>
@@ -50,7 +50,7 @@
       $("#topThree").hide();
       $("#wrap").append('<div id="gameOver"><h1>Game Over</h1><h2>Winner please look at your phone!</h2></div>');
       $("#gameOver").hide();
-      $("#wrap").append('<a class="back" href="http://www.pinatarush.com">Made in Brooklyn New York by Karen & Dexter</a>');
+      $("#wrap").append('<a class="back">Made in Brooklyn New York by Karen & Dexter</a>');
       $("#wrap").append('<button id="tutorial">Tutorial Off</button>');
       document.write('<audio id="bg" loop autoplay preload="auto"><source type="audio/mp3" src="/../public/music/pr_background.mp3"></audio>');
       document.write('<script type="text/javascript" src="/public/js/obelisk.min.js"><\/script>');
@@ -77,7 +77,7 @@
       }
       $("#wrapHit").hide();
       $("#wat").append('<div id="submitName"></div>');
-      $("#submitName").append('<div id="inputHolder" class="highscore-bg"><div id="yourInput" class="scrim"><p><img src="http://pinatarush.com/images/youwon.gif" width="300" height="200"></p><p class="highscore-text">Enter Your Name Below</p><input id="userName" class="form-control" type="text" placeholder="• • • •" maxlength="4"></input><br/><button id="submitButton" class="btn btn-hg btn-primary">SUBMIT</button></div></div>');
+      $("#submitName").append('<div id="inputHolder" class="highscore-bg"><div id="yourInput" class="scrim"><p><img src="/../public/image/youwon.gif" width="300" height="200"></p><p class="highscore-text">Enter Your Name Below</p><input id="userName" class="form-control" type="text" placeholder="• • • •" maxlength="4"></input><br/><button id="submitButton" class="btn btn-hg btn-primary">SUBMIT</button></div></div>');
       $("#inputHolder").append('<div id="thx">Thank You!</div>');
       $("#thx").hide();
       $("#submitName").hide();

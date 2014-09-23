@@ -61,7 +61,7 @@
     $("#summon").css('background-color', 'white');
     $("#explore").css('background-color', 'yellow');
     $("#level").attr('src',
-      'http://pinatarush.com/images/avatar/pr-avatar-6.png');
+      '/public/image/face/avatar/pr-avatar-6.png');
     oow.pause();
   });
 
@@ -101,7 +101,7 @@
     level = data;
     //$('#level').html('Distance:' + ' ' + data);
     $("#level").attr('src',
-      'http://pinatarush.com/images/avatar/pr-avatar-' +
+      '/public/image/face/avatar/pr-avatar-' +
       data + '.png');
     if (data === 0 && exports.start) {
       $("#wat").addClass('flash');

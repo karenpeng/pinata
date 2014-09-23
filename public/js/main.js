@@ -2,7 +2,7 @@
   var canvas = document.getElementById('myCanvas');
   var context = canvas.getContext('2d');
   var imgObj = new Image();
-  imgObj.src = "http://pinatarush.com/images/pinatamap.png";
+  imgObj.src = "/public/image/pinatamap.png";
 
   exports.point = new obelisk.Point(0, 0);
   exports.pixelView = new obelisk.PixelView(canvas, point);
@@ -79,7 +79,7 @@
       // });
       overCount++;
       if (overCount === 5) {
-        $("#explode").attr("src", "http://pinatarush.com/images/pinata.gif");
+        $("#explode").attr("src", "/public/image/pinata.gif");
         $("#explode").show();
         var highScore = 0;
         var highScorePlayer = [];
